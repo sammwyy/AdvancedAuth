@@ -1,28 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <!-- Project information -->
-    <groupId>me.sammwy</groupId>
-    <artifactId>ExamplePlugin</artifactId>
+    <groupId>dev._2lstudios</groupId>
+    <artifactId>AdvancedAuth</artifactId>
     <packaging>jar</packaging>
 
     <!-- Plugin Information -->
-    <name>ExamplePlugin</name>
-    <description>This is just an example plugin</description>
+    <name>AdvancedAuth</name>
+    <description>Just another authentication plugin</description>
     <version>0.1</version>
     <url>https://twitter.com/sammwy</url>
 
     <properties>
         <author>Sammwy</author>
-        <mainClass>me.sammwy.example.ExamplePlugin</mainClass>
+        <mainClass>dev._2lstudios.advancedauth.AdvancedAuth</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-   <!-- External repositories -->
+    <!-- External repositories -->
     <repositories>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>2lstudios-repo</id>
+            <url>https://ci.2lstudios.dev/plugin/repository/everything</url>
         </repository>
     </repositories>
 
@@ -31,8 +35,18 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.4-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev._2lstudios</groupId>
+            <artifactId>jelly</artifactId>
+            <version>0.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dotphin</groupId>
+            <artifactId>milkshakeorm</artifactId>
+            <version>0.6-ALPHA</version>
         </dependency>
     </dependencies>
 
@@ -88,7 +102,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> 
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>

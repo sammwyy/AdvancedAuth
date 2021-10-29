@@ -4,7 +4,29 @@ author: ${author}
 main: ${mainClass}
 version: ${version}
 url: ${url}
+api-version: 1.13+
 commands:
-  example:
-    aliases: ["ex"]
-    description: "This is an example plugin."
+  "2fa":
+    aliases: ["tfa"]
+    description: "Add two factory authentication to your account"
+  addemail:
+    aliases: ["adde", "email"]
+    description: "Add an email to your account"
+  advancedauth:
+    aliases: ["aa"]
+    description: "Main plugin command"
+  changepassword:
+    aliases: ["cpw", "passwd", "changepass"]
+    description: "Change your password"
+  login:
+    aliases: ["log", "l"]
+    description: "Login in to your account"
+  logout:
+    aliases: ["lout"]
+    description: "Logout from your account"
+  register:
+    aliases: ["reg"]
+    description: "Register a new account"
+  unregister:
+    aliases: ["unreg"]
+    description: "Un-register your account"
