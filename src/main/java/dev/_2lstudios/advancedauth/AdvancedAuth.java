@@ -2,8 +2,10 @@ package dev._2lstudios.advancedauth;
 
 import dev._2lstudios.advancedauth.commands.LoginCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
+import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
+import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
@@ -19,6 +21,9 @@ import dev._2lstudios.mineorm.providers.IProvider;
 public class AdvancedAuth extends JellyPlugin {
 
     private Configuration databaseConfig;
+    private Configuration mainConfig;
+
+    private Cipher cipher;
 
     private void setupDatabase() {
         // Connect to database
@@ -38,7 +43,28 @@ public class AdvancedAuth extends JellyPlugin {
         MineORM.addRepository(AuthPlayerData.class, provider, collection);
     }
 
-    private void onInitialize() throws Exception {
+    private void setupCipher() {
+        try {
+            this.cipher = Cipher.getCipher(this.mainConfig.getString("security.cipher", "bcrypt"));
+        } catch (final NoSuchCipherException e) {
+            e.printStackTrace();
+            this.getLogger().severe("Stopping server to avoid security breaches");
+            this.getServer().shutdown();
+        }
+    }
+
+    @Override
+    public void onEnable() {
+        // Load configuration
+        this.databaseConfig = this.getConfig("database.yml");
+        this.mainConfig = this.getConfig("config.yml");
+
+        // Setup database
+        this.setupDatabase();
+
+        // Initialize cipher
+        this.setupCipher();
+
         // Register player manager
         this.setPluginPlayerManager(new AuthPlayerManager(this));
 
@@ -50,21 +76,26 @@ public class AdvancedAuth extends JellyPlugin {
         // Register commands
         this.addCommand(new LoginCommand());
         this.addCommand(new RegisterCommand());
+
+        // Print welcome message if plugin starts correctly
+        final String cipherAlgorithm = this.mainConfig.getString("security.cipher");
+        final String storageDriver = this.databaseConfig.getString("storage.driver");
+        final String pluginVersion = this.getDescription().getVersion();
+
+        this.getServer().getConsoleSender().sendMessage("§8============================================");
+        this.getServer().getConsoleSender().sendMessage("              §6§lAdvanced§e§lAuth§r");
+        this.getServer().getConsoleSender().sendMessage("§7- §eCipher: §7" + cipherAlgorithm);
+        this.getServer().getConsoleSender().sendMessage("§7- §eStorage: §7" + storageDriver);
+        this.getServer().getConsoleSender().sendMessage("§7- §eVersion: §7" + pluginVersion);
+        this.getServer().getConsoleSender().sendMessage("§8============================================");
     }
 
-    @Override
-    public void onEnable() {
-        // Load configuration
-        this.databaseConfig = this.getConfig("database.yml");
+    /* Plugin getters */
+    public Cipher getCipher() {
+        return this.cipher;
+    }
 
-        // Setup database
-        this.setupDatabase();
-
-        // Safe plugin initialize
-        try {
-            this.onInitialize();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
+    public Configuration getMainConfig() {
+        return this.mainConfig;
     }
 }
