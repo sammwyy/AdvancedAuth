@@ -6,6 +6,11 @@ addemail:
   successfully: "&a¡Has cambiado tu dirección de correo exitosamente!"
   bad-format: "&cEl correo ingresado no parece ser válido."
 
+changepassword:
+  usage: "&cUso: /changepassword <vieja-contraseña> <nueva-contraseña>"
+  successfully: "&aLa contraseña ha sido cambiada correctamente."
+  wrong-password: "&cLa contraseña anterior no coincide con la registrada en tu cuenta"
+
 login:
   message: "&7Debes iniciar sesión usando &b/login <contraseña>"
   usage: "&cUso: /login <contraseña>"

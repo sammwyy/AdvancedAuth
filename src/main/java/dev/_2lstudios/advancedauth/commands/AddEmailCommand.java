@@ -13,6 +13,11 @@ public class AddEmailCommand extends CommandListener {
         final AuthPlayer player = (AuthPlayer) ctx.getPluginPlayer();
         final String email = ctx.getArguments().getString(0);
 
+        if (!player.isLogged()) {
+            player.sendI18nMessage("login.already-logged");
+            return;
+        }
+
         if (email == null) {
             player.sendI18nMessage("addemail.usage");
             return;
@@ -20,11 +25,6 @@ public class AddEmailCommand extends CommandListener {
 
         if (!player.isFetched()) {
             player.sendI18nMessage("common.still-downloading");
-            return;
-        }
-
-        if (!player.isLogged()) {
-            player.sendI18nMessage("login.already-logged");
             return;
         }
 

@@ -123,4 +123,9 @@ public class AuthPlayer extends PluginPlayer {
         this.data.email = email;
         this.data.save();
     }
+
+    public void setPassword(final String password) {
+        this.data.password = this.plugin.getCipher().hash(password);
+        this.data.save();
+    }
 }
