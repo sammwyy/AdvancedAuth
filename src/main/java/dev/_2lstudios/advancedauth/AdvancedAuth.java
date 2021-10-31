@@ -101,7 +101,7 @@ public class AdvancedAuth extends JellyPlugin {
         this.addCommand(new ChangePasswordCommand());
         this.addCommand(new LoginCommand());
         this.addCommand(new LogoutCommand());
-        this.addCommand(new RegisterCommand());
+        this.addCommand(new RegisterCommand(this));
         this.addCommand(new UnregisterCommand());
 
         // Print welcome message if plugin starts correctly

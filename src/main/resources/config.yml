@@ -1,6 +1,7 @@
 settings:
   prefix: "&8[&6&lA&e&lA&8] &r"
 authentication:
+  max-accounts-per-ip: 1
   message-interval: 2
   timeout: 30
 security:
@@ -23,4 +24,3 @@ security:
     - "asdasd"
     - "asdfasdf"
     - "wasdwasd"
-    - "{username}"

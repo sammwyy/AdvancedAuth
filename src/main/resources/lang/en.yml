@@ -26,8 +26,9 @@ register:
   already-registered: "&cEsta cuenta ya se encuentra registrada"
   not-registered: "&cEsta cuenta no se encuentra registrada"
   password-not-match: "&cLa confirmación de contraseña no coincide."
-  password-length: "&cLa contraseña debe tener entre {password:min} y {password:max} caracteres."
+  password-length: "&cLa contraseña debe tener entre {password_min} y {password_max} caracteres."
   password-too-weak: "&cEsta contraseña es muy débil."
+  too-many-accounts: "&cHas superado el limite de cuentas permitidas &7(&e{player_accounts}/{max_accounts}&7)"
 
 unregister:
   usage: "&cUso: /unregister <contraseña>"

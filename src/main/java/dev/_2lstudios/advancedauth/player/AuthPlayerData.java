@@ -19,4 +19,10 @@ public class AuthPlayerData extends Entity {
 
     @Prop
     public String password;
+
+    @Prop
+    public String registrationIP;
+
+    @Prop
+    public String lastLoginIP;
 }

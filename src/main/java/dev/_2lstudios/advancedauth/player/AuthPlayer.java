@@ -3,7 +3,7 @@ package dev._2lstudios.advancedauth.player;
 import org.bukkit.entity.Player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
-
+import dev._2lstudios.advancedauth.utils.PlaceholderUtils;
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
 
@@ -60,6 +60,16 @@ public class AuthPlayer extends PluginPlayer {
         this.fetched = true;
     }
 
+    public String getAddress() {
+        return this.getBukkitPlayer().getAddress().getAddress().toString();
+    }
+
+    public AuthPlayerData[] getAlts() {
+        final Repository<AuthPlayerData> repo = MineORM.getRepository(AuthPlayerData.class);
+        final MapFactory filter = MapFactory.create("lastLoginIP", this.getAddress());
+        return repo.findMany(filter);
+    }
+
     public int getTimer() {
         return this.timer;
     }
@@ -81,6 +91,7 @@ public class AuthPlayer extends PluginPlayer {
             this.logged = true;
             this.data.username = this.getBukkitPlayer().getName();
             this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
+            this.data.lastLoginIP = this.getAddress();
             this.data.save();
         }
     }
@@ -101,6 +112,8 @@ public class AuthPlayer extends PluginPlayer {
         this.data.username = this.getBukkitPlayer().getName();
         this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
         this.data.password = this.plugin.getCipher().hash(password);
+        this.data.lastLoginIP = this.getAddress();
+        this.data.registrationIP = this.getAddress();
         this.data.email = email;
 
         this.data.save();
@@ -116,7 +129,7 @@ public class AuthPlayer extends PluginPlayer {
     @Override
     public void sendMessage(final String message) {
         final String prefix = this.plugin.getMainConfig().getString("settings.prefix", "&8[&6&lA&e&lA&8] &r");
-        super.sendMessage(prefix + message);
+        super.sendMessage(PlaceholderUtils.format(prefix + message, this));
     }
 
     public void setEmail(final String email) {
