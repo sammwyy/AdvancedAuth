@@ -1,5 +1,9 @@
 package dev._2lstudios.advancedauth;
 
+import java.io.IOException;
+
+import org.bukkit.configuration.InvalidConfigurationException;
+
 import dev._2lstudios.advancedauth.commands.LoginCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
@@ -13,7 +17,6 @@ import dev._2lstudios.advancedauth.utils.URI;
 
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.config.Configuration;
-
 import dev._2lstudios.mineorm.DatabaseType;
 import dev._2lstudios.mineorm.MineORM;
 import dev._2lstudios.mineorm.providers.IProvider;
@@ -59,6 +62,13 @@ public class AdvancedAuth extends JellyPlugin {
         this.databaseConfig = this.getConfig("database.yml");
         this.mainConfig = this.getConfig("config.yml");
 
+        // Extract any language file from jar
+        try {
+            this.getLanguageManager().loadLanguages();
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
         // Setup database
         this.setupDatabase();
 
@@ -77,7 +87,7 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register commands
         this.addCommand(new LoginCommand());
-        this.addCommand(new RegisterCommand());
+        this.addCommand(new RegisterCommand(this));
 
         // Print welcome message if plugin starts correctly
         final String cipherAlgorithm = this.mainConfig.getString("security.cipher");

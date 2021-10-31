@@ -21,13 +21,13 @@ public class PlayerAuthNotifyTask implements Runnable {
             if (authPlayer != null && authPlayer.isFetched()) {
                 // Isn't registered
                 if (!authPlayer.isRegistered()) {
-                    authPlayer.sendMessage("&cRegister your account with /register <password> <email>");
+                    authPlayer.sendI18nMessage("register.message");
                     return;
                 }
 
                 // Is registered but isn't logged
                 if (!authPlayer.isLogged()) {
-                    authPlayer.sendMessage("&cLogin in to your account using /login <password>");
+                    authPlayer.sendI18nMessage("login.message");
                 }
             }
         }

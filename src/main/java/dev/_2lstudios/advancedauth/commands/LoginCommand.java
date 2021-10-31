@@ -12,25 +12,25 @@ public class LoginCommand extends CommandListener {
         final AuthPlayer player = (AuthPlayer) ctx.getPluginPlayer();
 
         if (!player.isFetched()) {
-            player.sendMessage("&eStill downloading your data, please wait...");
+            player.sendI18nMessage("common.still-downloading");
             return;
         }
 
         if (!player.isRegistered()) {
-            player.sendMessage("&eYou aren't registered yet.");
+            player.sendI18nMessage("login.not-registered");
             return;
         }
 
         if (player.isLogged()) {
-            player.sendMessage("&eYou are already logged in");
+            player.sendI18nMessage("login.already-logged");
             return;
         }
 
         if (player.comparePassword(ctx.getArguments().getString(0))) {
             player.login();
-            player.sendMessage("&aLogged successfully");
+            player.sendI18nMessage("login.successfully");
         } else {
-            player.sendMessage("&cInvalid password");
+            player.sendI18nMessage("login.wrong-password");
         }
     }
 }

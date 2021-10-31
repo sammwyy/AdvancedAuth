@@ -3,3 +3,18 @@ authentication:
   timeout: 30
 security:
   cipher: "bcrypt"
+  password-min-length: 6
+  password-max-length: 32
+  password-blacklist:
+    - "1234"
+    - "123456"
+    - "654321"
+    - "abcdef"
+    - "fedcba"
+    - "qwerty"
+    - "minecraft"
+    - "password"
+    - "asdasd"
+    - "asdfasdf"
+    - "wasdwasd"
+    - "{username}"
