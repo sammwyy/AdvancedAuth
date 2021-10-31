@@ -1,8 +1,14 @@
 common:
   still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
 
+addemail:
+  usage: "&cUso: /addemail <email>"
+  successfully: "&a¡Has cambiado tu dirección de correo exitosamente!"
+  bad-format: "&cEl correo ingresado no parece ser válido."
+
 login:
   message: "&7Debes iniciar sesión usando &b/login <contraseña>"
+  usage: "&cUso: /login <contraseña>"
   successfully: "&aHas iniciado sesión correctamente."
   already-logged: "&cYa te encuentras logeado."
   logout: "&eHas cerrado sesión."

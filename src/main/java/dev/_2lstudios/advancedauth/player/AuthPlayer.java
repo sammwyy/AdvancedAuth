@@ -118,4 +118,9 @@ public class AuthPlayer extends PluginPlayer {
         final String prefix = this.plugin.getMainConfig().getString("settings.prefix", "&8[&6&lA&e&lA&8] &r");
         super.sendMessage(prefix + message);
     }
+
+    public void setEmail(final String email) {
+        this.data.email = email;
+        this.data.save();
+    }
 }

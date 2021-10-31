@@ -13,7 +13,7 @@ public class PlayerMoveListener extends BlockerListener {
     @EventHandler
     public void onPlayerMove(final PlayerMoveEvent e) {
         if (!this.isAllowed(e.getPlayer())) {
-            if (e.getFrom().distance(e.getTo()) > 0) {
+            if (e.getFrom().distance(e.getTo()) > 0.1) {
                 e.setTo(e.getFrom());
                 e.setCancelled(true);
             }
