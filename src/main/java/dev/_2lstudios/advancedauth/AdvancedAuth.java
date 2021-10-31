@@ -7,6 +7,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import dev._2lstudios.advancedauth.commands.LoginCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
+import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
@@ -84,6 +85,9 @@ public class AdvancedAuth extends JellyPlugin {
         this.getServer().getScheduler().runTaskTimer(this, new PlayerAuthNotifyTask(this), interval, interval);
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, new PlayerDataFetchTask(this), 20L, 20L);
         this.getServer().getScheduler().runTaskTimer(this, new PlayerTimeoutTask(this), 20L, 20L);
+
+        // Register events
+        BlockerListenerHandler.register(this);
 
         // Register commands
         this.addCommand(new LoginCommand());
