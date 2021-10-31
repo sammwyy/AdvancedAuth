@@ -25,7 +25,7 @@ public class ChangePasswordCommand extends CommandListener {
         }
 
         if (!player.comparePassword(oldPassword)) {
-            player.sendI18nMessage("changepassword.wrong-password");
+            player.sendI18nMessage("login.wrong-password");
             return;
         }
 

@@ -128,4 +128,10 @@ public class AuthPlayer extends PluginPlayer {
         this.data.password = this.plugin.getCipher().hash(password);
         this.data.save();
     }
+
+    public void unregister() {
+        this.logout();
+        this.data.delete();
+        this.data = null;
+    }
 }

@@ -9,7 +9,6 @@ addemail:
 changepassword:
   usage: "&cUso: /changepassword <vieja-contraseña> <nueva-contraseña>"
   successfully: "&aLa contraseña ha sido cambiada correctamente."
-  wrong-password: "&cLa contraseña anterior no coincide con la registrada en tu cuenta"
 
 login:
   message: "&7Debes iniciar sesión usando &b/login <contraseña>"
@@ -29,3 +28,7 @@ register:
   password-not-match: "&cLa confirmación de contraseña no coincide."
   password-length: "&cLa contraseña debe tener entre {password:min} y {password:max} caracteres."
   password-too-weak: "&cEsta contraseña es muy débil."
+
+unregister:
+  usage: "&cUso: /unregister <contraseña>"
+  successfully: "&aTu cuenta ha sido eliminada correctamente."

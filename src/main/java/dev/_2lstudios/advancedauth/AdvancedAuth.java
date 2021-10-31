@@ -9,6 +9,7 @@ import dev._2lstudios.advancedauth.commands.ChangePasswordCommand;
 import dev._2lstudios.advancedauth.commands.LoginCommand;
 import dev._2lstudios.advancedauth.commands.LogoutCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
+import dev._2lstudios.advancedauth.commands.UnregisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
@@ -101,6 +102,7 @@ public class AdvancedAuth extends JellyPlugin {
         this.addCommand(new LoginCommand());
         this.addCommand(new LogoutCommand());
         this.addCommand(new RegisterCommand());
+        this.addCommand(new UnregisterCommand());
 
         // Print welcome message if plugin starts correctly
         final String cipherAlgorithm = this.mainConfig.getString("security.cipher");
