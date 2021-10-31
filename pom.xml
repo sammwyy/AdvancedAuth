@@ -40,13 +40,14 @@
         </dependency>
         <dependency>
             <groupId>dev._2lstudios</groupId>
-            <artifactId>jelly</artifactId>
-            <version>0.0.4</version>
+            <artifactId>mineorm</artifactId>
+            <version>0.0.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.dotphin</groupId>
-            <artifactId>milkshakeorm</artifactId>
-            <version>0.6-ALPHA</version>
+            <groupId>dev._2lstudios</groupId>
+            <artifactId>jelly</artifactId>
+            <version>0.0.4</version>
         </dependency>
     </dependencies>
 
