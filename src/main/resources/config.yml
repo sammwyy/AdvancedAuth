@@ -1,2 +1,5 @@
+authentication:
+  message-interval: 2
+  timeout: 30
 security:
   cipher: "bcrypt"

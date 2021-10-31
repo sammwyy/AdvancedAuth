@@ -69,7 +69,9 @@ public class AdvancedAuth extends JellyPlugin {
         this.setPluginPlayerManager(new AuthPlayerManager(this));
 
         // Register tasks
-        this.getServer().getScheduler().runTaskTimer(this, new PlayerAuthNotifyTask(this), 20L, 20L);
+        final long interval = this.getConfig().getInt("authentication.message-interval", 2) * 20L;
+
+        this.getServer().getScheduler().runTaskTimer(this, new PlayerAuthNotifyTask(this), interval, interval);
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, new PlayerDataFetchTask(this), 20L, 20L);
         this.getServer().getScheduler().runTaskTimer(this, new PlayerTimeoutTask(this), 20L, 20L);
 

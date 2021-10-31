@@ -8,9 +8,11 @@ import dev._2lstudios.advancedauth.player.AuthPlayer;
 public class PlayerTimeoutTask implements Runnable {
 
     private final AdvancedAuth plugin;
+    private final long timeout;
 
     public PlayerTimeoutTask(final AdvancedAuth plugin) {
         this.plugin = plugin;
+        this.timeout = this.plugin.getConfig().getInt("authentication.timeout", 30);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class PlayerTimeoutTask implements Runnable {
             if (authPlayer != null && !authPlayer.isLogged()) {
                 authPlayer.addTimer();
 
-                if (authPlayer.getTimer() >= 10) {
+                if (authPlayer.getTimer() >= timeout) {
                     authPlayer.getBukkitPlayer().kickPlayer("§cTimeout");
                 }
             }

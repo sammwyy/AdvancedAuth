@@ -2,21 +2,27 @@ package dev._2lstudios.advancedauth.player;
 
 import org.bukkit.entity.Player;
 
+import dev._2lstudios.advancedauth.AdvancedAuth;
+
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
+
 import dev._2lstudios.mineorm.MineORM;
 import dev._2lstudios.mineorm.repository.Repository;
 import dev._2lstudios.mineorm.utils.MapFactory;
 
 public class AuthPlayer extends PluginPlayer {
-    private AuthPlayerData data = null;
 
+    private final AdvancedAuth plugin;
+
+    private AuthPlayerData data = null;
     private boolean fetched = false;
     private boolean logged = false;
     private int timer = 0;
 
     public AuthPlayer(final JellyPlugin plugin, final Player player) {
         super(plugin, player);
+        this.plugin = (AdvancedAuth) plugin;
     }
 
     public void addTimer() {
@@ -28,7 +34,7 @@ public class AuthPlayer extends PluginPlayer {
             return false;
         }
 
-        return candidate.equals(this.data.password);
+        return this.plugin.getCipher().compare(this.data.password, candidate);
     }
 
     public void fetchUserData() {
@@ -87,7 +93,7 @@ public class AuthPlayer extends PluginPlayer {
         this.data = new AuthPlayerData();
         this.data.username = this.getBukkitPlayer().getName();
         this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
-        this.data.password = password;
+        this.data.password = this.plugin.getCipher().hash(password);
         this.data.email = email;
 
         this.data.save();
