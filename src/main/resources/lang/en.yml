@@ -1,18 +1,20 @@
 common:
-  still-downloading: "&eTus datos aún se están validando, inténtalo nuevamente en un segundo."
+  still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
 
 login:
-  message: "&cDebes iniciar sesión usando /login <contraseña>"
+  message: "&7Debes iniciar sesión usando &b/login <contraseña>"
   successfully: "&aHas iniciado sesión correctamente."
   already-logged: "&cYa te encuentras logeado."
-  not-registered: "&cEsta cuenta no se encuentra registrada"
+  logout: "&eHas cerrado sesión."
+  not-logged: "&cDebes iniciar sesión antes de hacer eso."
   wrong-password: "&cContraseña incorrecta"
 
 register:
-  message: "&cDebes registrarte usando /register <contraseña>"
+  message: "&7Debes registrarte usando &b/register <contraseña>"
   usage: "&cUso: /register <contraseña>"
   successfully: "&aTu cuenta se ha registrado correctamente."
   already-registered: "&cEsta cuenta ya se encuentra registrada"
+  not-registered: "&cEsta cuenta no se encuentra registrada"
   password-not-match: "&cLa confirmación de contraseña no coincide."
   password-length: "&cLa contraseña debe tener entre {password:min} y {password:max} caracteres."
   password-too-weak: "&cEsta contraseña es muy débil."

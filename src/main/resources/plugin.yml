@@ -23,7 +23,6 @@ commands:
     aliases: ["log", "l"]
     description: "Login in to your account"
   logout:
-    aliases: ["lout"]
     description: "Logout from your account"
   register:
     aliases: ["reg"]

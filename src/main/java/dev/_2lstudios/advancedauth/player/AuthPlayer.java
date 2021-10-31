@@ -85,6 +85,13 @@ public class AuthPlayer extends PluginPlayer {
         }
     }
 
+    public void logout() {
+        if (this.isLogged()) {
+            this.logged = false;
+            this.timer = 0;
+        }
+    }
+
     public boolean register(final String password, final String email) {
         if (this.isRegistered()) {
             return false;
@@ -97,11 +104,18 @@ public class AuthPlayer extends PluginPlayer {
         this.data.email = email;
 
         this.data.save();
+        this.timer = 0;
         this.logged = true;
         return true;
     }
 
     public boolean register(final String password) {
         return this.register(password, null);
+    }
+
+    @Override
+    public void sendMessage(final String message) {
+        final String prefix = this.plugin.getMainConfig().getString("settings.prefix", "&8[&6&lA&e&lA&8] &r");
+        super.sendMessage(prefix + message);
     }
 }

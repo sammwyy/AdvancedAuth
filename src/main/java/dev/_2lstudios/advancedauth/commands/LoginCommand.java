@@ -10,6 +10,12 @@ public class LoginCommand extends CommandListener {
     @Override
     public void handle(final CommandContext ctx) throws Exception {
         final AuthPlayer player = (AuthPlayer) ctx.getPluginPlayer();
+        final String password = ctx.getArguments().getString(0);
+
+        if (password == null) {
+            player.sendI18nMessage("login.usage");
+            return;
+        }
 
         if (!player.isFetched()) {
             player.sendI18nMessage("common.still-downloading");
@@ -17,7 +23,7 @@ public class LoginCommand extends CommandListener {
         }
 
         if (!player.isRegistered()) {
-            player.sendI18nMessage("login.not-registered");
+            player.sendI18nMessage("register.not-registered");
             return;
         }
 
@@ -26,7 +32,7 @@ public class LoginCommand extends CommandListener {
             return;
         }
 
-        if (player.comparePassword(ctx.getArguments().getString(0))) {
+        if (player.comparePassword(password)) {
             player.login();
             player.sendI18nMessage("login.successfully");
         } else {

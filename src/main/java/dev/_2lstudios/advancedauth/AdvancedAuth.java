@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 
 import dev._2lstudios.advancedauth.commands.LoginCommand;
+import dev._2lstudios.advancedauth.commands.LogoutCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
@@ -91,6 +92,7 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register commands
         this.addCommand(new LoginCommand());
+        this.addCommand(new LogoutCommand());
         this.addCommand(new RegisterCommand(this));
 
         // Print welcome message if plugin starts correctly

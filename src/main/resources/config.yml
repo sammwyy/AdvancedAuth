@@ -1,8 +1,14 @@
+settings:
+  prefix: "&8[&6&lA&e&lA&8] &r"
 authentication:
   message-interval: 2
   timeout: 30
 security:
   cipher: "bcrypt"
+  allowed-commands:
+    - "/login"
+    - "/logout"
+    - "/register"
   password-min-length: 6
   password-max-length: 32
   password-blacklist:
