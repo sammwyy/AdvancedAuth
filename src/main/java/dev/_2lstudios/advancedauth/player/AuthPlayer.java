@@ -37,6 +37,31 @@ public class AuthPlayer extends PluginPlayer {
         return this.plugin.getCipher().compare(this.data.password, candidate);
     }
 
+    public void createSession() {
+        if (this.data._id != null) {
+            this.plugin.getCache().set("auth_session_" + this.data._id, this.getAddress());
+        }
+    }
+
+    public boolean hasActiveSession() {
+        if (this.data._id == null) {
+            return false;
+        }
+
+        final String sessionAddr = this.plugin.getCache().get("auth_session_" + this.data._id);
+        if (sessionAddr == null) {
+            return false;
+        } else {
+            return sessionAddr.equals(this.getAddress());
+        }
+    }
+
+    public void deleteSession() {
+        if (this.data._id != null) {
+            this.plugin.getCache().delete("auth_session_" + this.data._id);
+        }
+    }
+
     public void fetchUserData() {
         final Repository<AuthPlayerData> repo = MineORM.getRepository(AuthPlayerData.class);
 
@@ -47,17 +72,21 @@ public class AuthPlayer extends PluginPlayer {
 
         if (byUsernameData != null) {
             this.data = byUsernameData;
-            this.fetched = true;
-            return;
+        } else {
+            // Find by UUID
+            final String uuid = this.getBukkitPlayer().getUniqueId().toString();
+            final MapFactory uuidFilter = MapFactory.create("uuid", uuid);
+            final AuthPlayerData byUUIDData = (AuthPlayerData) repo.findOne(uuidFilter);
+            this.data = byUUIDData;
         }
 
-        // Find by UUID
-        final String uuid = this.getBukkitPlayer().getUniqueId().toString();
-        final MapFactory uuidFilter = MapFactory.create("uuid", uuid);
-        final AuthPlayerData byUUIDData = (AuthPlayerData) repo.findOne(uuidFilter);
-
-        this.data = byUUIDData;
         this.fetched = true;
+
+        // Check for session
+        boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
+        if (resumeSession && this.hasActiveSession()) {
+            this.login(LoginReason.SESSION_RESUME);
+        }
     }
 
     public String getAddress() {
@@ -86,13 +115,18 @@ public class AuthPlayer extends PluginPlayer {
         return this.data != null;
     }
 
-    public void login() {
+    public void login(final LoginReason reason) {
         if (this.isRegistered()) {
             this.logged = true;
             this.data.username = this.getBukkitPlayer().getName();
             this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
             this.data.lastLoginIP = this.getAddress();
             this.data.save();
+
+            boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
+            if (reason == LoginReason.PASSWORD && resumeSession) {
+                this.createSession();
+            }
         }
     }
 
@@ -103,7 +137,7 @@ public class AuthPlayer extends PluginPlayer {
         }
     }
 
-    public boolean register(final String password, final String email) {
+    public boolean register(final String password) {
         if (this.isRegistered()) {
             return false;
         }
@@ -114,16 +148,11 @@ public class AuthPlayer extends PluginPlayer {
         this.data.password = this.plugin.getCipher().hash(password);
         this.data.lastLoginIP = this.getAddress();
         this.data.registrationIP = this.getAddress();
-        this.data.email = email;
 
         this.data.save();
         this.timer = 0;
         this.logged = true;
         return true;
-    }
-
-    public boolean register(final String password) {
-        return this.register(password, null);
     }
 
     @Override

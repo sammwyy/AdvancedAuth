@@ -4,6 +4,7 @@ authentication:
   max-accounts-per-ip: 1
   message-interval: 2
   timeout: 30
+  resume-session: true
 security:
   cipher: "bcrypt"
   allowed-commands:
