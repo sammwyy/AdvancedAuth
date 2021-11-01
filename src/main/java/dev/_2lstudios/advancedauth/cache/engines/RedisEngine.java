@@ -15,6 +15,8 @@ public class RedisEngine implements CacheEngine {
         if (password != null && !password.isEmpty()) {
             this.client.auth(password);
         }
+
+        this.client.ping();
     }
 
     @Override
