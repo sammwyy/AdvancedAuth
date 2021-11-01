@@ -1,8 +1,20 @@
-storage:
-  driver: "mongodb"
-  username: ""
+# The cache buffer will be used for fast access data, such as sessions and synchronization
+cache:
+  # Available drivers: memory, redis
+  driver: "memory"
+  expiration: 1440 # In minutes (1440 = 1 day)
+  # The following values are only valid if no memory cache is used
+  host: "localhost"
+  port: 6379
   password: ""
+
+# The storage container will be used to store the names and passwords of the registered accounts
+storage:
+  # Available drivers: mongodb
+  driver: "mongodb"
   host: "localhost"
   port: 27017
+  username: ""
+  password: ""
   database: "minecraft"
   collection: "users"

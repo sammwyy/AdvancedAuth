@@ -4,12 +4,14 @@ import java.io.IOException;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 
+import dev._2lstudios.advancedauth.cache.CacheEngine;
 import dev._2lstudios.advancedauth.commands.AddEmailCommand;
 import dev._2lstudios.advancedauth.commands.ChangePasswordCommand;
 import dev._2lstudios.advancedauth.commands.LoginCommand;
 import dev._2lstudios.advancedauth.commands.LogoutCommand;
 import dev._2lstudios.advancedauth.commands.RegisterCommand;
 import dev._2lstudios.advancedauth.commands.UnregisterCommand;
+import dev._2lstudios.advancedauth.errors.NoSuchCacheEngineException;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
@@ -31,6 +33,7 @@ public class AdvancedAuth extends JellyPlugin {
     private Configuration databaseConfig;
     private Configuration mainConfig;
 
+    private CacheEngine cache;
     private Cipher cipher;
 
     private void setupDatabase() {
@@ -49,6 +52,22 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register repository
         MineORM.addRepository(AuthPlayerData.class, provider, collection);
+    }
+
+    private void setupCacheEngine() {
+        final String driver = this.databaseConfig.getString("cache.driver", "memory");
+        final String host = this.databaseConfig.getString("cache.host", "localhost");
+        final int port = this.databaseConfig.getInt("cache.port", 6379);
+        final String password = this.databaseConfig.getString("cache.password", "");
+        final int expiration = this.databaseConfig.getInt("cache.expiration", 1440);
+
+        try {
+            this.cache = CacheEngine.getEngine(driver, expiration, host, port, password);
+        } catch (final NoSuchCacheEngineException e) {
+            e.printStackTrace();
+            this.getLogger().severe("Stopping server to avoid security breaches");
+            this.getServer().shutdown();
+        }
     }
 
     private void setupCipher() {
@@ -80,6 +99,9 @@ public class AdvancedAuth extends JellyPlugin {
         // Setup database
         this.setupDatabase();
 
+        // Setup cache engine
+        this.setupCacheEngine();
+
         // Initialize cipher
         this.setupCipher();
 
@@ -106,11 +128,13 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Print welcome message if plugin starts correctly
         final String cipherAlgorithm = this.mainConfig.getString("security.cipher");
+        final String cacheDriver = this.databaseConfig.getString("cache.driver");
         final String storageDriver = this.databaseConfig.getString("storage.driver");
         final String pluginVersion = this.getDescription().getVersion();
 
         this.getServer().getConsoleSender().sendMessage("§8============================================");
         this.getServer().getConsoleSender().sendMessage("              §6§lAdvanced§e§lAuth§r");
+        this.getServer().getConsoleSender().sendMessage("§7- §eCache Engine: §7" + cacheDriver);
         this.getServer().getConsoleSender().sendMessage("§7- §eCipher: §7" + cipherAlgorithm);
         this.getServer().getConsoleSender().sendMessage("§7- §eStorage: §7" + storageDriver);
         this.getServer().getConsoleSender().sendMessage("§7- §eVersion: §7" + pluginVersion);
@@ -118,6 +142,10 @@ public class AdvancedAuth extends JellyPlugin {
     }
 
     /* Plugin getters */
+    public CacheEngine getCache() {
+        return this.cache;
+    }
+
     public Cipher getCipher() {
         return this.cipher;
     }
