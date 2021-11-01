@@ -16,8 +16,8 @@ public class MemoryEngine implements CacheEngine {
     public MemoryEngine(final int expiration) {
         this.cache = CacheBuilder.newBuilder().expireAfterWrite(expiration, TimeUnit.SECONDS)
                 .expireAfterAccess(expiration, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
-                    public String load(final String _key) throws Exception {
-                        return null;
+                    public String load(final String key) throws Exception {
+                        return key;
                     }
                 });
     }

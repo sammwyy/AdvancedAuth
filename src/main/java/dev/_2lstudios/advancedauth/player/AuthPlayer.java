@@ -124,8 +124,18 @@ public class AuthPlayer extends PluginPlayer {
             this.data.save();
 
             boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
+
             if (reason == LoginReason.PASSWORD && resumeSession) {
                 this.createSession();
+            }
+
+            switch (reason) {
+            case PASSWORD:
+                this.sendI18nMessage("login.successfully");
+                break;
+            case SESSION_RESUME:
+                this.sendI18nMessage("login.session-resumed");
+                break;
             }
         }
     }

@@ -14,6 +14,7 @@ login:
   message: "&7Debes iniciar sesión usando &b/login <contraseña>"
   usage: "&cUso: /login <contraseña>"
   successfully: "&aHas iniciado sesión correctamente."
+  session-resumed: "&aTu sesión ha sido reanudada."
   already-logged: "&cYa te encuentras logeado."
   logout: "&eHas cerrado sesión."
   not-logged: "&cDebes iniciar sesión antes de hacer eso."

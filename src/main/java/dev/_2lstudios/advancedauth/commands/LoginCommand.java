@@ -35,7 +35,6 @@ public class LoginCommand extends CommandListener {
 
         if (player.comparePassword(password)) {
             player.login(LoginReason.PASSWORD);
-            player.sendI18nMessage("login.successfully");
         } else {
             player.sendI18nMessage("login.wrong-password");
         }
