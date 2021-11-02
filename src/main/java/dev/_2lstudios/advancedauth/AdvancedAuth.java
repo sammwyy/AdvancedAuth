@@ -24,9 +24,9 @@ import dev._2lstudios.advancedauth.utils.URI;
 
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.config.Configuration;
-import dev._2lstudios.mineorm.DatabaseType;
-import dev._2lstudios.mineorm.MineORM;
-import dev._2lstudios.mineorm.providers.IProvider;
+
+import com.dotphin.milkshakeorm.MilkshakeORM;
+import com.dotphin.milkshakeorm.providers.Provider;
 
 public class AdvancedAuth extends JellyPlugin {
 
@@ -48,10 +48,10 @@ public class AdvancedAuth extends JellyPlugin {
 
         final URI uri = new URI().setProtocol(driver).setUsername(username).setPassword(password).setHost(host)
                 .setPort(port).setPath(database);
-        final IProvider provider = MineORM.connect(DatabaseType.valueOf(driver.toUpperCase()), uri.toString());
+        final Provider provider = MilkshakeORM.connect(uri.toString());
 
         // Register repository
-        MineORM.addRepository(AuthPlayerData.class, provider, collection);
+        MilkshakeORM.addRepository(AuthPlayerData.class, provider, collection);
     }
 
     private void setupCacheEngine() {

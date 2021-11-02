@@ -5,7 +5,6 @@ main: ${mainClass}
 version: ${version}
 url: ${url}
 api-version: 1.13+
-depend: ["MineORM"]
 commands:
   "2fa":
     aliases: ["tfa"]

@@ -41,15 +41,21 @@
         </dependency>
         <!-- Framework and libraries -->
         <dependency>
-            <groupId>dev._2lstudios</groupId>
-            <artifactId>mineorm</artifactId>
-            <version>0.0.1</version>
+            <groupId>com.dotphin</groupId>
+            <artifactId>milkshakeorm</artifactId>
+            <version>0.8-ALPHA</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev._2lstudios</groupId>
             <artifactId>jelly</artifactId>
             <version>0.0.7</version>
+        </dependency>
+        <!-- Database Drivers -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.3.2</version>
         </dependency>
         <!-- Ciphers -->
         <dependency>

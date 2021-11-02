@@ -7,9 +7,9 @@ import dev._2lstudios.advancedauth.utils.PlaceholderUtils;
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
 
-import dev._2lstudios.mineorm.MineORM;
-import dev._2lstudios.mineorm.repository.Repository;
-import dev._2lstudios.mineorm.utils.MapFactory;
+import com.dotphin.milkshakeorm.MilkshakeORM;
+import com.dotphin.milkshakeorm.repository.Repository;
+import com.dotphin.milkshakeorm.utils.MapFactory;
 
 public class AuthPlayer extends PluginPlayer {
 
@@ -63,7 +63,7 @@ public class AuthPlayer extends PluginPlayer {
     }
 
     public void fetchUserData() {
-        final Repository<AuthPlayerData> repo = MineORM.getRepository(AuthPlayerData.class);
+        final Repository<AuthPlayerData> repo = MilkshakeORM.getRepository(AuthPlayerData.class);
 
         // Find by username
         final String username = this.getBukkitPlayer().getName();
@@ -94,7 +94,7 @@ public class AuthPlayer extends PluginPlayer {
     }
 
     public AuthPlayerData[] getAlts() {
-        final Repository<AuthPlayerData> repo = MineORM.getRepository(AuthPlayerData.class);
+        final Repository<AuthPlayerData> repo = MilkshakeORM.getRepository(AuthPlayerData.class);
         final MapFactory filter = MapFactory.create("lastLoginIP", this.getAddress());
         return repo.findMany(filter);
     }
@@ -144,6 +144,11 @@ public class AuthPlayer extends PluginPlayer {
         if (this.isLogged()) {
             this.logged = false;
             this.timer = 0;
+
+            boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
+            if (resumeSession) {
+                this.deleteSession();
+            }
         }
     }
 
