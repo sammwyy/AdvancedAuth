@@ -1,4 +1,5 @@
 common:
+  error-sending-server: "&cNo se te puede enviar al servidor {server}"
   still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
 
 admin:

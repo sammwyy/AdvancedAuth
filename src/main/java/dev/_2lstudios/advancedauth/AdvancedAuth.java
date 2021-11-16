@@ -14,6 +14,8 @@ import dev._2lstudios.advancedauth.commands.player.RegisterCommand;
 import dev._2lstudios.advancedauth.commands.player.UnregisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCacheEngineException;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
+import dev._2lstudios.advancedauth.hooks.ProxyHook;
+import dev._2lstudios.advancedauth.hooks.impl.ProxyBungeecordHook;
 import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
@@ -37,6 +39,8 @@ public class AdvancedAuth extends JellyPlugin {
 
     private CacheEngine cache;
     private Cipher cipher;
+
+    private ProxyHook proxyHook;
 
     private void setupDatabase() {
         // Connect to database
@@ -98,6 +102,14 @@ public class AdvancedAuth extends JellyPlugin {
             e.printStackTrace();
         }
 
+        // Setup hooks
+        if (this.mainConfig.getBoolean("authentication.send-server-on-login.enabled")) {
+            final String proxyHookName = this.mainConfig.getString("authentication.send-server-on-login.proxy");
+            if (proxyHookName.equalsIgnoreCase("bungeecord") || proxyHookName.equalsIgnoreCase("bungee")) {
+                this.proxyHook = new ProxyBungeecordHook(this);
+            }
+        }
+
         // Setup database
         this.setupDatabase();
 
@@ -157,6 +169,10 @@ public class AdvancedAuth extends JellyPlugin {
 
     public Configuration getMainConfig() {
         return this.mainConfig;
+    }
+
+    public ProxyHook getProxyHook () {
+        return this.proxyHook;
     }
 
     /* Static instance */

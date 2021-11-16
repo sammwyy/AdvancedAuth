@@ -3,6 +3,7 @@ package dev._2lstudios.advancedauth.player;
 import org.bukkit.entity.Player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
+import dev._2lstudios.advancedauth.hooks.ProxyHook;
 import dev._2lstudios.advancedauth.utils.PlaceholderUtils;
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
@@ -136,6 +137,16 @@ public class AuthPlayer extends PluginPlayer {
             case SESSION_RESUME:
                 this.sendI18nMessage("login.session-resumed");
                 break;
+            }
+
+            final ProxyHook proxy = this.plugin.getProxyHook();
+            if (proxy != null) {
+                final String server = this.plugin.getMainConfig().getString("authentication.send-server-on-login.server");
+                try {
+                    proxy.sendServer(this.getBukkitPlayer(), server);
+                } catch (Exception e) {
+                    this.sendMessage(this.getI18nString("common.error-sending-server").replace("{server}", server));
+                }
             }
         }
     }
