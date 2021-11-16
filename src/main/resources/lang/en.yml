@@ -1,6 +1,14 @@
 common:
   still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
 
+admin:
+  help: |-
+    &r
+    &6&lAdvanced&e&lAuth &8|| &7Lista de comandos
+    &9/aa setspawn &8- &7Define el spawn en tu posición actual
+    &r
+  spawn-set: "&aEl spawn ha sido colocado en tu posición actual."
+
 addemail:
   usage: "&cUso: /addemail <email>"
   successfully: "&a¡Has cambiado tu dirección de correo exitosamente!"

@@ -1,4 +1,4 @@
-package dev._2lstudios.advancedauth.commands;
+package dev._2lstudios.advancedauth.commands.player;
 
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.jelly.annotations.Command;

@@ -5,14 +5,16 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 
 import dev._2lstudios.advancedauth.cache.CacheEngine;
-import dev._2lstudios.advancedauth.commands.AddEmailCommand;
-import dev._2lstudios.advancedauth.commands.ChangePasswordCommand;
-import dev._2lstudios.advancedauth.commands.LoginCommand;
-import dev._2lstudios.advancedauth.commands.LogoutCommand;
-import dev._2lstudios.advancedauth.commands.RegisterCommand;
-import dev._2lstudios.advancedauth.commands.UnregisterCommand;
+import dev._2lstudios.advancedauth.commands.AdvancedAuthCommand;
+import dev._2lstudios.advancedauth.commands.player.AddEmailCommand;
+import dev._2lstudios.advancedauth.commands.player.ChangePasswordCommand;
+import dev._2lstudios.advancedauth.commands.player.LoginCommand;
+import dev._2lstudios.advancedauth.commands.player.LogoutCommand;
+import dev._2lstudios.advancedauth.commands.player.RegisterCommand;
+import dev._2lstudios.advancedauth.commands.player.UnregisterCommand;
 import dev._2lstudios.advancedauth.errors.NoSuchCacheEngineException;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
+import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
@@ -117,6 +119,7 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register events
         BlockerListenerHandler.register(this);
+        this.addEventListener(new PlayerJoinListener(this));
 
         // Register commands
         this.addCommand(new AddEmailCommand());
@@ -125,6 +128,8 @@ public class AdvancedAuth extends JellyPlugin {
         this.addCommand(new LogoutCommand());
         this.addCommand(new RegisterCommand(this));
         this.addCommand(new UnregisterCommand());
+
+        this.addCommand(new AdvancedAuthCommand(this));
 
         // Print welcome message if plugin starts correctly
         final String cipherAlgorithm = this.mainConfig.getString("security.cipher");
