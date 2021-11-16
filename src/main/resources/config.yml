@@ -1,10 +1,23 @@
 settings:
   prefix: "&8[&6&lA&e&lA&8] &r"
+  teleport-spawn:
+    enabled: false
+    location:
+      world: ""
+      x: 0
+      y: 0
+      z: 0
+      yaw: 0
+      pitch: 0
 authentication:
   max-accounts-per-ip: 1
   message-interval: 2
   timeout: 30
   resume-session: true
+  send-server-on-login:
+    enabled: false
+    proxy: bungeecord
+    server: lobby
 security:
   cipher: "bcrypt"
   allowed-commands:

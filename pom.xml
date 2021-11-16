@@ -44,7 +44,6 @@
             <groupId>com.dotphin</groupId>
             <artifactId>milkshakeorm</artifactId>
             <version>0.8-ALPHA</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev._2lstudios</groupId>
@@ -78,7 +77,7 @@
         <!-- Directory of .java files -->
         <sourceDirectory>src/main/java</sourceDirectory>
         <!-- Clean old builds and install dependencies before compile -->
-        <defaultGoal>clean install</defaultGoal>
+        <defaultGoal>clean package</defaultGoal>
         <!-- Package files inside resource directory in to the jar -->
         <resources>
             <resource>

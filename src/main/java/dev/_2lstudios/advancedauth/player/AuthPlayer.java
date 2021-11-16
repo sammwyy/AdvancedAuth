@@ -38,13 +38,13 @@ public class AuthPlayer extends PluginPlayer {
     }
 
     public void createSession() {
-        if (this.data._id != null) {
+        if (this.data != null && this.data._id != null) {
             this.plugin.getCache().set("auth_session_" + this.data._id, this.getAddress());
         }
     }
 
     public boolean hasActiveSession() {
-        if (this.data._id == null) {
+        if (this.data == null || this.data._id == null) {
             return false;
         }
 
