@@ -1,5 +1,6 @@
 settings:
   prefix: "&8[&6&lA&e&lA&8] &r"
+  logging: true
   teleport-spawn:
     enabled: false
     location:

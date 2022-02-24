@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.advancedauth.security.EmailValidation;
 import dev._2lstudios.jelly.annotations.Command;
@@ -35,5 +36,6 @@ public class AddEmailCommand extends CommandListener {
 
         player.setEmail(email);
         player.sendI18nMessage("addemail.successfully");
+        Logging.info(player.getName() + " has changed his email.");
     }
 }

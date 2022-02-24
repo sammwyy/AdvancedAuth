@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.commands.CommandContext;
@@ -30,5 +31,6 @@ public class UnregisterCommand extends CommandListener {
 
         player.unregister();
         player.sendI18nMessage("unregister.successfully");
+        Logging.info(player.getName() + " has deregistered his account.");
     }
 }

@@ -26,6 +26,10 @@ public class AuthPlayer extends PluginPlayer {
         this.plugin = (AdvancedAuth) plugin;
     }
 
+    public String getName() {
+        return this.getBukkitPlayer().getName();
+    }
+
     public void addTimer() {
         this.timer++;
     }

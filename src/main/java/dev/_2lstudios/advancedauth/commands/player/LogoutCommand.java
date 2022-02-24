@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.commands.CommandContext;
@@ -18,5 +19,6 @@ public class LogoutCommand extends CommandListener {
 
         player.logout();
         player.sendI18nMessage("login.logout");
+        Logging.info(player.getName() + " manually logged out.");
     }
 }

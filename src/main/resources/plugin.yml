@@ -5,6 +5,7 @@ main: ${mainClass}
 version: ${version}
 url: ${url}
 api-version: 1.13+
+depends: ["Milkshake-Bukkit"]
 commands:
   "2fa":
     description: "Add two factory authentication to your account"

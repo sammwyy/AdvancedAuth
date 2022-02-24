@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.advancedauth.player.LoginReason;
 import dev._2lstudios.jelly.annotations.Command;
@@ -35,8 +36,10 @@ public class LoginCommand extends CommandListener {
 
         if (player.comparePassword(password)) {
             player.login(LoginReason.PASSWORD);
+            Logging.info(player.getName() + " has been logged in using a password.");
         } else {
             player.sendI18nMessage("login.wrong-password");
+            Logging.info(player.getName() + " password failed.");
         }
     }
 }

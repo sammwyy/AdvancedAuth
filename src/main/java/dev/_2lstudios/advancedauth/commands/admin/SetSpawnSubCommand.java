@@ -5,7 +5,7 @@ import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.commands.CommandContext;
 import dev._2lstudios.jelly.commands.CommandListener;
 
-@Command(name = "setspawn")
+@Command(name = "setspawn", permission = "advancedauth.admin.setspawn")
 public class SetSpawnSubCommand extends CommandListener {
 
     private final AdvancedAuth plugin;

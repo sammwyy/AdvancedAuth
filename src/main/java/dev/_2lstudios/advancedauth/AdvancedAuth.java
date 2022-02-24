@@ -85,6 +85,10 @@ public class AdvancedAuth extends JellyPlugin {
         // Load configuration
         this.mainConfig = this.getConfig("config.yml");
 
+        // Logger
+        Logging.setLogger(this.getLogger());
+        Logging.setEnabled(this.mainConfig.getBoolean("settings.logging"));
+
         // Extract any language file from jar
         try {
             this.getLanguageManager().loadLanguages();

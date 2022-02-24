@@ -49,13 +49,7 @@
         <dependency>
             <groupId>dev._2lstudios</groupId>
             <artifactId>jelly</artifactId>
-            <version>0.2.1</version>
-        </dependency>
-        <!-- Database Drivers -->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-sync</artifactId>
-            <version>4.3.2</version>
+            <version>0.2.12</version>
         </dependency>
         <!-- Ciphers -->
         <dependency>

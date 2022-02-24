@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.advancedauth.security.PasswordValidation;
 import dev._2lstudios.jelly.annotations.Command;
@@ -26,6 +27,7 @@ public class ChangePasswordCommand extends CommandListener {
 
         if (!player.comparePassword(oldPassword)) {
             player.sendI18nMessage("login.wrong-password");
+            Logging.info(player.getName() + " has tried to change his password but failed to verify the old one.");
             return;
         }
 
@@ -33,6 +35,7 @@ public class ChangePasswordCommand extends CommandListener {
         if (passwordValidation == null) {
             player.setPassword(newPassword);
             player.sendI18nMessage("changepassword.successfully");
+            Logging.info(player.getName() + " has changed his password.");
         } else {
             player.sendI18nMessage("register." + passwordValidation);
         }

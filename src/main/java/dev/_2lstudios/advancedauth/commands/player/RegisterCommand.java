@@ -1,6 +1,7 @@
 package dev._2lstudios.advancedauth.commands.player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
+import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.advancedauth.security.PasswordValidation;
 import dev._2lstudios.jelly.annotations.Command;
@@ -39,6 +40,7 @@ public class RegisterCommand extends CommandListener {
 
         if (player.getAlts().length >= this.plugin.getMainConfig().getInt("authentication.max-accounts-per-ip", 1)) {
             player.sendI18nMessage("register.too-many-accounts");
+            Logging.info(player.getName() + " tried to register but has already exceeded the limit of registered accounts.");
             return;
         }
 
@@ -46,6 +48,7 @@ public class RegisterCommand extends CommandListener {
         if (passwordValidation == null) {
             player.register(password);
             player.sendI18nMessage("register.successfully");
+            Logging.info(player.getName() + " has been registered.");
         } else {
             player.sendI18nMessage("register." + passwordValidation);
         }
