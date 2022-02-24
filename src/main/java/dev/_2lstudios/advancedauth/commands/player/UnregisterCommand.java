@@ -6,7 +6,7 @@ import dev._2lstudios.jelly.commands.CommandContext;
 import dev._2lstudios.jelly.commands.CommandExecutionTarget;
 import dev._2lstudios.jelly.commands.CommandListener;
 
-@Command(name = "unregister", target = CommandExecutionTarget.ONLY_PLAYER)
+@Command(name = "unregister", aliases={"unreg"}, silent = true, target = CommandExecutionTarget.ONLY_PLAYER)
 public class UnregisterCommand extends CommandListener {
     @Override
     public void handle(final CommandContext ctx) throws Exception {

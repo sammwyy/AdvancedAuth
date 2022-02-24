@@ -9,6 +9,26 @@ settings:
       z: 0
       yaw: 0
       pitch: 0
+storage: 
+  # The storage container will be used to store the names and passwords of the registered accounts
+  database:
+    # URI format: 
+    #     driver://address/database
+    # with authentication: 
+    #     driver://username:password@address/database
+    #
+    # Available drivers: MongoDB
+    uri: "mongodb://localhost/minecraft"
+    collection: "Users"
+  # The cache buffer will be used for fast access data, such as sessions and synchronization
+  cache:
+    # Available drivers: memory, redis
+    driver: "memory"
+    expiration: 1440 # In minutes (1440 = 1 day)
+    # The following values are only valid if no memory cache is used (memory selected)
+    host: "localhost"
+    port: 6379
+    password: ""
 authentication:
   max-accounts-per-ip: 1
   message-interval: 2
@@ -22,8 +42,10 @@ security:
   cipher: "bcrypt"
   allowed-commands:
     - "/login"
+    - "/l"
     - "/logout"
     - "/register"
+    - "/reg"
   password-min-length: 6
   password-max-length: 32
   password-blacklist:

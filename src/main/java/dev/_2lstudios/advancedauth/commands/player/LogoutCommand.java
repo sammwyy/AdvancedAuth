@@ -5,7 +5,7 @@ import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.commands.CommandContext;
 import dev._2lstudios.jelly.commands.CommandListener;
 
-@Command(name = "logout")
+@Command(name = "logout", silent = true)
 public class LogoutCommand extends CommandListener {
     @Override
     public void handle(final CommandContext ctx) throws Exception {

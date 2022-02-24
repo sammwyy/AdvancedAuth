@@ -12,7 +12,7 @@ public class ProxyBungeecordHook implements ProxyHook {
 
     private final AdvancedAuth plugin;
 
-    public ProxyBungeecordHook (final AdvancedAuth plugin) {
+    public ProxyBungeecordHook(final AdvancedAuth plugin) {
         this.plugin = plugin;
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
@@ -21,14 +21,12 @@ public class ProxyBungeecordHook implements ProxyHook {
     public void sendServer(final Player player, String server) throws Exception {
         final ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         final DataOutputStream out = new DataOutputStream(byteOut);
-        
+
         out.writeUTF("Connect");
         out.writeUTF(server);
         player.sendPluginMessage(this.plugin, "BungeeCord", byteOut.toByteArray());
 
         byteOut.close();
         out.close();
-
-        System.out.print("XD");
     }
 }

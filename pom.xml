@@ -41,14 +41,15 @@
         </dependency>
         <!-- Framework and libraries -->
         <dependency>
-            <groupId>com.dotphin</groupId>
-            <artifactId>milkshakeorm</artifactId>
-            <version>0.8-ALPHA</version>
+            <groupId>dev._2lstudios</groupId>
+            <artifactId>Milkshake-Bukkit</artifactId>
+            <version>0.1-BETA</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev._2lstudios</groupId>
             <artifactId>jelly</artifactId>
-            <version>0.0.7</version>
+            <version>0.2.1</version>
         </dependency>
         <!-- Database Drivers -->
         <dependency>

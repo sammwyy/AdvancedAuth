@@ -6,7 +6,7 @@ import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.commands.CommandContext;
 import dev._2lstudios.jelly.commands.CommandListener;
 
-@Command(name = "changepassword")
+@Command(name = "changepassword", aliases = {"cpw"}, silent = true)
 public class ChangePasswordCommand extends CommandListener {
     @Override
     public void handle(final CommandContext ctx) throws Exception {

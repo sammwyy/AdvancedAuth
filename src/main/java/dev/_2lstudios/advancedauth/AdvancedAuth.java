@@ -2,6 +2,9 @@ package dev._2lstudios.advancedauth;
 
 import java.io.IOException;
 
+import com.dotphin.milkshakeorm.MilkshakeORM;
+import com.dotphin.milkshakeorm.providers.Provider;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 
 import dev._2lstudios.advancedauth.cache.CacheEngine;
@@ -24,17 +27,11 @@ import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
-import dev._2lstudios.advancedauth.utils.URI;
 
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.config.Configuration;
 
-import com.dotphin.milkshakeorm.MilkshakeORM;
-import com.dotphin.milkshakeorm.providers.Provider;
-
 public class AdvancedAuth extends JellyPlugin {
-
-    private Configuration databaseConfig;
     private Configuration mainConfig;
 
     private CacheEngine cache;
@@ -43,29 +40,18 @@ public class AdvancedAuth extends JellyPlugin {
     private ProxyHook proxyHook;
 
     private void setupDatabase() {
-        // Connect to database
-        final String driver = this.databaseConfig.getString("storage.driver", "mongodb");
-        final String username = this.databaseConfig.getString("storage.username", "");
-        final String password = this.databaseConfig.getString("storage.password", "");
-        final String host = this.databaseConfig.getString("storage.host", "localhost");
-        final int port = this.databaseConfig.getInt("storage.port", 27017);
-        final String database = this.databaseConfig.getString("storage.database", "minecraft");
-        final String collection = this.databaseConfig.getString("storage.collection", "players");
+        // Connect to database.
+        final String dbUri = this.mainConfig.getString("storage.database.uri", "mongodb://localhost/minecraft");
+        final String dbCollection = this.mainConfig.getString("storage.database.collection", "Users");
+        final Provider provider = MilkshakeORM.connect(dbUri);
+        MilkshakeORM.addRepository(AuthPlayerData.class, provider, dbCollection);
 
-        final URI uri = new URI().setProtocol(driver).setUsername(username).setPassword(password).setHost(host)
-                .setPort(port).setPath(database);
-        final Provider provider = MilkshakeORM.connect(uri.toString());
-
-        // Register repository
-        MilkshakeORM.addRepository(AuthPlayerData.class, provider, collection);
-    }
-
-    private void setupCacheEngine() {
-        final String driver = this.databaseConfig.getString("cache.driver", "memory");
-        final String host = this.databaseConfig.getString("cache.host", "localhost");
-        final int port = this.databaseConfig.getInt("cache.port", 6379);
-        final String password = this.databaseConfig.getString("cache.password", "");
-        final int expiration = this.databaseConfig.getInt("cache.expiration", 1440);
+        // Connect to cache engine.
+        final String driver = this.mainConfig.getString("storage.cache.driver", "memory");
+        final String host = this.mainConfig.getString("storage.cache.hist", "localhost");
+        final int port = this.mainConfig.getInt("storage.cache.port", 6379);
+        final String password = this.mainConfig.getString("storage.cache.password", "");
+        final int expiration = this.mainConfig.getInt("storage.cache.expiration", 1440);
 
         try {
             this.cache = CacheEngine.getEngine(driver, expiration, host, port, password);
@@ -91,8 +77,12 @@ public class AdvancedAuth extends JellyPlugin {
         // Set static instance
         instance = this;
 
+        // Use hooks
+        this.useCommandAPI();
+        this.useConfigAPI();
+        this.useLanguageAPI();
+
         // Load configuration
-        this.databaseConfig = this.getConfig("database.yml");
         this.mainConfig = this.getConfig("config.yml");
 
         // Extract any language file from jar
@@ -112,9 +102,6 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Setup database
         this.setupDatabase();
-
-        // Setup cache engine
-        this.setupCacheEngine();
 
         // Initialize cipher
         this.setupCipher();
@@ -145,8 +132,8 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Print welcome message if plugin starts correctly
         final String cipherAlgorithm = this.mainConfig.getString("security.cipher");
-        final String cacheDriver = this.databaseConfig.getString("cache.driver");
-        final String storageDriver = this.databaseConfig.getString("storage.driver");
+        final String cacheDriver = this.mainConfig.getString("storage.cache.driver");
+        final String storageDriver =  this.mainConfig.getString("storage.database.uri").split("://")[0];
         final String pluginVersion = this.getDescription().getVersion();
 
         this.getServer().getConsoleSender().sendMessage("§8============================================");
@@ -171,7 +158,7 @@ public class AdvancedAuth extends JellyPlugin {
         return this.mainConfig;
     }
 
-    public ProxyHook getProxyHook () {
+    public ProxyHook getProxyHook() {
         return this.proxyHook;
     }
 

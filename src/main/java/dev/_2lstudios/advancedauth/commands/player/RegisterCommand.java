@@ -8,7 +8,7 @@ import dev._2lstudios.jelly.commands.CommandContext;
 import dev._2lstudios.jelly.commands.CommandExecutionTarget;
 import dev._2lstudios.jelly.commands.CommandListener;
 
-@Command(name = "register", target = CommandExecutionTarget.ONLY_PLAYER)
+@Command(name = "register", aliases={"reg"}, silent = true, target = CommandExecutionTarget.ONLY_PLAYER)
 public class RegisterCommand extends CommandListener {
 
     private final AdvancedAuth plugin;
