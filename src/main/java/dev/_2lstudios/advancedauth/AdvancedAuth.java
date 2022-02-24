@@ -5,6 +5,9 @@ import java.io.IOException;
 import com.dotphin.milkshakeorm.MilkshakeORM;
 import com.dotphin.milkshakeorm.providers.Provider;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 
 import dev._2lstudios.advancedauth.cache.CacheEngine;
@@ -24,6 +27,7 @@ import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
+import dev._2lstudios.advancedauth.security.ConsoleFilter;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
@@ -88,6 +92,10 @@ public class AdvancedAuth extends JellyPlugin {
         // Logger
         Logging.setLogger(this.getLogger());
         Logging.setEnabled(this.mainConfig.getBoolean("settings.logging"));
+        
+        // Logger filter
+        Logger logger = (Logger) LogManager.getRootLogger();
+        logger.addFilter(new ConsoleFilter());
 
         // Extract any language file from jar
         try {

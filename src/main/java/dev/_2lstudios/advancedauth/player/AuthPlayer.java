@@ -71,7 +71,7 @@ public class AuthPlayer extends PluginPlayer {
         final Repository<AuthPlayerData> repo = MilkshakeORM.getRepository(AuthPlayerData.class);
 
         // Find by username
-        final String username = this.getBukkitPlayer().getName();
+        final String username = this.getBukkitPlayer().getName().toLowerCase();
         final MapFactory usernameFilter = MapFactory.create("username", username);
         final AuthPlayerData byUsernameData = (AuthPlayerData) repo.findOne(usernameFilter);
 
@@ -86,6 +86,22 @@ public class AuthPlayer extends PluginPlayer {
         }
 
         this.fetched = true;
+
+        // Check for username spoof.
+        if (this.data != null) {
+            // Check if is the same name.
+            if (this.getBukkitPlayer().getName().equalsIgnoreCase(this.data.displayName)) {
+                // But with different case.
+                if (!this.getBukkitPlayer().getName().equals(this.data.displayName)) {
+                    // And kick if isn't the same as previous saved.
+                    this.getBukkitPlayer().kickPlayer(
+                        this.getI18nString("common.username-case-mismatch")
+                            .replace("{current_name}", this.getBukkitPlayer().getName())
+                            .replace("{registered_name}", this.data.displayName)
+                    );
+                }
+            }
+        }
 
         // Check for session
         boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
@@ -123,7 +139,8 @@ public class AuthPlayer extends PluginPlayer {
     public void login(final LoginReason reason) {
         if (this.isRegistered()) {
             this.logged = true;
-            this.data.username = this.getBukkitPlayer().getName();
+            this.data.displayName = this.getName();
+            this.data.username = this.getName().toLowerCase();
             this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
             this.data.lastLoginIP = this.getAddress();
             this.data.save();
@@ -173,7 +190,8 @@ public class AuthPlayer extends PluginPlayer {
         }
 
         this.data = new AuthPlayerData();
-        this.data.username = this.getBukkitPlayer().getName();
+        this.data.displayName = this.getName();
+        this.data.username = this.getName().toLowerCase();
         this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
         this.data.password = this.plugin.getCipher().hash(password);
         this.data.lastLoginIP = this.getAddress();
