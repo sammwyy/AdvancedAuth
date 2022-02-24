@@ -3,6 +3,7 @@ package dev._2lstudios.advancedauth.commands;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.commands.admin.AccountsSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.ChangePasswordSubCommand;
+import dev._2lstudios.advancedauth.commands.admin.ForceLoginSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.IPSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.SetSpawnSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.UnregisterSubCommand;
@@ -16,6 +17,7 @@ public class AdvancedAuthCommand extends CommandListener {
     public AdvancedAuthCommand(final AdvancedAuth plugin) {
         this.addSubcommand(new AccountsSubCommand());
         this.addSubcommand(new ChangePasswordSubCommand());
+        this.addSubcommand(new ForceLoginSubCommand());
         this.addSubcommand(new IPSubCommand());
         this.addSubcommand(new SetSpawnSubCommand(plugin));
         this.addSubcommand(new UnregisterSubCommand());

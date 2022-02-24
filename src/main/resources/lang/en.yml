@@ -2,6 +2,7 @@ common:
   error-sending-server: "&cNo se te puede enviar al servidor {server}"
   still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
   player-not-registered: "&cEsta cuenta no se encuentra registrada."
+  player-offline: "&cEste usuario no se encuentra conectado."
   username-case-mismatch: "&cEstas registrado como {registered_name} pero has intentado ingresar como {current_name}. Por favor, comprueba las mayusculas y vuelve a intentar entrar."
 
 admin:
@@ -28,6 +29,10 @@ admin:
   change-password: "&aLa contraseña de {player} ha sido cambiada."
   unregistered: "&cHas eliminado la cuenta de {player}."
   spawn-set: "&aEl spawn ha sido colocado en tu posición actual."
+  forge-login:
+    usage: "&cUso: /aa forcelogin <player>"
+    already-logged: "&cEste usuario ya se encuentra logeado."
+    success: "&aHas forzado el logeo de {player}"
 
 
 addemail:
@@ -44,6 +49,7 @@ login:
   usage: "&cUso: /login <contraseña>"
   successfully: "&aHas iniciado sesión correctamente."
   session-resumed: "&aTu sesión ha sido reanudada."
+  forced: "&aUn administrador ha forzado el inicio de sesión en tu cuenta."
   already-logged: "&cYa te encuentras logeado."
   logout: "&eHas cerrado sesión."
   not-logged: "&cDebes iniciar sesión antes de hacer eso."

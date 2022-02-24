@@ -163,6 +163,8 @@ public class AuthPlayer extends PluginPlayer {
             case SESSION_RESUME:
                 this.sendI18nMessage("login.session-resumed");
                 break;
+            case FORCED:
+                this.sendI18nMessage("login.forced");
             }
 
             final ProxyHook proxy = this.plugin.getProxyHook();
