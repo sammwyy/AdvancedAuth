@@ -1,5 +1,7 @@
 package dev._2lstudios.advancedauth.player;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
@@ -94,11 +96,14 @@ public class AuthPlayer extends PluginPlayer {
                 // But with different case.
                 if (!this.getBukkitPlayer().getName().equals(this.data.displayName)) {
                     // And kick if isn't the same as previous saved.
-                    this.getBukkitPlayer().kickPlayer(
-                        this.getI18nString("common.username-case-mismatch")
-                            .replace("{current_name}", this.getBukkitPlayer().getName())
-                            .replace("{registered_name}", this.data.displayName)
-                    );
+                    Bukkit.getScheduler().runTask(this.plugin, () -> {
+                        this.getBukkitPlayer().kickPlayer(
+                            ChatColor.translateAlternateColorCodes('&', 
+                            this.getI18nString("common.username-case-mismatch")
+                                .replace("{current_name}", this.getBukkitPlayer().getName())
+                                .replace("{registered_name}", this.data.displayName))
+                        );
+                    });
                 }
             }
         }
