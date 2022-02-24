@@ -23,6 +23,7 @@ import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 import dev._2lstudios.advancedauth.hooks.ProxyHook;
 import dev._2lstudios.advancedauth.hooks.impl.ProxyBungeecordHook;
 import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
+import dev._2lstudios.advancedauth.listeners.PlayerLoginListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
@@ -128,9 +129,12 @@ public class AdvancedAuth extends JellyPlugin {
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, new PlayerDataFetchTask(this), 20L, 20L);
         this.getServer().getScheduler().runTaskTimer(this, new PlayerTimeoutTask(this), 20L, 20L);
 
-        // Register events
+        // Register event blockers
         BlockerListenerHandler.register(this);
+
+        // Register listeners
         this.addEventListener(new PlayerJoinListener(this));
+        this.addEventListener(new PlayerLoginListener(this));
 
         // Register commands
         this.addCommand(new AddEmailCommand());
