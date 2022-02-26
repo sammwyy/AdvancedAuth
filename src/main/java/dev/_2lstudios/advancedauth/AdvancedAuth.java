@@ -24,12 +24,14 @@ import dev._2lstudios.advancedauth.hooks.ProxyHook;
 import dev._2lstudios.advancedauth.hooks.impl.ProxyBungeecordHook;
 import dev._2lstudios.advancedauth.listeners.AsyncPlayerPreLoginListener;
 import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
+import dev._2lstudios.advancedauth.listeners.PlayerLoginListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.migration.MigrationManager;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.security.ConsoleFilter;
+import dev._2lstudios.advancedauth.security.CountryCheck;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
@@ -44,6 +46,8 @@ public class AdvancedAuth extends JellyPlugin {
     private MigrationManager migration;
     private CacheEngine cache;
     private Cipher cipher;
+
+    private CountryCheck countryCheck;
 
     private ProxyHook proxyHook;
 
@@ -129,6 +133,9 @@ public class AdvancedAuth extends JellyPlugin {
         // Register player manager
         this.setPluginPlayerManager(new AuthPlayerManager(this));
 
+        // Initialize country check
+        this.countryCheck = new CountryCheck(this);
+
         // Register tasks
         final long interval = this.getConfig().getInt("authentication.message-interval", 2) * 20L;
 
@@ -142,6 +149,7 @@ public class AdvancedAuth extends JellyPlugin {
         // Register listeners
         this.addEventListener(new AsyncPlayerPreLoginListener(this));
         this.addEventListener(new PlayerJoinListener(this));
+        this.addEventListener(new PlayerLoginListener(this));
 
         // Register commands
         this.addCommand(new AddEmailCommand());
@@ -169,6 +177,10 @@ public class AdvancedAuth extends JellyPlugin {
     }
 
     /* Plugin getters */
+    public CountryCheck getCountryCheck() {
+        return this.countryCheck;
+    }
+
     public MigrationManager getMigration() {
         return this.migration;
     }

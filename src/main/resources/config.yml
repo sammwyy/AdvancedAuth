@@ -42,6 +42,12 @@ authentication:
     proxy: bungeecord
     server: lobby
 security:
+  country-check:
+    enabled: false
+    mode: blacklist
+    list:
+      - "cn"
+      - "ru"
   cipher: "bcrypt"
   allowed-commands:
     - "/login"
