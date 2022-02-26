@@ -35,7 +35,7 @@ public class GeoIPService {
         GeoIPService.service = new LookupService(dbFile.getAbsolutePath(), LookupService.GEOIP_MEMORY_CACHE | LookupService.GEOIP_CHECK_CACHE); 
     }
 
-    public static String getCountry(final String ip) {
+    public static String getCountryCode(final String ip) {
         String code = GeoIPService.service.getCountry(ip).getCode();
         if (code == null) {
             code = "unknown";
@@ -43,5 +43,15 @@ public class GeoIPService {
             code = code.toLowerCase();
         }
         return code;
+    }
+
+    public static String getCountry(final String ip) {
+        String name = GeoIPService.service.getCountry(ip).getName();
+        if (name == null) {
+            name = "unknown";
+        } else {
+            name = name.toLowerCase();
+        }
+        return name;
     }
 }

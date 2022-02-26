@@ -18,14 +18,6 @@ public class CountryCheck {
         this.enabled = config.getBoolean("security.country-check.enabled", false);
         this.mode = config.getString("security.country-check.mode");
         this.list = config.getStringList("security.country-check.list");
-
-        if (this.enabled) {
-            try {
-                GeoIPService.start(plugin.getDataFolder());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public boolean canJoinAddress (final String address) {
@@ -33,7 +25,7 @@ public class CountryCheck {
             return true;
         }
 
-        final String country = GeoIPService.getCountry(address);
+        final String country = GeoIPService.getCountryCode(address);
         final boolean isInList = this.list.contains(country);
 
         if (this.mode.equalsIgnoreCase("blacklist") && isInList) {

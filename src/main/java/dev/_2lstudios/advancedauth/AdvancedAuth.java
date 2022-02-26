@@ -33,6 +33,7 @@ import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.security.ConsoleFilter;
 import dev._2lstudios.advancedauth.security.CountryCheck;
+import dev._2lstudios.advancedauth.services.GeoIPService;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
@@ -108,7 +109,7 @@ public class AdvancedAuth extends JellyPlugin {
         // Logger filter
         Logger logger = (Logger) LogManager.getRootLogger();
         logger.addFilter(new ConsoleFilter());
-
+        
         // Extract any language file from jar
         try {
             this.getLanguageManager().loadLanguages();
@@ -135,6 +136,13 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register player manager
         this.setPluginPlayerManager(new AuthPlayerManager(this));
+        
+        // Initialize Services
+        try {
+            GeoIPService.start(this.getDataFolder());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Initialize country check
         this.countryCheck = new CountryCheck(this);

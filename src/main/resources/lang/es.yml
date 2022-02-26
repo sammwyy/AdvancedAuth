@@ -23,8 +23,8 @@ admin:
   ip: |-
     &r
     &6Dirección IP de {player}:
-    &7Al registrarse: &e{registration_ip}
-    &7Último logeo: &e{last_login_ip}
+    &7Al registrarse: &a{registration_country} &e{registration_ip}
+    &7Último logeo: &a{last_country} &e{last_login_ip}
     &r
   change-password: "&aLa contraseña de {player} ha sido cambiada."
   unregistered: "&cHas eliminado la cuenta de {player}."

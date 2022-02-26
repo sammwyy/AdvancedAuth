@@ -23,8 +23,8 @@ admin:
   ip: |-
     &r
     &6IP of {player}:
-    &7First IP: &e{registration_ip}
-    &7Last Login: &e{last_login_ip}
+    &7Registration IP: &a{registration_country} &e{registration_ip}
+    &7Last Login: &a{last_country} &e{last_login_ip}
     &r
   change-password: "&aThe password of {player} was changed."
   unregistered: "&cYou deleted {player}'s account'."
