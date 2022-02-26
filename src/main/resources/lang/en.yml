@@ -56,7 +56,7 @@ login:
   already-logged: "&cYou are already logged in."
   logout: "&eYou signed out."
   not-logged: "&cYou have to login first."
-  wrong-password: "&cInvalid password."
+  wrong-password: "&cInvalid password ({tries}/{max-tries} try)"
 
 register:
   message: "&7Register using &b/register <password>"

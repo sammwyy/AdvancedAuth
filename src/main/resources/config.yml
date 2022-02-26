@@ -74,6 +74,7 @@ authentication:
   timeout: 30
   # By default the session resumption will be activated or deactivated in new users.
   # This option is configurable for each user using the /autologin command.
+  # The session duration time will be the same as the cache time (storage.cache.expiration)
   resume-session-by-default: false
   # Send to another server upon completion of authentication.
   send-server-on-login:
@@ -98,6 +99,12 @@ security:
     list:
       - "cn"
       - "ru"
+  # Block the IP in case of several consecutive failed password attempts.
+  # The ban duration time will be the same as the cache time (storage.cache.expiration)
+  fail-lock:
+    enabled: true
+    # Maximum attempts for ip ban
+    tries: 3
   # Encryption algorithm for passwords, available ciphers:
   # - bcrypt (recommended)
   # - md5

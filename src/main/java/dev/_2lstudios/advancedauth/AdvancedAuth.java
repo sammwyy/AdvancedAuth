@@ -34,6 +34,7 @@ import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.security.ConsoleFilter;
 import dev._2lstudios.advancedauth.security.CountryCheck;
+import dev._2lstudios.advancedauth.security.Faillock;
 import dev._2lstudios.advancedauth.services.GeoIPService;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
 import dev._2lstudios.advancedauth.tasks.PlayerTimeoutTask;
@@ -51,6 +52,7 @@ public class AdvancedAuth extends JellyPlugin {
     private Cipher cipher;
 
     private CountryCheck countryCheck;
+    private Faillock faillock;
 
     private ProxyHook proxyHook;
 
@@ -145,8 +147,9 @@ public class AdvancedAuth extends JellyPlugin {
             e.printStackTrace();
         }
 
-        // Initialize country check
+        // Initialize security checks.
         this.countryCheck = new CountryCheck(this);
+        this.faillock = new Faillock(this);
 
         // Register tasks
         final long interval = this.getConfig().getInt("authentication.message-interval", 2) * 20L;
@@ -193,6 +196,10 @@ public class AdvancedAuth extends JellyPlugin {
     /* Plugin getters */
     public CountryCheck getCountryCheck() {
         return this.countryCheck;
+    }
+
+    public Faillock getFailLock() {
+        return this.faillock;
     }
 
     public MigrationManager getMigration() {

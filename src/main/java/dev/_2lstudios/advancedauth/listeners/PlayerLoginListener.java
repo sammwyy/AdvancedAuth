@@ -15,8 +15,16 @@ public class PlayerLoginListener implements Listener {
 
     @EventHandler
     public void onPlayerLogin (final PlayerLoginEvent e) {
-        if (!this.plugin.getCountryCheck().canJoinAddress(e.getRealAddress().toString())) {
+        // Country blocker.
+        if (!this.plugin.getCountryCheck().canJoinAddress(e.getAddress().toString())) {
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Your country has been blocked");
+            return;
+        }
+
+        // Fail Lock.
+        if (this.plugin.getFailLock().isAddressLocked(e.getAddress().toString())) {
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Fail locked");
+            return;
         }
     }
 }

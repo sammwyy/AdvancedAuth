@@ -17,7 +17,7 @@ public class MemoryEngine implements CacheEngine {
         this.cache = CacheBuilder.newBuilder().expireAfterWrite(expiration, TimeUnit.SECONDS)
                 .expireAfterAccess(expiration, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
                     public String load(final String key) throws Exception {
-                        return key;
+                        return "";
                     }
                 });
     }
@@ -30,7 +30,12 @@ public class MemoryEngine implements CacheEngine {
     @Override
     public String get(final String key) {
         try {
-            return this.cache.get(key);
+            String result = this.cache.get(key);
+            if (result.equals("")) {
+                return null;
+            } else {
+                return result;
+            }
         } catch (final ExecutionException e) {
             e.printStackTrace();
             return null;

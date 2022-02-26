@@ -56,7 +56,7 @@ login:
   already-logged: "&cYa te encuentras logeado."
   logout: "&eHas cerrado sesión."
   not-logged: "&cDebes iniciar sesión antes de hacer eso."
-  wrong-password: "&cContraseña incorrecta"
+  wrong-password: "&cContraseña incorrecta (intento {tries}/{max-tries})"
 
 register:
   message: "&7Debes registrarte usando &b/register <contraseña>"
