@@ -39,5 +39,10 @@ public class PlayerJoinListener implements Listener {
             final Location location = this.plugin.getMainConfig().getLocation("settings.teleport-spawn.location", true);
             e.getPlayer().teleport(location);
         }
+
+        // Disable join message
+        if (this.plugin.getMainConfig().getBoolean("settings.disable-join-quit-message")) {
+            e.setJoinMessage(null);
+        }
     }
 }

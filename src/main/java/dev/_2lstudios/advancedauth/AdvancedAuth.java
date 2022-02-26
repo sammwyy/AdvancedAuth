@@ -26,6 +26,7 @@ import dev._2lstudios.advancedauth.hooks.impl.ProxyBungeecordHook;
 import dev._2lstudios.advancedauth.listeners.AsyncPlayerPreLoginListener;
 import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
 import dev._2lstudios.advancedauth.listeners.PlayerLoginListener;
+import dev._2lstudios.advancedauth.listeners.PlayerQuitListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
 import dev._2lstudios.advancedauth.migration.MigrationManager;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
@@ -161,6 +162,7 @@ public class AdvancedAuth extends JellyPlugin {
         this.addEventListener(new AsyncPlayerPreLoginListener(this));
         this.addEventListener(new PlayerJoinListener(this));
         this.addEventListener(new PlayerLoginListener(this));
+        this.addEventListener(new PlayerQuitListener(this));
 
         // Register commands
         this.addCommand(new AddEmailCommand());

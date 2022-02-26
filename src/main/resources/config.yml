@@ -1,13 +1,21 @@
+# General plugin settings.
 settings:
+  # The prefix with which all messages will be displayed.
   prefix: "&8[&6&lA&e&lA&8] &r"
+  # Enable user action log messages.
   logging: true
+  # Prevent malicious users from kicking other connected players.
   prevent-logged-from-another-location: true
+  # Default language in case of not finding translation (it will also work for the console)
   default-lang: "en"
+  # Disable the message to join and leave the server.
+  disable-join-quit-message: false
+  # Blocked or allowed actions for authenticated and unauthenticated users.
   actions:
     # default = Block action only for unauthenticated.
     # always  = Always block the action.
     # never   = Never block this action.
-    deny-commands: default
+    deny-commands: default # NEVER, NEVER NEVER!! set this option to "never", otherwise your server could be vulnerable to attack.
     deny-chat: default
     deny-be-a-mob-target: default
     deny-block-break-place: default
@@ -22,6 +30,8 @@ settings:
     deny-statistic-increment: default
     deny-vehicles: default
     hide-players: default
+  # Teleport player to spawn.
+  # You don't need to modify it, just use /aa setspawn within the game.
   teleport-spawn:
     enabled: false
     location:
@@ -31,8 +41,9 @@ settings:
       z: 0
       yaw: 0
       pitch: 0
+# Plugin data storage.
 storage: 
-  # The storage container will be used to store the names and passwords of the registered accounts
+  # The storage container will be used to store the names and passwords of the registered accounts.
   database:
     # URI format: 
     #     driver://address/database
@@ -42,42 +53,69 @@ storage:
     # Available drivers: MongoDB
     uri: "mongodb://localhost/minecraft"
     collection: "Users"
-  # The cache buffer will be used for fast access data, such as sessions and synchronization
+  # The cache buffer will be used for fast access data, such as sessions and synchronization.
   cache:
-    # Available drivers: memory, redis
+    # Available drivers: memory, redis.
     driver: "memory"
     expiration: 1440 # In minutes (1440 = 1 day)
     # The following values are only valid if no memory cache is used (memory selected)
     host: "localhost"
     port: 6379
     password: ""
+# Authentication settings.
 authentication:
-  kick: true
+  # Kick player for wrong password entry.
+  kick-on-wrong-password: true
+  # Maximum number of accounts per IP allowed to register.
   max-accounts-per-ip: 1
+  # Interval of the messages that notify you that you have to authenticate.
   message-interval: 2
+  # Time (in seconds) in which the player will be expelled if he does not authenticate.
   timeout: 30
+  # By default the session resumption will be activated or deactivated in new users.
+  # This option is configurable for each user using the /autologin command.
   resume-session-by-default: false
+  # Send to another server upon completion of authentication.
   send-server-on-login:
     enabled: false
+    # Available proxies:
+    # - bungeecord
     proxy: bungeecord
+    # List of destination servers (choose one at random)
     servers:
       - lobby
+# Security options.
 security:
+  # Country blocking
   country-check:
     enabled: false
+    # How the list will operate:
+    #   blacklist   ->   countries on the list will not be able to join.
+    #   whitelist   ->   countries outside the list will not be able to join.
     mode: blacklist
+    # List of countries, code reference in https://www.iban.com/country-codes
+    # use "Alpha-2 code".
     list:
       - "cn"
       - "ru"
+  # Encryption algorithm for passwords, available ciphers:
+  # - bcrypt (recommended)
+  # - md5
+  # - sha1
+  # - sha256
+  # - sha512
   cipher: "bcrypt"
+  # Commands allowed to unauthenticated users.
   allowed-commands:
     - "/login"
     - "/l"
     - "/logout"
     - "/register"
     - "/reg"
+  # Minimum and maximum size of the password.
   password-min-length: 6
   password-max-length: 32
+  # List of forbidden passwords to use (because they are very easy)
   password-blacklist:
     - "1234"
     - "123456"
