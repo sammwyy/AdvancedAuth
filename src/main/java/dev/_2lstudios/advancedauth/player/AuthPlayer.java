@@ -176,6 +176,8 @@ public class AuthPlayer extends PluginPlayer {
                     this.sendMessage(this.getI18nString("common.error-sending-server").replace("{server}", server));
                 }
             }
+
+            this.getBukkitPlayer().setWalkSpeed(0.2f);
         }
     }
 
