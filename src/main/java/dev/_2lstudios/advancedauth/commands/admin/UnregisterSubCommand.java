@@ -25,7 +25,7 @@ public class UnregisterSubCommand extends CommandListener {
     @Override
     public void handle(CommandContext ctx) throws Exception {
         String username = ctx.getArguments().getString(0);
-        AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username));
+        AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username.toLowerCase()));
 
         if (player == null) {
             ctx.getSender().sendI18nMessage("common.player-not-registered");
