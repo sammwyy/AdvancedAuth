@@ -25,8 +25,8 @@ public class ForceLoginSubCommand extends CommandListener {
 
     @Override
     public void onPlayerOffline(CommandContext ctx, PlayerOfflineException e) {
-        ctx.getPluginPlayer().sendMessage(
-            ctx.getPluginPlayer().getI18nString("common.player-not-registered")
+        ctx.getSender().sendMessage(
+            ctx.getSender().getI18nString("common.player-not-registered")
                 .replace("{player}", e.getPlayer())
         );
     }
@@ -41,12 +41,12 @@ public class ForceLoginSubCommand extends CommandListener {
 
         AuthPlayer player = (AuthPlayer) plugin.getPluginPlayerManager().getPlayer(bukkitPlayer);
         if (!player.isRegistered())
-            ctx.getPluginPlayer().sendI18nMessage("common.player-not-registered");
+            ctx.getSender().sendI18nMessage("common.player-not-registered");
         if (player.isLogged()) {
-            ctx.getPluginPlayer().sendI18nMessage("admin.force-login.already-logged");
+            ctx.getSender().sendI18nMessage("admin.force-login.already-logged");
         } else {
             player.login(LoginReason.FORCED);
-            ctx.getPluginPlayer().sendI18nMessage("admin.force-login.success");
+            ctx.getSender().sendI18nMessage("admin.force-login.success");
         }
     }
     

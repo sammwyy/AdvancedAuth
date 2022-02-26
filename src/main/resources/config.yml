@@ -2,6 +2,7 @@ settings:
   prefix: "&8[&6&lA&e&lA&8] &r"
   logging: true
   prevent-logged-from-another-location: true
+  default-lang: "en"
   teleport-spawn:
     enabled: false
     location:

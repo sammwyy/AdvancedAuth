@@ -22,11 +22,11 @@ public class MigrateSubCommand extends CommandListener {
     @Override
     public void handle(CommandContext ctx) throws Exception {
         try {
-            ctx.getSender().sendMessage("Starting migration...");
+            ctx.getSender().sendMessage("&eStarting migration...");
             int users = migrationManager.startMigration();
-            ctx.getSender().sendMessage("Migration completed (" + users + " users migrated)");
+            ctx.getSender().sendMessage("&aMigration completed (&b" + users + " &ausers migrated)");
         } catch (final Exception e) {
-            ctx.getSender().sendMessage("Error migrating: " + e.getMessage());
+            ctx.getSender().sendMessage("&cError migrating: " + e.getMessage());
         }
     }
     

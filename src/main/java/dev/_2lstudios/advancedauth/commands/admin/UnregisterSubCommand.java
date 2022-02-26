@@ -28,11 +28,11 @@ public class UnregisterSubCommand extends CommandListener {
         AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username));
 
         if (player == null) {
-            ctx.getPluginPlayer().sendI18nMessage("common.player-not-registered");
+            ctx.getSender().sendI18nMessage("common.player-not-registered");
         } else {
             player.delete();
-            ctx.getPluginPlayer().sendMessage(
-                ctx.getPluginPlayer().getI18nString("admin.unregistered")
+            ctx.getSender().sendMessage(
+                ctx.getSender().getI18nString("admin.unregistered")
                     .replace("{player}", player.username)
             );
         }

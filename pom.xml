@@ -49,7 +49,7 @@
         <dependency>
             <groupId>dev._2lstudios</groupId>
             <artifactId>jelly</artifactId>
-            <version>0.2.12</version>
+            <version>0.2.15</version>
         </dependency>
         <!-- Ciphers -->
         <dependency>

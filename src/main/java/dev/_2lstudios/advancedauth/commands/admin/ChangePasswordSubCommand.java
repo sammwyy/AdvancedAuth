@@ -32,14 +32,14 @@ public class ChangePasswordSubCommand extends CommandListener {
         AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username));
 
         if (player == null) {
-            ctx.getPluginPlayer().sendI18nMessage("common.player-not-registered");
+            ctx.getSender().sendI18nMessage("common.player-not-registered");
         } else {
             String hash = AdvancedAuth.getInstance().getCipher().hash(newPassword);
             player.password = hash;
             player.save();
 
-            ctx.getPluginPlayer().sendMessage(
-                ctx.getPluginPlayer().getI18nString("admin.change-password")
+            ctx.getSender().sendMessage(
+                ctx.getSender().getI18nString("admin.change-password")
                     .replace("{player}", player.username)
             );
         }

@@ -29,7 +29,7 @@ public class AccountsSubCommand extends CommandListener {
         AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username));
 
         if (player == null) {
-            ctx.getPluginPlayer().sendI18nMessage("common.player-not-registered");
+            ctx.getSender().sendI18nMessage("common.player-not-registered");
         } else {
             String lastIP = player.lastLoginIP;
             AuthPlayerData[] alts = this.playerRepository.findMany(MapFactory.create("lastLoginIP", lastIP));
@@ -47,8 +47,8 @@ public class AccountsSubCommand extends CommandListener {
                 altsText += "&9" + position + ".&r &b" + alt.username + " &7(&e" + alt.uuid + "&7)";
             }
 
-            ctx.getPluginPlayer().sendMessage(
-                ctx.getPluginPlayer().getI18nString("admin.accounts")
+            ctx.getSender().sendMessage(
+                ctx.getSender().getI18nString("admin.accounts")
                     .replace("{alts}", altsText)
                     .replace("{player}", player.username)
             );

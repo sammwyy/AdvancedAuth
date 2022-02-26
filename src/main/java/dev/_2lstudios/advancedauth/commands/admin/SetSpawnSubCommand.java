@@ -16,7 +16,7 @@ public class SetSpawnSubCommand extends CommandListener {
 
     @Override
     public void handle(final CommandContext ctx) throws Exception {
-        ctx.getPluginPlayer().sendI18nMessage("admin.spawn-set");
+        ctx.getSender().sendI18nMessage("admin.spawn-set");
         this.plugin.getMainConfig().setLocation("settings.teleport-spawn.location", ctx.getPlayer().getLocation());
         this.plugin.getMainConfig().set("settings.teleport-spawn.enabled", true);
         this.plugin.getMainConfig().save();

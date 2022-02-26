@@ -28,13 +28,13 @@ public class IPSubCommand extends CommandListener {
         AuthPlayerData player = this.playerRepository.findOne(MapFactory.create("username", username));
 
         if (player == null) {
-            ctx.getPluginPlayer().sendI18nMessage("common.player-not-registered");
+            ctx.getSender().sendI18nMessage("common.player-not-registered");
         } else {
             String lastIP = player.lastLoginIP;
             String registeredIP = player.registrationIP;
 
-            ctx.getPluginPlayer().sendMessage(
-                ctx.getPluginPlayer().getI18nString("admin.ip")
+            ctx.getSender().sendMessage(
+                ctx.getSender().getI18nString("admin.ip")
                     .replace("{player}", player.username)
                     .replace("{last_login_ip}", lastIP)
                     .replace("{registration_ip}", registeredIP)

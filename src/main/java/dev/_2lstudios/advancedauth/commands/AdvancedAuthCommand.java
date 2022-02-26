@@ -26,11 +26,11 @@ public class AdvancedAuthCommand extends CommandListener {
     }
 
     public void onMissingPermissions(CommandContext ctx, String permission) {
-        ctx.getPluginPlayer().sendMessage("&9&lAdvancedAuth &cAuthentication plugin By 2LStudios (Sammwy, LinsaFTW)");
+        ctx.getSender().sendMessage("&9&lAdvancedAuth &cAuthentication plugin By 2LStudios (Sammwy, LinsaFTW)");
     }
 
     @Override
     public void handle(final CommandContext ctx) throws Exception {
-        ctx.getPluginPlayer().sendI18nMessage("admin.help");
+        ctx.getSender().sendI18nMessage("admin.help");
     }
 }

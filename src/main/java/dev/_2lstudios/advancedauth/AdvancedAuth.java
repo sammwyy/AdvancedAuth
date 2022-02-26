@@ -93,11 +93,13 @@ public class AdvancedAuth extends JellyPlugin {
         // Use hooks
         this.useCommandAPI();
         this.useConfigAPI();
-        this.useLanguageAPI();
 
         // Load configuration
         this.mainConfig = this.getConfig("config.yml");
         this.migrationConfig = this.getConfig("migration.yml");
+
+        // Use language manager
+        this.useLanguageAPI(this.mainConfig.getString("settings.default-lang", "en"));
 
         // Logger
         Logging.setLogger(this.getLogger());
