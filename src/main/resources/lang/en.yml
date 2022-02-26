@@ -35,8 +35,8 @@ admin:
     success: "&aYou forced the login of {player}"
 
 autologin:
-  enabled: "&aHas activado el inicio de sesión automatico."
-  disabled: "&cHas desactivado el inicio de sesión automatico."
+  enabled: "&aYou enabled the automatic login feature."
+  disabled: "&cYou disabled the automatic login feature."
 
 addemail:
   usage: "&cUsage: /addemail <email>"
