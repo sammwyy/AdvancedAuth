@@ -108,7 +108,7 @@ public class MigrationManager {
             player.password = password;
             player.registrationIP = registrationIP;
             player.lastLoginIP = lastLoginIP;
-
+            player.save();
             users++;
         }
 
