@@ -15,12 +15,12 @@ public class AuthMeMigration implements IMigration {
 
     @Override
     public String getDisplayNameKey() {
-        return "username";
+        return "realname";
     }
 
     @Override
     public String getUsernameKey() {
-        return "realname";
+        return "username";
     }
 
     @Override
