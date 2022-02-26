@@ -15,7 +15,7 @@ public class CountryCheck {
     public CountryCheck (final AdvancedAuth plugin) {
         Configuration config = plugin.getMainConfig();
 
-        this.enabled = config.getBoolean("security.country-check.enabled");
+        this.enabled = config.getBoolean("security.country-check.enabled", false);
         this.mode = config.getString("security.country-check.mode");
         this.list = config.getStringList("security.country-check.list");
 

@@ -13,6 +13,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import dev._2lstudios.advancedauth.cache.CacheEngine;
 import dev._2lstudios.advancedauth.commands.AdvancedAuthCommand;
 import dev._2lstudios.advancedauth.commands.player.AddEmailCommand;
+import dev._2lstudios.advancedauth.commands.player.AutoLoginCommand;
 import dev._2lstudios.advancedauth.commands.player.ChangePasswordCommand;
 import dev._2lstudios.advancedauth.commands.player.LoginCommand;
 import dev._2lstudios.advancedauth.commands.player.LogoutCommand;
@@ -153,6 +154,7 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Register commands
         this.addCommand(new AddEmailCommand());
+        this.addCommand(new AutoLoginCommand());
         this.addCommand(new ChangePasswordCommand());
         this.addCommand(new LoginCommand(this));
         this.addCommand(new LogoutCommand());

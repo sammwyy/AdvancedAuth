@@ -12,3 +12,6 @@ commands:
   advancedauth:
     aliases: ["aa"]
     description: "Main plugin command"
+  autologin:
+    aliases: ["session", "auto-login"]
+    description: "Manage your auto-login session"

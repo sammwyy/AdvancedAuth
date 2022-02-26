@@ -31,6 +31,10 @@ public class AuthPlayer extends PluginPlayer {
         this.plugin = (AdvancedAuth) plugin;
     }
 
+    public AuthPlayerData getData() {
+        return this.data;
+    }
+
     public String getName() {
         return this.getBukkitPlayer().getName();
     }
@@ -154,9 +158,7 @@ public class AuthPlayer extends PluginPlayer {
             this.data.lastLoginDate = System.currentTimeMillis();
             this.data.save();
 
-            boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
-
-            if (reason == LoginReason.PASSWORD && resumeSession) {
+            if (reason == LoginReason.PASSWORD && this.data.enabledSession) {
                 this.createSession();
             }
 
@@ -214,6 +216,7 @@ public class AuthPlayer extends PluginPlayer {
         this.data.lastLoginDate = System.currentTimeMillis();
         this.data.registrationIP = this.getAddress();
         this.data.registrationDate = System.currentTimeMillis();
+        this.data.enabledSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session-by-default", false);
 
         this.data.save();
         this.timer = 0;

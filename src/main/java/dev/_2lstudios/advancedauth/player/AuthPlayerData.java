@@ -8,21 +8,25 @@ public class AuthPlayerData extends Entity {
     @ID
     public String _id;
 
+    // Information.
     @Prop
     public String email;
-
     @Prop
     public String displayName;
 
+    // Authentication.
     @Prop
     public String username;
-
     @Prop
     public String uuid;
-
     @Prop
     public String password;
 
+    // Settings.
+    @Prop
+    public boolean enabledSession = false;
+
+    // Extra.
     @Prop
     public String registrationIP;
 

@@ -36,7 +36,7 @@ authentication:
   max-accounts-per-ip: 1
   message-interval: 2
   timeout: 30
-  resume-session: true
+  resume-session-by-default: false
   send-server-on-login:
     enabled: false
     proxy: bungeecord

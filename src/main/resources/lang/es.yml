@@ -34,6 +34,9 @@ admin:
     already-logged: "&cEste usuario ya se encuentra logeado."
     success: "&aHas forzado el logeo de {player}"
 
+autologin:
+  enabled: "&aHas activado el inicio de sesión automatico."
+  disabled: "&cHas desactivado el inicio de sesión automatico."
 
 addemail:
   usage: "&cUso: /addemail <email>"
