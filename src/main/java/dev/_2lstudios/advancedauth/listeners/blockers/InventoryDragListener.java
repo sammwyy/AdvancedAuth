@@ -14,7 +14,7 @@ public class InventoryDragListener extends BlockerListener {
     @EventHandler
     public void onInventoryDrag(final InventoryDragEvent e) {
         if (e.getWhoClicked() instanceof Player) {
-            if (!this.isAllowed((Player) e.getWhoClicked())) {
+            if (!this.isAllowed((Player) e.getWhoClicked(), "deny-inventory")) {
                 e.setCancelled(true);
             }
         }

@@ -3,6 +3,24 @@ settings:
   logging: true
   prevent-logged-from-another-location: true
   default-lang: "en"
+  actions:
+    # default = Block action only for unauthenticated.
+    # always  = Always block the action.
+    # never   = Never block this action.
+    deny-commands: default
+    deny-chat: default
+    deny-be-a-mob-target: default
+    deny-block-break-place: default
+    deny-damage: default
+    deny-food-level-change: default
+    deny-health-change: default
+    deny-interact: default
+    deny-inventory: default
+    deny-item-pickup: default
+    deny-move: default
+    deny-projectiles: default
+    deny-statistic-increment: default
+    deny-vehicles: default
   teleport-spawn:
     enabled: false
     location:

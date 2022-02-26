@@ -15,7 +15,7 @@ public class AsyncPlayerChatListener extends BlockerListener {
     public void onAsyncPlayerChat(final AsyncPlayerChatEvent e) {
         final Player player = e.getPlayer();
 
-        if (!isAllowed(player)) {
+        if (!isAllowed(player, "deny-chat")) {
             e.setCancelled(true);
         }
     }

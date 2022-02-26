@@ -12,7 +12,7 @@ public class BlockBreakListener extends BlockerListener {
 
     @EventHandler
     public void onBlockBreak(final BlockBreakEvent e) {
-        if (!isAllowed(e.getPlayer())) {
+        if (!isAllowed(e.getPlayer(), "deny-block-break-place")) {
             e.setCancelled(true);
         }
     }

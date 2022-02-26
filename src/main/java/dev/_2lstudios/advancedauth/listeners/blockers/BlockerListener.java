@@ -16,15 +16,23 @@ public class BlockerListener implements Listener {
         this.plugin = plugin;
     }
 
-    public boolean isAllowed(final AuthPlayer player) {
+    public boolean isAllowed(final AuthPlayer player, final String action) {
         if (!player.getBukkitPlayer().isOnline()) {
             return true;
         }
+        
+        String blockMode = this.plugin.getMainConfig().getString("settings.actions.block", "default");
 
-        return player.isLogged();
+        if (blockMode.equalsIgnoreCase("never")) {
+            return true;
+        } else if (blockMode.equalsIgnoreCase("always")) {
+            return false;
+        } else {
+            return player.isLogged();
+        }
     }
 
-    public boolean isAllowed(final Player player) {
+    public boolean isAllowed(final Player player, final String action) {
         final AuthPlayer authPlayer = (AuthPlayer) this.players.getPlayer(player);
 
         if (authPlayer == null && player.isOnline()) {
@@ -33,6 +41,6 @@ public class BlockerListener implements Listener {
             return true;
         }
 
-        return this.isAllowed(authPlayer);
+        return this.isAllowed(authPlayer, action);
     }
 }

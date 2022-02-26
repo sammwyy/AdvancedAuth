@@ -186,7 +186,23 @@ public class AuthPlayer extends PluginPlayer {
                 }
             }
 
+            this.updateAllowOrDenyMovement();
+        }
+    }
+
+    public void updateAllowOrDenyMovement () {
+        String blockMode = this.plugin.getMainConfig().getString("settings.actions.deny-move", "default");
+        
+        if (blockMode.equalsIgnoreCase("always")) {
+            this.getBukkitPlayer().setWalkSpeed(0.0f);
+        } else if (blockMode.equalsIgnoreCase("never")) {
             this.getBukkitPlayer().setWalkSpeed(0.2f);
+        } else {
+            if (this.isLogged()) {
+                this.getBukkitPlayer().setWalkSpeed(0.2f);
+            } else {
+                this.getBukkitPlayer().setWalkSpeed(0.0f);
+            }
         }
     }
 
@@ -221,7 +237,7 @@ public class AuthPlayer extends PluginPlayer {
         this.data.save();
         this.timer = 0;
         this.logged = true;
-        this.getBukkitPlayer().setWalkSpeed(0.2f);
+        this.updateAllowOrDenyMovement();
         return true;
     }
 

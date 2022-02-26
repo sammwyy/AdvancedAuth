@@ -14,7 +14,7 @@ public class EntityPickupItemListener extends BlockerListener {
     @EventHandler
     public void onEntityPickupItem(final EntityPickupItemEvent e) {
         if (e.getEntity() instanceof Player) {
-            if (!this.isAllowed((Player) e.getEntity())) {
+            if (!this.isAllowed((Player) e.getEntity(), "deny-item-pickup")) {
                 e.setCancelled(true);
             }
         }

@@ -14,7 +14,7 @@ public class EntityTargetListener extends BlockerListener {
     @EventHandler
     public void onEntityTarget(final EntityTargetEvent e) {
         if (e.getTarget() instanceof Player) {
-            if (!this.isAllowed((Player) e.getTarget())) {
+            if (!this.isAllowed((Player) e.getTarget(), "deny-be-a-mob-target")) {
                 e.setTarget(null);
                 e.setCancelled(true);
             }

@@ -14,7 +14,7 @@ public class InventoryOpenListener extends BlockerListener {
     @EventHandler
     public void onInventoryOpen(final InventoryOpenEvent e) {
         if (e.getPlayer() instanceof Player) {
-            if (!this.isAllowed((Player) e.getPlayer())) {
+            if (!this.isAllowed((Player) e.getPlayer(), "deny-inventory")) {
                 e.setCancelled(true);
             }
         }

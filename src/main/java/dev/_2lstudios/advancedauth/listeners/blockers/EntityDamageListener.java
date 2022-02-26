@@ -17,7 +17,7 @@ public class EntityDamageListener extends BlockerListener {
             return;
         }
 
-        if (!this.isAllowed((Player) e.getEntity())) {
+        if (!this.isAllowed((Player) e.getEntity(), "deny-damage")) {
             e.setCancelled(true);
         }
     }
