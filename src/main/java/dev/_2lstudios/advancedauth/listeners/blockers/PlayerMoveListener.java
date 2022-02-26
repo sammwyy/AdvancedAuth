@@ -15,7 +15,6 @@ public class PlayerMoveListener extends BlockerListener {
         if (!this.isAllowed(e.getPlayer())) {
             if (e.getFrom().distance(e.getTo()) > 0) {
                 e.setTo(e.getFrom());
-                e.setCancelled(true);
             }
         }
     }
