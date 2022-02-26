@@ -25,6 +25,7 @@ import dev._2lstudios.advancedauth.hooks.impl.ProxyBungeecordHook;
 import dev._2lstudios.advancedauth.listeners.AsyncPlayerPreLoginListener;
 import dev._2lstudios.advancedauth.listeners.PlayerJoinListener;
 import dev._2lstudios.advancedauth.listeners.blockers.BlockerListenerHandler;
+import dev._2lstudios.advancedauth.migration.MigrationManager;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
 import dev._2lstudios.advancedauth.player.AuthPlayerManager;
 import dev._2lstudios.advancedauth.security.Cipher;
@@ -38,7 +39,9 @@ import dev._2lstudios.jelly.config.Configuration;
 
 public class AdvancedAuth extends JellyPlugin {
     private Configuration mainConfig;
+    private Configuration migrationConfig;
 
+    private MigrationManager migration;
     private CacheEngine cache;
     private Cipher cipher;
 
@@ -89,6 +92,7 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Load configuration
         this.mainConfig = this.getConfig("config.yml");
+        this.migrationConfig = this.getConfig("migration.yml");
 
         // Logger
         Logging.setLogger(this.getLogger());
@@ -118,6 +122,9 @@ public class AdvancedAuth extends JellyPlugin {
 
         // Initialize cipher
         this.setupCipher();
+
+        // Initialize migration
+        this.migration = new MigrationManager(this);
 
         // Register player manager
         this.setPluginPlayerManager(new AuthPlayerManager(this));
@@ -162,6 +169,10 @@ public class AdvancedAuth extends JellyPlugin {
     }
 
     /* Plugin getters */
+    public MigrationManager getMigration() {
+        return this.migration;
+    }
+
     public CacheEngine getCache() {
         return this.cache;
     }
@@ -172,6 +183,10 @@ public class AdvancedAuth extends JellyPlugin {
 
     public Configuration getMainConfig() {
         return this.mainConfig;
+    }
+
+    public Configuration getMigrationConfig() {
+        return this.migrationConfig;
     }
 
     public ProxyHook getProxyHook() {

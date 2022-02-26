@@ -1,0 +1,20 @@
+# Available plugins:
+# - authme
+plugin: ""
+
+# Available backends:
+# - mysql
+# - sqlite
+backend: ""
+
+# Database
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: "user"
+  password: "pass"
+  database: "minecraft"
+  table: "users"
+
+sqlite:
+  file: "db.sqlite"

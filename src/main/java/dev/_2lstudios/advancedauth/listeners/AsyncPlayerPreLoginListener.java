@@ -16,7 +16,6 @@ public class AsyncPlayerPreLoginListener implements Listener {
 
     @EventHandler
     public void onAsyncPlayerPreLogin (final AsyncPlayerPreLoginEvent e) {
-        System.out.println(e.getName());
         if (this.plugin.getMainConfig().getBoolean("settings.prevent-logged-from-another-location")) {
             for (final Player player : this.plugin.getServer().getOnlinePlayers()) {
                 if (player.getName().equalsIgnoreCase(e.getName())) {
