@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
 import dev._2lstudios.advancedauth.player.LoginReason;
@@ -9,6 +10,12 @@ import dev._2lstudios.jelly.commands.CommandListener;
 
 @Command(name = "login", aliases = {"l"}, silent = true)
 public class LoginCommand extends CommandListener {
+    private final AdvancedAuth plugin;
+
+    public LoginCommand(final AdvancedAuth plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void handle(final CommandContext ctx) throws Exception {
         final AuthPlayer player = (AuthPlayer) ctx.getPluginPlayer();
@@ -38,7 +45,13 @@ public class LoginCommand extends CommandListener {
             player.login(LoginReason.PASSWORD);
             Logging.info(player.getName() + " has been logged in using a password.");
         } else {
-            player.sendI18nMessage("login.wrong-password");
+
+            if (this.plugin.getMainConfig().getBoolean("authentication.kick", false)) {
+                player.sendI18nMessage("login.wrong-password");
+            } else {
+                player.getBukkitPlayer().kickPlayer(player.getI18nString("login.wrong-password"));
+            }
+
             Logging.info(player.getName() + " password failed.");
         }
     }

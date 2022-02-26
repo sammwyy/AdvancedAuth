@@ -32,6 +32,7 @@ storage:
     port: 6379
     password: ""
 authentication:
+  kick: true
   max-accounts-per-ip: 1
   message-interval: 2
   timeout: 30
