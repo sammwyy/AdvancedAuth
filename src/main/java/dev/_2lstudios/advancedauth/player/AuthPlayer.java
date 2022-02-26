@@ -6,9 +6,12 @@ import org.bukkit.entity.Player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.hooks.ProxyHook;
+import dev._2lstudios.advancedauth.utils.ArrayUtils;
 import dev._2lstudios.advancedauth.utils.PlaceholderUtils;
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
+
+import java.util.List;
 
 import com.dotphin.milkshakeorm.MilkshakeORM;
 import com.dotphin.milkshakeorm.repository.Repository;
@@ -168,9 +171,12 @@ public class AuthPlayer extends PluginPlayer {
                 this.sendI18nMessage("login.forced");
             }
 
-            final ProxyHook proxy = this.plugin.getProxyHook();
+            ProxyHook proxy = this.plugin.getProxyHook();
+            
             if (proxy != null) {
-                final String server = this.plugin.getMainConfig().getString("authentication.send-server-on-login.server");
+                List<String> servers = this.plugin.getMainConfig().getStringList("authentication.send-server-on-login.server");
+                String server =  ArrayUtils.randomItem(servers);
+                
                 try {
                     proxy.sendServer(this.getBukkitPlayer(), server);
                 } catch (Exception e) {

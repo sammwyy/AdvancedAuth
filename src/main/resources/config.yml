@@ -40,7 +40,8 @@ authentication:
   send-server-on-login:
     enabled: false
     proxy: bungeecord
-    server: lobby
+    servers:
+      - lobby
 security:
   country-check:
     enabled: false
