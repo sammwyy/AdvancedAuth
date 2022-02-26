@@ -45,7 +45,7 @@ changepassword:
   successfully: "&aPassword was changed."
 
 login:
-  message: "&7Debes iniciar sesión usando &b/login <password>"
+  message: "&7Login using &b/login <password>"
   usage: "&cUsage: /login <password>"
   successfully: "&aYou are now logged in."
   session-resumed: "&aYour session was resumed."
