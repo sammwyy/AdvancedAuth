@@ -8,5 +8,7 @@ public interface IMigration {
     public String getUUIDKey();
     public String getPasswordKey();
     public String getRegistrationIPKey();
+    public String getRegistrationDateKey();
     public String getLastLoginIPKey();
+    public String getLastLoginDateKey();
 }

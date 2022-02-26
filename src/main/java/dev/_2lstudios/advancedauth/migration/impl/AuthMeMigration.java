@@ -39,8 +39,18 @@ public class AuthMeMigration implements IMigration {
     }
 
     @Override
+    public String getRegistrationDateKey() {
+        return "registrationDate";
+    }
+
+    @Override
     public String getLastLoginIPKey() {
         return "regip";
+    }
+
+    @Override
+    public String getLastLoginDateKey() {
+        return "lastLogin";
     }
     
 }

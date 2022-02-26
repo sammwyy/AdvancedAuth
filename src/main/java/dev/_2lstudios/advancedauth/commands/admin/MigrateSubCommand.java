@@ -8,7 +8,8 @@ import dev._2lstudios.jelly.commands.CommandListener;
 
 @Command(
     name = "migrate", 
-    permission = "advancedauth.admin.migrate"
+    permission = "advancedauth.admin.migrate",
+    async = true
 )
 public class MigrateSubCommand extends CommandListener {
 
@@ -21,6 +22,7 @@ public class MigrateSubCommand extends CommandListener {
     @Override
     public void handle(CommandContext ctx) throws Exception {
         try {
+            ctx.getSender().sendMessage("Starting migration...");
             int users = migrationManager.startMigration();
             ctx.getSender().sendMessage("Migration completed (" + users + " users migrated)");
         } catch (final Exception e) {

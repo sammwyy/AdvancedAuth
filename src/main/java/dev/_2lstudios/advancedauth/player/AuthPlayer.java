@@ -148,6 +148,7 @@ public class AuthPlayer extends PluginPlayer {
             this.data.username = this.getName().toLowerCase();
             this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
             this.data.lastLoginIP = this.getAddress();
+            this.data.lastLoginDate = System.currentTimeMillis();
             this.data.save();
 
             boolean resumeSession = this.plugin.getMainConfig().getBoolean("authentication.resume-session", false);
@@ -204,7 +205,9 @@ public class AuthPlayer extends PluginPlayer {
         this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
         this.data.password = this.plugin.getCipher().hash(password);
         this.data.lastLoginIP = this.getAddress();
+        this.data.lastLoginDate = System.currentTimeMillis();
         this.data.registrationIP = this.getAddress();
+        this.data.registrationDate = System.currentTimeMillis();
 
         this.data.save();
         this.timer = 0;

@@ -27,5 +27,11 @@ public class AuthPlayerData extends Entity {
     public String registrationIP;
 
     @Prop
+    public long registrationDate;
+
+    @Prop
     public String lastLoginIP;
+
+    @Prop
+    public long lastLoginDate;
 }

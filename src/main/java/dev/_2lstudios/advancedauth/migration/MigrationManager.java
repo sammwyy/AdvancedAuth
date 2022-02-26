@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.dotphin.milkshakeorm.MilkshakeORM;
+import com.dotphin.milkshakeorm.repository.Repository;
+import com.dotphin.milkshakeorm.utils.MapFactory;
+
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.migration.impl.AuthMeMigration;
 import dev._2lstudios.advancedauth.player.AuthPlayerData;
@@ -29,6 +33,7 @@ public class MigrationManager {
 
     public int startMigration() throws Exception {
         // Prepare stuff.
+        final Repository<AuthPlayerData> repo = MilkshakeORM.getRepository(AuthPlayerData.class);
         final Configuration config = this.plugin.getMigrationConfig();
 
         // Connect to backend.
@@ -67,7 +72,9 @@ public class MigrationManager {
         String keyUUID = migration.getUUIDKey();
         String keyPassword = migration.getPasswordKey();
         String keyRegistrationIP = migration.getRegistrationIPKey();
+        String keyRegistrationDate = migration.getRegistrationDateKey();
         String keyLastLoginIP = migration.getLastLoginIPKey();
+        String keyLastLoginDate = migration.getLastLoginDateKey();
 
         if (keyDisplayName == null) {
             keyUsername = keyDisplayName;
@@ -86,7 +93,7 @@ public class MigrationManager {
 
             String uuid = null;
             if (keyUUID != null)
-            uuid = resultSet.getString(keyUUID);
+                uuid = resultSet.getString(keyUUID);
 
             String email = null;
             if (keyEmail != null)
@@ -96,18 +103,37 @@ public class MigrationManager {
             if (keyRegistrationIP != null)
                 registrationIP = resultSet.getString(keyRegistrationIP);
 
+            long registrationDate = -1;
+            if (keyRegistrationDate != null)
+                registrationDate = resultSet.getLong(keyRegistrationDate);
+
             String lastLoginIP = null;
             if (keyLastLoginIP != null)
                 lastLoginIP = resultSet.getString(keyLastLoginIP);
 
-            AuthPlayerData player = new AuthPlayerData();
+            long lastLoginDate = -1;
+            if (keyLastLoginDate != null)
+                lastLoginDate = resultSet.getLong(keyLastLoginDate);
+
+            AuthPlayerData player = repo.findOne(MapFactory.create("username", username));
+
+            if (player == null && uuid != null) {
+                player = repo.findOne(MapFactory.create("uuid", uuid));
+            }
+
+            if (player == null) {
+                player = new AuthPlayerData();
+            }
+
             player.email = email;
             player.displayName = displayName;
             player.username = username;
             player.uuid = uuid;
             player.password = password;
             player.registrationIP = registrationIP;
+            player.registrationDate = registrationDate;
             player.lastLoginIP = lastLoginIP;
+            player.lastLoginDate = lastLoginDate;
             player.save();
             users++;
         }
