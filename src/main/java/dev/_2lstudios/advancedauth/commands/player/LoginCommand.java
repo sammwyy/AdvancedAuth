@@ -1,5 +1,7 @@
 package dev._2lstudios.advancedauth.commands.player;
 
+import org.bukkit.ChatColor;
+
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.player.AuthPlayer;
@@ -49,7 +51,7 @@ public class LoginCommand extends CommandListener {
             if (this.plugin.getMainConfig().getBoolean("authentication.kick", false)) {
                 player.sendI18nMessage("login.wrong-password");
             } else {
-                player.getBukkitPlayer().kickPlayer(player.getI18nString("login.wrong-password"));
+                player.getBukkitPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', player.getI18nString("login.wrong-password")));
             }
 
             Logging.info(player.getName() + " password failed.");
