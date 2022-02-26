@@ -212,6 +212,7 @@ public class AuthPlayer extends PluginPlayer {
         this.data.save();
         this.timer = 0;
         this.logged = true;
+        this.getBukkitPlayer().setWalkSpeed(0.2f);
         return true;
     }
 
