@@ -10,6 +10,7 @@ import dev._2lstudios.advancedauth.utils.ArrayUtils;
 import dev._2lstudios.advancedauth.utils.PlaceholderUtils;
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.player.PluginPlayer;
+import dev._2lstudios.jelly.utils.ServerUtils;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class AuthPlayer extends PluginPlayer {
     private AuthPlayerData data = null;
     private boolean fetched = false;
     private boolean logged = false;
+    private boolean hidden = false;
     private int timer = 0;
 
     public AuthPlayer(final JellyPlugin plugin, final Player player) {
@@ -187,6 +189,23 @@ public class AuthPlayer extends PluginPlayer {
             }
 
             this.updateAllowOrDenyMovement();
+            this.updateHideOrShowPlayer();
+        }
+    }
+
+    public void updateHideOrShowPlayer() {
+        String blockMode = this.plugin.getMainConfig().getString("settings.actions.hide-players", "default");
+
+        if (blockMode.equalsIgnoreCase("always")) {
+            this.hide();
+        } else if (blockMode.equalsIgnoreCase("never")) {
+            this.show();
+        } else {
+            if (this.isLogged()) {
+                this.show();
+            } else {
+                this.hide();
+            }
         }
     }
 
@@ -238,6 +257,7 @@ public class AuthPlayer extends PluginPlayer {
         this.timer = 0;
         this.logged = true;
         this.updateAllowOrDenyMovement();
+        this.updateHideOrShowPlayer();
         return true;
     }
 
@@ -261,5 +281,41 @@ public class AuthPlayer extends PluginPlayer {
         this.logout();
         this.data.delete();
         this.data = null;
+    }
+
+    public boolean isHidden() {
+        return this.hidden;
+    }
+    
+    public void show() {
+        this.hidden = false;
+        for (Player op : Bukkit.getOnlinePlayers()){
+            this.showOther(op);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public void showOther(final Player player) {
+        if (ServerUtils.isLegacy()) {
+            player.showPlayer(this.getBukkitPlayer());
+        } else {
+            player.showPlayer(this.plugin, this.getBukkitPlayer());
+        }
+    }
+
+    public void hide() {
+        this.hidden = true;
+        for (Player op : Bukkit.getOnlinePlayers()){
+            this.hideOther(op);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public void hideOther(final Player player) {
+        if (ServerUtils.isLegacy()) {
+            player.hidePlayer(this.getBukkitPlayer());
+        } else {
+            player.hidePlayer(this.plugin, this.getBukkitPlayer());
+        }
     }
 }

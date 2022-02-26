@@ -21,6 +21,7 @@ settings:
     deny-projectiles: default
     deny-statistic-increment: default
     deny-vehicles: default
+    hide-players: default
   teleport-spawn:
     enabled: false
     location:

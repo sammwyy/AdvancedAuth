@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.jelly.player.IPluginPlayerManager;
-import dev._2lstudios.jelly.player.PluginPlayer;
 
 public class AuthPlayerManager implements IPluginPlayerManager {
 
@@ -20,7 +19,7 @@ public class AuthPlayerManager implements IPluginPlayerManager {
     }
 
     @Override
-    public PluginPlayer addPlayer(final Player bukkitPlayer) {
+    public AuthPlayer addPlayer(final Player bukkitPlayer) {
         return this.players.put(bukkitPlayer, new AuthPlayer(this.plugin, bukkitPlayer));
     }
 
@@ -30,12 +29,12 @@ public class AuthPlayerManager implements IPluginPlayerManager {
     }
 
     @Override
-    public PluginPlayer getPlayer(final Player bukkitPlayer) {
+    public AuthPlayer getPlayer(final Player bukkitPlayer) {
         return this.players.get(bukkitPlayer);
     }
 
     @Override
-    public PluginPlayer removePlayer(final Player bukkitPlayer) {
+    public AuthPlayer removePlayer(final Player bukkitPlayer) {
         return this.players.remove(bukkitPlayer);
     }
 
