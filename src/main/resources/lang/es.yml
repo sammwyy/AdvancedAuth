@@ -1,0 +1,71 @@
+common:
+  error-sending-server: "&cNo se te puede enviar al servidor {server}"
+  still-downloading: "&cTus datos aún se están validando, inténtalo nuevamente en un segundo."
+  player-not-registered: "&cEsta cuenta no se encuentra registrada."
+  player-offline: "&cEste usuario no se encuentra conectado."
+  username-case-mismatch: "&cEstas registrado como {registered_name} pero has intentado ingresar como {current_name}. Por favor, comprueba las mayusculas y vuelve a intentar entrar."
+
+admin:
+  help: |-
+    &r
+    &6&lAdvanced&e&lAuth &8|| &7Lista de comandos
+    &9/aa accounts <player> &8- &7Ver las demás cuentas de un jugador.
+    &9/aa changepassword <player> <password> &8- &7Cambia la contraseña de un jugador.
+    &9/aa ip <player> &8- &7Ver la primera y última ip de un jugador.
+    &9/aa setspawn &8- &7Define el spawn en tu posición actual.
+    &9/aa unregister <player> &8- &7Elimina la cuenta de un jugador.
+    &r
+  accounts: |-
+    &r
+    &6Cuentas de {player}:
+    {alts}
+    &r
+  ip: |-
+    &r
+    &6Dirección IP de {player}:
+    &7Al registrarse: &e{registration_ip}
+    &7Último logeo: &e{last_login_ip}
+    &r
+  change-password: "&aLa contraseña de {player} ha sido cambiada."
+  unregistered: "&cHas eliminado la cuenta de {player}."
+  spawn-set: "&aEl spawn ha sido colocado en tu posición actual."
+  forge-login:
+    usage: "&cUso: /aa forcelogin <player>"
+    already-logged: "&cEste usuario ya se encuentra logeado."
+    success: "&aHas forzado el logeo de {player}"
+
+
+addemail:
+  usage: "&cUso: /addemail <email>"
+  successfully: "&a¡Has cambiado tu dirección de correo exitosamente!"
+  bad-format: "&cEl correo ingresado no parece ser válido."
+
+changepassword:
+  usage: "&cUso: /changepassword <vieja-contraseña> <nueva-contraseña>"
+  successfully: "&aLa contraseña ha sido cambiada correctamente."
+
+login:
+  message: "&7Debes iniciar sesión usando &b/login <contraseña>"
+  usage: "&cUso: /login <contraseña>"
+  successfully: "&aHas iniciado sesión correctamente."
+  session-resumed: "&aTu sesión ha sido reanudada."
+  forced: "&aUn administrador ha forzado el inicio de sesión en tu cuenta."
+  already-logged: "&cYa te encuentras logeado."
+  logout: "&eHas cerrado sesión."
+  not-logged: "&cDebes iniciar sesión antes de hacer eso."
+  wrong-password: "&cContraseña incorrecta"
+
+register:
+  message: "&7Debes registrarte usando &b/register <contraseña>"
+  usage: "&cUso: /register <contraseña>"
+  successfully: "&aTu cuenta se ha registrado correctamente."
+  already-registered: "&cEsta cuenta ya se encuentra registrada"
+  not-registered: "&cEsta cuenta no se encuentra registrada"
+  password-not-match: "&cLa confirmación de contraseña no coincide."
+  password-length: "&cLa contraseña debe tener entre {password_min} y {password_max} caracteres."
+  password-too-weak: "&cEsta contraseña es muy débil."
+  too-many-accounts: "&cHas superado el limite de cuentas permitidas &7(&e{player_accounts}/{max_accounts}&7)"
+
+unregister:
+  usage: "&cUso: /unregister <contraseña>"
+  successfully: "&aTu cuenta ha sido eliminada correctamente."
