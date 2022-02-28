@@ -15,18 +15,17 @@ public class AutoLoginCommand extends CommandListener {
             player.sendI18nMessage("login.not-logged");
             return;
         }
+    
+        boolean result =  !player.getData().enabledSession;
+        player.getData().enabledSession = result;
+        player.getData().save();
 
-        if (player.getData().enabledSession) {
-            player.getData().enabledSession = !player.getData().enabledSession;
-            player.getData().save();
-
-            if (player.getData().enabledSession) {
-                player.sendI18nMessage("autologin.enabled");
-                player.createSession();
-            } else {
-                player.sendI18nMessage("autologin.disabled");
-                player.deleteSession();
-            }
+        if (result) {
+            player.sendI18nMessage("autologin.enabled");
+            player.createSession();
+        } else {
+            player.sendI18nMessage("autologin.disabled");
+            player.deleteSession();
         }
     }
 }
