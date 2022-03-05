@@ -64,6 +64,9 @@ storage:
     password: ""
 # Authentication settings.
 authentication:
+  # If the registration is optional, the user will be able to play the server without registering,
+  # however, if he does so, then he must enter the password to be able to enter.
+  is-register-optional: false
   # Kick player for wrong password entry.
   kick-on-wrong-password: true
   # Maximum number of accounts per IP allowed to register.
