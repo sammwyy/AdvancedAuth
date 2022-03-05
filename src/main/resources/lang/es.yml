@@ -72,3 +72,5 @@ register:
 unregister:
   usage: "&cUso: /unregister <contraseña>"
   successfully: "&aTu cuenta ha sido eliminada correctamente."
+
+timeout: "&cTardaste mucho en ingresar tu clave!"

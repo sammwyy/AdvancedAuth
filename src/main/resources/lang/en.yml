@@ -72,3 +72,5 @@ register:
 unregister:
   usage: "&cUsage: /unregister <password>"
   successfully: "&aYour account was deleted."
+
+timeout: "&cYou took too long to enter your password!"

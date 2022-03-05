@@ -24,7 +24,7 @@ public class PlayerTimeoutTask implements Runnable {
                 authPlayer.addTimer();
 
                 if (authPlayer.getTimer() >= timeout) {
-                    authPlayer.getBukkitPlayer().kickPlayer("§cTimeout");
+                    authPlayer.kickI18n("timeout");
                 }
             }
         }
