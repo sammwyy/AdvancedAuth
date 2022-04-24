@@ -1,0 +1,76 @@
+common:
+  error-sending-server: "&cNão foi possível conectar ao servidor {server}"
+  still-downloading: "&cSeus dados ainda estão carregando. Tente novamente mais tarde."
+  player-not-registered: "&cEsta conta não está registrada."
+  player-offline: "&cO usuário não está online."
+  username-case-mismatch: "&cVocê está registrado como {registered_name}, mas conectou-se como {current_name}.\nCombine as letras maiúsculas e tente novamente."
+
+admin:
+  help: |-
+    &r
+    &6&lAdvanced&e&lAuth &8|| &7Lista de comandos
+    &9/aa accounts <jogador> &8- &7Consultar contas do jogador.
+    &9/aa changepassword <jogador> <senha> &8- &7Alterar a senha do jogador.
+    &9/aa ip <jogador> &8- &7Consultar o primeiro e o último IP do jogador.
+    &9/aa setspawn &8- &7Defina o ponto de início para a sua posição atual.
+    &9/aa unregister <jogador> &8- &7Excluir a conta do jogador.
+    &r
+  accounts: |-
+    &r
+    &6Contas de {player}:
+    {alts}
+    &r
+  ip: |-
+    &r
+    &6IP de {player}:
+    &7IP de registro: &a{registration_country} &e{registration_ip}
+    &7Último login: &a{last_country} &e{last_login_ip}
+    &r
+  change-password: "&aA senha de {player} foi alterada."
+  unregistered: "&cVocê deletou a conta de {player}."
+  spawn-set: "&aO ponto de início foi definido."
+  forge-login:
+    usage: "&cUso: /aa forcelogin <jogador>"
+    already-logged: "&cEste jogador já está logado."
+    success: "&aVocê forçou o login de {player}"
+
+autologin:
+  enabled: "&aVocê ativou o recurso de login automático."
+  disabled: "&cVocê desativou o recurso de login automático."
+
+addemail:
+  usage: "&cUso: /addemail <e-mail>"
+  successfully: "&a¡Você alterou seu e-mail com sucesso!"
+  bad-format: "&cO e-mail é inválido."
+
+changepassword:
+  usage: "&cUso: /changepassword <senha-antiga> <senha-nova>"
+  successfully: "&aA senha foi alterada."
+
+login:
+  message: "&7Faça login usando &b/login <senha>"
+  usage: "&cUso: /login <senha>"
+  successfully: "&aAgora você está logado."
+  session-resumed: "&aSua sessão foi retomada."
+  forced: "&aUm administrador fez login para você."
+  already-logged: "&cVocê já está logado."
+  logout: "&eVocê deslogou-se."
+  not-logged: "&cVocê tem que logar primeiro."
+  wrong-password: "&cSenha inválida ({tries}/{max-tries} tentativas)"
+
+register:
+  message: "&7Registre-se usando &b/register <senha>"
+  usage: "&cUso: /register <senha>"
+  successfully: "&aSua conta foi registrada com sucesso."
+  already-registered: "&cEsta conta já está registrada."
+  not-registered: "&cEsta conta não está registrada."
+  password-not-match: "&cA confirmação da senha não corresponde."
+  password-length: "&cA senha deve ter entre {password_min} e {password_max} caracteres."
+  password-too-weak: "&cA senha é muito fraca."
+  too-many-accounts: "&cVocê excedeu o limite de contas registradas &7(&e{player_accounts}/{max_accounts}&7)"
+
+unregister:
+  usage: "&cUso: /unregister <senha>"
+  successfully: "&aSua conta foi excluída."
+
+timeout: "&cVocê demorou muito para digitar sua senha!"
