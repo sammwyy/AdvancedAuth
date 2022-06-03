@@ -13,7 +13,8 @@ import dev._2lstudios.advancedauth.security.PasswordValidation;
     name = "register",
     arguments = { Argument.STRING },
     minArguments = 1,
-    silent = true
+    silent = true,
+    requireAuth = false
 )
 public class RegisterCommand extends CommandListener {
 
@@ -27,12 +28,7 @@ public class RegisterCommand extends CommandListener {
     public void onExecuteByPlayer(final CommandContext ctx) {
         final AuthPlayer player = ctx.getPlayer();
         final String password = ctx.getArguments().getString(0);
-
-        if (!player.isFetched()) {
-            player.sendI18nMessage("common.still-downloading");
-            return;
-        }
-
+        
         if (player.isRegistered()) {
             player.sendI18nMessage("register.already-registered");
             return;

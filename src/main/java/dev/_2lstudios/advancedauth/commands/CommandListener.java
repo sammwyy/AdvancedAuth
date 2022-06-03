@@ -12,6 +12,7 @@ import dev._2lstudios.advancedauth.errors.MaterialNotFoundException;
 import dev._2lstudios.advancedauth.errors.PlayerOfflineException;
 import dev._2lstudios.advancedauth.errors.SoundNotFoundException;
 import dev._2lstudios.advancedauth.errors.WorldNotFoundException;
+import dev._2lstudios.advancedauth.players.AuthPlayer;
 import dev._2lstudios.advancedauth.utils.ArrayUtils;
 
 public abstract class CommandListener implements CommandExecutor {
@@ -120,6 +121,23 @@ public abstract class CommandListener implements CommandExecutor {
     // Command logic
     public void execute(CommandSender sender, String[] args) {
         CommandContext ctx = new CommandContext(this.plugin, sender, command.arguments());
+
+        // Check for auth
+        if (ctx.isPlayer()) {
+            AuthPlayer player = ctx.getPlayer();
+
+            // Check if data is downloading.
+            if (!player.isFetched()) {
+                player.sendI18nMessage("common.still-downloading");
+                return;
+            }
+
+            // Check is isn't authenticated.
+            if (command.requireAuth() && (!player.isLogged() || player.isGuest())) {
+                player.sendI18nMessage("login.not-logged");
+                return;
+            }
+        }
 
         // Check for permissions
         if (!command.permission().isEmpty() && !sender.hasPermission(command.permission())) {

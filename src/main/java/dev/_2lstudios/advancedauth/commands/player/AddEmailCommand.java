@@ -12,6 +12,7 @@ import dev._2lstudios.advancedauth.security.EmailValidation;
     name = "addemail",
     arguments = { Argument.STRING },
     minArguments = 1,
+    requireAuth = true,
     silent = true
 )
 public class AddEmailCommand extends CommandListener {
@@ -19,16 +20,6 @@ public class AddEmailCommand extends CommandListener {
     public void onExecuteByPlayer(final CommandContext ctx) {
         final AuthPlayer player = (AuthPlayer) ctx.getPlayer();
         final String email = ctx.getArguments().getString(0);
-
-        if (!player.isLogged() || player.isGuest()) {
-            player.sendI18nMessage("login.not-logged");
-            return;
-        }
-
-        if (!player.isFetched()) {
-            player.sendI18nMessage("common.still-downloading");
-            return;
-        }
 
         if (!EmailValidation.isValidEmailFormat(email)) {
             player.sendI18nMessage("addemail.bad-format");

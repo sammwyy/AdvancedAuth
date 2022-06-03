@@ -12,6 +12,7 @@ import dev._2lstudios.advancedauth.security.PasswordValidation;
     name = "changepassword",
     arguments = { Argument.STRING, Argument.STRING },
     minArguments = 2,
+    requireAuth = true,
     silent = true
 )
 public class ChangePasswordCommand extends CommandListener {
@@ -20,11 +21,6 @@ public class ChangePasswordCommand extends CommandListener {
         final AuthPlayer player = ctx.getPlayer();
         final String oldPassword = ctx.getArguments().getString(0);
         final String newPassword = ctx.getArguments().getString(1);
-
-        if (!player.isLogged() || player.isGuest()) {
-            player.sendI18nMessage("login.not-logged");
-            return;
-        }
 
         if (!player.comparePassword(oldPassword)) {
             player.sendI18nMessage("login.wrong-password");

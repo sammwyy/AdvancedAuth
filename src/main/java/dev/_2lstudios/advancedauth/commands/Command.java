@@ -20,5 +20,7 @@ public @interface Command {
 
     public boolean silent() default false;
 
+    public boolean requireAuth() default true;
+
     public int minArguments() default Integer.MIN_VALUE;
 }

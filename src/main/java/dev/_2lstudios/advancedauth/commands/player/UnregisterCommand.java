@@ -8,18 +8,14 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 
 @Command(
     name = "unregister",
-    silent = true
+    silent = true,
+    requireAuth = true
 )
 public class UnregisterCommand extends CommandListener {
     @Override
     public void onExecuteByPlayer(final CommandContext ctx) {
         final AuthPlayer player = (AuthPlayer) ctx.getPlayer();
         final String password = ctx.getArguments().getString(0);
-
-        if (!player.isLogged() || player.isGuest()) {
-            player.sendI18nMessage("login.not-logged");
-            return;
-        }
 
         if (password == null) {
             player.sendI18nMessage("unregister.usage");

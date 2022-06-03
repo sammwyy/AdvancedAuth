@@ -9,7 +9,10 @@ import dev._2lstudios.advancedauth.commands.admin.MigrateSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.SetSpawnSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.UnregisterSubCommand;
 
-@Command(name = "advancedauth", permission = "advancedauth.admin")
+@Command(
+    name = "advancedauth", 
+    permission = "advancedauth.admin"
+)
 public class AdvancedAuthCommand extends CommandListener {
     public AdvancedAuthCommand(final AdvancedAuth plugin) {
         this.addSubcommand(new AccountsSubCommand());

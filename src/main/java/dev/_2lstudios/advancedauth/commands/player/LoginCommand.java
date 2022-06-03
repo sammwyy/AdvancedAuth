@@ -13,6 +13,7 @@ import dev._2lstudios.advancedauth.players.LoginReason;
     name = "login",
     arguments = { Argument.STRING },
     minArguments = 1,
+    requireAuth = false,
     silent = true
 )
 public class LoginCommand extends CommandListener {
@@ -26,12 +27,7 @@ public class LoginCommand extends CommandListener {
     public void onExecuteByPlayer(final CommandContext ctx) {
         final AuthPlayer player = ctx.getPlayer();
         final String password = ctx.getArguments().getString(0);
-
-        if (!player.isFetched()) {
-            player.sendI18nMessage("common.still-downloading");
-            return;
-        }
-
+        
         if (!player.isRegistered()) {
             player.sendI18nMessage("register.not-registered");
             return;
