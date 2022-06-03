@@ -10,7 +10,9 @@ import dev._2lstudios.advancedauth.services.GeoIPService;
 @Command(
     name = "ip", 
     permission = "advancedauth.admin.ip", 
-    arguments = { Argument.STRING }
+    arguments = { Argument.STRING },
+    minArguments = 1,
+    usageKey = "admin.ip.usage"
 )
 public class IPSubCommand extends CommandListener {
     @Override
@@ -28,7 +30,7 @@ public class IPSubCommand extends CommandListener {
             String registeredCountry = GeoIPService.getCountry(registeredIP);
 
             ctx.getExecutor().sendMessage(
-                ctx.getExecutor().getI18nMessage("admin.ip")
+                ctx.getExecutor().getI18nMessage("admin.ip.message")
                     .replace("{player}", player.username)
                     .replace("{last_login_ip}", lastIP)
                     .replace("{registration_ip}", registeredIP)

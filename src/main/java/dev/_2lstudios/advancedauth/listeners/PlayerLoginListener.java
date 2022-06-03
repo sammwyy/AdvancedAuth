@@ -1,5 +1,6 @@
 package dev._2lstudios.advancedauth.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -13,17 +14,25 @@ public class PlayerLoginListener implements Listener {
         this.plugin = plugin;
     }
 
+    public String getDefaultMessage(String key) {
+        return ChatColor.translateAlternateColorCodes(
+            '&',
+            this.plugin.getLanguageManager().getLanguage(
+                this.plugin.getLanguageManager().getDefaultLocale()
+            ).getString(key));
+    }
+
     @EventHandler
     public void onPlayerLogin (PlayerLoginEvent e) {
         // Country blocker.
         if (!this.plugin.getCountryCheck().canJoinAddress(e.getAddress().toString())) {
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Your country has been blocked");
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, this.getDefaultMessage("country-blocked"));
             return;
         }
 
         // Fail Lock.
         if (this.plugin.getFailLock().isAddressLocked(e.getAddress().toString())) {
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Fail locked");
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, this.getDefaultMessage("faillock"));
             return;
         }
     }

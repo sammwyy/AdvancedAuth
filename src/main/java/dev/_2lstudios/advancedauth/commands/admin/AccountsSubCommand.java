@@ -13,7 +13,9 @@ import dev._2lstudios.advancedauth.services.AuthService;
     name = "accounts", 
     permission = "advancedauth.admin.accounts", 
     aliases = { "alts" }, 
-    arguments = { Argument.STRING }
+    arguments = { Argument.STRING },
+    minArguments = 1,
+    usageKey = "admin.accounts.usage"
 )
 public class AccountsSubCommand extends CommandListener {
     @Override
@@ -41,7 +43,7 @@ public class AccountsSubCommand extends CommandListener {
             }
 
             ctx.getExecutor().sendMessage(
-                ctx.getExecutor().getI18nMessage("admin.accounts")
+                ctx.getExecutor().getI18nMessage("admin.accounts.message")
                     .replace("{alts}", altsText)
                     .replace("{player}", field)
             );

@@ -9,7 +9,8 @@ import dev._2lstudios.advancedauth.commands.CommandListener;
     name = "unregister", 
     permission = "advancedauth.admin.unregister", 
     arguments = { Argument.STRING },
-    minArguments = 1
+    minArguments = 1,
+    usageKey = "admin.unregister.usage"
 )
 public class UnregisterSubCommand extends CommandListener {
     @Override
@@ -18,7 +19,7 @@ public class UnregisterSubCommand extends CommandListener {
 
         if (ctx.getPlugin().getAuthService().unregister(username)) {
             ctx.getExecutor().sendMessage(
-                ctx.getExecutor().getI18nMessage("admin.unregistered")
+                ctx.getExecutor().getI18nMessage("admin.unregister.unregistered")
                     .replace("{player}", username)
             );
         } else {

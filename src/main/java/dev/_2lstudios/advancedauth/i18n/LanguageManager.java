@@ -60,6 +60,8 @@ public class LanguageManager {
             directory.mkdirs();
         }
 
+        this.languages.clear();
+
         for (File file : directory.listFiles()) {
             if (file.getName().endsWith(".yml")) {
                 try {

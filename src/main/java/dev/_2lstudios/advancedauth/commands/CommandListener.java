@@ -53,7 +53,7 @@ public abstract class CommandListener implements CommandExecutor {
 
     protected void onPlayerOffline(CommandContext ctx, String playerName) {
         ctx.getExecutor().sendMessage(
-                ctx.getExecutor().getI18nMessage("common.offline-player")
+                ctx.getExecutor().getI18nMessage("common.player-offline")
                         .replace("{player}", playerName));
     }
 

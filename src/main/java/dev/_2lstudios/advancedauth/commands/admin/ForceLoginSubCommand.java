@@ -11,7 +11,8 @@ import dev._2lstudios.advancedauth.players.LoginReason;
     name = "forcelogin", 
     permission = "advancedauth.admin.forcelogin", 
     arguments = { Argument.PLAYER },
-    minArguments = 1
+    minArguments = 1,
+    usageKey = "admin.forcelogin.usage"
 )
 public class ForceLoginSubCommand extends CommandListener {
     @Override
@@ -20,11 +21,14 @@ public class ForceLoginSubCommand extends CommandListener {
 
         if (!player.isRegistered())
             ctx.getExecutor().sendI18nMessage("common.player-not-registered");
-        if (player.isLogged()) {
-            ctx.getExecutor().sendI18nMessage("admin.force-login.already-logged");
+        else if (player.isLogged()) {
+            ctx.getExecutor().sendI18nMessage("admin.forcelogin.already-logged");
         } else {
             player.login(LoginReason.FORCED);
-            ctx.getExecutor().sendI18nMessage("admin.force-login.success");
+            ctx.getExecutor().sendMessage(
+                ctx.getExecutor().getI18nMessage("admin.forcelogin.success")
+                    .replace("{player}", player.getName())
+            );
         }
     }
     

@@ -5,6 +5,7 @@ common:
   player-not-registered: "&cThis account is not registered."
   player-offline: "&cThe user is not online."
   username-case-mismatch: "&cYou are registered as {registered_name} but joined as {current_name}.\nPlease match the caps and try again."
+  no-by-console: "&cThis command only can be executed by a player."
 
 # Task & request messages
 login-request:
@@ -28,36 +29,49 @@ logged:
 
 # Misc messages
 timeout: "&cYou took too long to enter your password!"
+faillock: "&cYou address is faillocked because you have failed many times the password"
+country-blocked: "&cYour country is blocked"
 
 # Command messages
 admin:
   help: |-
     &r
-    &6&lAdvanced&e&lAuth &8|| &7Command list
+    &6&lAdvanced&e&lAuth &8| &cCommand list
     &9/aa accounts <player> &8- &7Check player's accounts.
     &9/aa changepassword <player> <password> &8- &7Change other's password.
+    &9/aa forcelogin <player> &8- &7Force a player to log in.
     &9/aa ip <player> &8- &7See other's first and last IP.
+    &9/aa reload &8- &7Reload plugin config and messages.
     &9/aa setspawn &8- &7Set the spawn to current position.
     &9/aa unregister <player> &8- &7Delete someone's account.
     &r
-  accounts: |-
-    &r
-    &6Accounts of {player}:
-    {alts}
-    &r
-  ip: |-
-    &r
-    &6IP of {player}:
-    &7Registration IP: &a{registration_country} &e{registration_ip}
-    &7Last Login: &a{last_country} &e{last_login_ip}
-    &r
-  change-password: "&aThe password of {player} was changed."
-  unregistered: "&cYou deleted {player}'s account'."
-  spawn-set: "&aThe spawn has been set."
-  forge-login:
+  accounts:
+    usage: "&cUsage: /aa accounts <player>"
+    message: |-
+      &r
+      &6Accounts of {player}:
+      {alts}
+      &r
+  ip: 
+    usage: "&cUsage: /aa ip <player>"
+    message: |-
+      &r
+      &6IP of {player}:
+      &7Registration IP: &a{registration_country} &e{registration_ip}
+      &7Last Login: &a{last_country} &e{last_login_ip}
+      &r
+  changepassword:
+    usage: "&cUsage: /aa changepassword <player> <newpassword>"
+    changed: "&aThe password of {player} was changed."
+  unregister:
+    usage: "&cUsage: /aa unregister <player>"
+    unregistered: "&cYou deleted {player}'s account'."
+  forcelogin:
     usage: "&cUsage: /aa forcelogin <player>"
     already-logged: "&cThis player is already logged in."
     success: "&aYou forced the login of {player}"
+  spawn-set: "&aThe spawn has been set."
+  reloaded: "&aPlugin configuration and messages reloaded."
 
 autologin:
   enabled: "&aYou enabled the automatic login feature."
@@ -70,6 +84,7 @@ addemail:
 
 changepassword:
   usage: "&cUsage: /changepassword <old-password> <new-password>"
+  wrong-password: "&cInvalid password"
   successfully: "&aPassword was changed."
 
 login:

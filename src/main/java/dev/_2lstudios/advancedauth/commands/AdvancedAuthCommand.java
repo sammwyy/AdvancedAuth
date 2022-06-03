@@ -5,6 +5,7 @@ import dev._2lstudios.advancedauth.commands.admin.ChangePasswordSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.ForceLoginSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.IPSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.MigrateSubCommand;
+import dev._2lstudios.advancedauth.commands.admin.ReloadSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.SetSpawnSubCommand;
 import dev._2lstudios.advancedauth.commands.admin.UnregisterSubCommand;
 
@@ -19,6 +20,7 @@ public class AdvancedAuthCommand extends CommandListener {
         this.addSubcommand(new ForceLoginSubCommand());
         this.addSubcommand(new IPSubCommand());
         this.addSubcommand(new MigrateSubCommand());
+        this.addSubcommand(new ReloadSubCommand());
         this.addSubcommand(new SetSpawnSubCommand());
         this.addSubcommand(new UnregisterSubCommand());
     }

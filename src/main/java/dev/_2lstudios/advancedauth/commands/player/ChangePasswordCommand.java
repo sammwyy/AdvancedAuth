@@ -23,7 +23,7 @@ public class ChangePasswordCommand extends CommandListener {
         String newPassword = ctx.getArguments().getString(1);
 
         if (!player.comparePassword(oldPassword)) {
-            player.sendI18nMessage("login.wrong-password");
+            player.sendI18nMessage("changepassword.wrong-password");
             Logging.info(player.getName() + " has tried to change his password but failed to verify the old one.");
             return;
         }
