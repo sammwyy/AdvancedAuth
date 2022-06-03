@@ -102,6 +102,10 @@ authentication:
       - lobby
 # Security options.
 security:
+  # Block invalid usernames with unknown characters.
+  block-invalid-usernames:
+    enabled: true
+    regex: "^[a-zA-Z0-9_]{2,16}$"
   # Country blocking
   country-check:
     enabled: false

@@ -31,6 +31,7 @@ logged:
 timeout: "&cYou took too long to enter your password!"
 faillock: "&cYou address is faillocked because you have failed many times the password"
 country-blocked: "&cYour country is blocked"
+invalid-username: "&cYour username is invalid"
 
 # Command messages
 admin:
