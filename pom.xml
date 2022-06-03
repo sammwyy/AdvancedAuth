@@ -9,12 +9,12 @@
     <!-- Plugin Information -->
     <name>AdvancedAuth</name>
     <description>Just another authentication plugin</description>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <url>https://twitter.com/sammwy</url>
 
     <properties>
         <author>Sammwy</author>
-        <mainClass>dev._2lstudios.advancedauth.bukkit.AdvancedAuth</mainClass>
+        <mainClass>dev._2lstudios.advancedauth.AdvancedAuth</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -43,13 +43,8 @@
         <dependency>
             <groupId>dev._2lstudios</groupId>
             <artifactId>Milkshake-Bukkit</artifactId>
-            <version>0.1-BETA</version>
+            <version>1.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>dev._2lstudios</groupId>
-            <artifactId>jelly</artifactId>
-            <version>0.2.16</version>
         </dependency>
         <!-- Ciphers -->
         <dependency>
