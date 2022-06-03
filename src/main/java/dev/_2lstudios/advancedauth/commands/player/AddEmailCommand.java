@@ -18,7 +18,7 @@ import dev._2lstudios.advancedauth.security.EmailValidation;
 public class AddEmailCommand extends CommandListener {
     @Override
     public void onExecuteByPlayer(CommandContext ctx) {
-        AuthPlayer player = (AuthPlayer) ctx.getPlayer();
+        AuthPlayer player = ctx.getPlayer();
         String email = ctx.getArguments().getString(0);
 
         if (!EmailValidation.isValidEmailFormat(email)) {
