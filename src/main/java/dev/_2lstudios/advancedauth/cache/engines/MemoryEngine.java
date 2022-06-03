@@ -11,24 +11,24 @@ import dev._2lstudios.advancedauth.cache.CacheEngine;
 
 public class MemoryEngine implements CacheEngine {
 
-    private final LoadingCache<String, String> cache;
+    private LoadingCache<String, String> cache;
 
-    public MemoryEngine(final int expiration) {
+    public MemoryEngine(int expiration) {
         this.cache = CacheBuilder.newBuilder().expireAfterWrite(expiration, TimeUnit.SECONDS)
                 .expireAfterAccess(expiration, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
-                    public String load(final String key) throws Exception {
+                    public String load(String key) throws Exception {
                         return "";
                     }
                 });
     }
 
     @Override
-    public void delete(final String key) {
+    public void delete(String key) {
         this.cache.invalidate(key);
     }
 
     @Override
-    public String get(final String key) {
+    public String get(String key) {
         try {
             String result = this.cache.get(key);
             if (result.equals("")) {
@@ -36,14 +36,14 @@ public class MemoryEngine implements CacheEngine {
             } else {
                 return result;
             }
-        } catch (final ExecutionException e) {
+        } catch (ExecutionException e) {
             e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public void set(final String key, final String value) {
+    public void set(String key, String value) {
         this.cache.put(key, value);
     }
 

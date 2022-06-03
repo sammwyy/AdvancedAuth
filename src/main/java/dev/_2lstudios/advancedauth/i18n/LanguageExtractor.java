@@ -13,11 +13,11 @@ public class LanguageExtractor {
         return new File(LanguageExtractor.class.getProtectionDomain().getCodeSource().getLocation().getPath());
     }
 
-    private static boolean shouldExtractEntry(final JarEntry entry) {
+    private static boolean shouldExtractEntry(JarEntry entry) {
         return entry.getName().startsWith("lang/") && entry.getName().endsWith(".yml");
     }
 
-    public static void extractAll(final File target) {
+    public static void extractAll(File target) {
         if (!target.exists()) {
             target.mkdirs();
         }
@@ -25,7 +25,7 @@ public class LanguageExtractor {
         try {
             JarFile jar = new JarFile(LanguageExtractor.getJarFile());
             for (Enumeration<JarEntry> enums = jar.entries(); enums.hasMoreElements();) {
-                final JarEntry entry = enums.nextElement();
+                JarEntry entry = enums.nextElement();
                 if (shouldExtractEntry(entry)) {
                     FileUtils.extractFile(new File(target, new File(entry.getName()).getName()), entry.getName());
                 }

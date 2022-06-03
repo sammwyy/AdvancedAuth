@@ -10,14 +10,14 @@ import dev._2lstudios.advancedauth.commands.CommandListener;
     permission = "advancedauth.admin.setspawn"
 )
 public class SetSpawnSubCommand extends CommandListener {
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
 
-    public SetSpawnSubCommand (final AdvancedAuth plugin) {
+    public SetSpawnSubCommand (AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
+    public void onExecuteByPlayer(CommandContext ctx) {
         ctx.getExecutor().sendI18nMessage("admin.spawn-set");
         this.plugin.getConfig().setLocation("settings.teleport-spawn.location", ctx.getPlayer().getBukkitPlayer().getLocation());
         this.plugin.getConfig().set("settings.teleport-spawn.enabled", true);

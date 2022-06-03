@@ -10,14 +10,14 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 
 public class PlayerJoinListener implements Listener {
     
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
 
-    public PlayerJoinListener (final AdvancedAuth plugin) {
+    public PlayerJoinListener (AdvancedAuth plugin) {
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void onPlayerJoin (final PlayerJoinEvent e) {
+    public void onPlayerJoin (PlayerJoinEvent e) {
         AuthPlayer player = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
 
         // Prevent movement
@@ -32,7 +32,7 @@ public class PlayerJoinListener implements Listener {
 
         // Teleport spawn
         if (this.plugin.getConfig().getBoolean("settings.teleport-spawn.enabled")) {
-            final Location location = this.plugin.getConfig().getLocation("settings.teleport-spawn.location");
+            Location location = this.plugin.getConfig().getLocation("settings.teleport-spawn.location");
             e.getPlayer().teleport(location);
         }
 

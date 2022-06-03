@@ -8,14 +8,14 @@ import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class PlayerQuitListener implements Listener {
     
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
 
-    public PlayerQuitListener (final AdvancedAuth plugin) {
+    public PlayerQuitListener (AdvancedAuth plugin) {
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void onPlayerQuit (final PlayerQuitEvent e) {
+    public void onPlayerQuit (PlayerQuitEvent e) {
         // Disable join message
         if (this.plugin.getConfig().getBoolean("settings.disable-join-quit-message")) {
             e.setQuitMessage(null);

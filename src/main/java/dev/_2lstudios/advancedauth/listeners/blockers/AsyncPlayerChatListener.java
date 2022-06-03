@@ -7,13 +7,13 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class AsyncPlayerChatListener extends BlockerListener {
-    public AsyncPlayerChatListener(final AdvancedAuth plugin) {
+    public AsyncPlayerChatListener(AdvancedAuth plugin) {
         super(plugin);
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onAsyncPlayerChat(final AsyncPlayerChatEvent e) {
-        final Player player = e.getPlayer();
+    public void onAsyncPlayerChat(AsyncPlayerChatEvent e) {
+        Player player = e.getPlayer();
 
         if (!isAllowed(player, "deny-chat")) {
             e.setCancelled(true);

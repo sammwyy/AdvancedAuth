@@ -13,9 +13,9 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 )
 public class UnregisterCommand extends CommandListener {
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = (AuthPlayer) ctx.getPlayer();
-        final String password = ctx.getArguments().getString(0);
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = (AuthPlayer) ctx.getPlayer();
+        String password = ctx.getArguments().getString(0);
 
         if (password == null) {
             player.sendI18nMessage("unregister.usage");

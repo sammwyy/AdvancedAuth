@@ -13,8 +13,8 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 )
 public class LogoutCommand extends CommandListener {
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = ctx.getPlayer();
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = ctx.getPlayer();
         player.logout();
         player.sendI18nMessage("login.logout");
         Logging.info(player.getName() + " manually logged out.");

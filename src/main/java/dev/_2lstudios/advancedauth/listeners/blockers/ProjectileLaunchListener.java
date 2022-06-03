@@ -12,7 +12,7 @@ public class ProjectileLaunchListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onProjectileLaunch(final ProjectileLaunchEvent e) {
+    public void onProjectileLaunch(ProjectileLaunchEvent e) {
         if (e.getEntity() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntity(), "deny-projectiles")) {
                 e.setCancelled(true);

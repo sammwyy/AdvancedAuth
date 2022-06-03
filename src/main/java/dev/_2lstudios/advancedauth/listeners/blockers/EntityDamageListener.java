@@ -12,7 +12,7 @@ public class EntityDamageListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onEntityDamage(final EntityDamageEvent e) {
+    public void onEntityDamage(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player)) {
             return;
         }

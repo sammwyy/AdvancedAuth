@@ -6,12 +6,12 @@ import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.config.Configuration;
 
 public class PasswordValidation {
-    public static String validatePassword(final String password) {
-        final Configuration config = AdvancedAuth.getInstance().getConfig();
+    public static String validatePassword(String password) {
+        Configuration config = AdvancedAuth.getInstance().getConfig();
 
-        final int minLength = config.getInt("security.password-min-length", 4);
-        final int maxLength = config.getInt("security.password-max-length", 32);
-        final List<String> weakPasswords = config.getStringList("security.password-blacklist");
+        int minLength = config.getInt("security.password-min-length", 4);
+        int maxLength = config.getInt("security.password-max-length", 32);
+        List<String> weakPasswords = config.getStringList("security.password-blacklist");
 
         if (password == null || password.length() < minLength || password.length() > maxLength) {
             return "password-length";

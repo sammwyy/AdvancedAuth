@@ -14,7 +14,7 @@ import dev._2lstudios.advancedauth.commands.admin.UnregisterSubCommand;
     permission = "advancedauth.admin"
 )
 public class AdvancedAuthCommand extends CommandListener {
-    public AdvancedAuthCommand(final AdvancedAuth plugin) {
+    public AdvancedAuthCommand(AdvancedAuth plugin) {
         this.addSubcommand(new AccountsSubCommand());
         this.addSubcommand(new ChangePasswordSubCommand());
         this.addSubcommand(new ForceLoginSubCommand());
@@ -30,7 +30,7 @@ public class AdvancedAuthCommand extends CommandListener {
     }
 
     @Override
-    public void onExecute(final CommandContext ctx) {
+    public void onExecute(CommandContext ctx) {
         ctx.getExecutor().sendI18nMessage("admin.help");
     }
 }

@@ -17,10 +17,10 @@ import dev._2lstudios.advancedauth.security.PasswordValidation;
 )
 public class ChangePasswordCommand extends CommandListener {
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = ctx.getPlayer();
-        final String oldPassword = ctx.getArguments().getString(0);
-        final String newPassword = ctx.getArguments().getString(1);
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = ctx.getPlayer();
+        String oldPassword = ctx.getArguments().getString(0);
+        String newPassword = ctx.getArguments().getString(1);
 
         if (!player.comparePassword(oldPassword)) {
             player.sendI18nMessage("login.wrong-password");
@@ -28,7 +28,7 @@ public class ChangePasswordCommand extends CommandListener {
             return;
         }
 
-        final String passwordValidation = PasswordValidation.validatePassword(newPassword);
+        String passwordValidation = PasswordValidation.validatePassword(newPassword);
         if (passwordValidation == null) {
             player.setPassword(newPassword);
             player.sendI18nMessage("changepassword.successfully");

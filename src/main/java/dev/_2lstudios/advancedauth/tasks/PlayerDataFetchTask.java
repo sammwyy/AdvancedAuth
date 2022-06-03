@@ -6,7 +6,7 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 public class PlayerDataFetchTask implements Runnable {
     private AdvancedAuth plugin;
 
-    public PlayerDataFetchTask(final AdvancedAuth plugin) {
+    public PlayerDataFetchTask(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 

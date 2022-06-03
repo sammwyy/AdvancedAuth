@@ -12,7 +12,7 @@ public class EntityRegainHealthListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onEntityRegainHealthEvent(final EntityRegainHealthEvent e) {
+    public void onEntityRegainHealthEvent(EntityRegainHealthEvent e) {
         if (e.getEntity() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntity(), "deny-health-change")) {
                 e.setAmount(0);

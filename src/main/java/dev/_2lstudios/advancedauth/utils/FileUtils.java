@@ -19,26 +19,26 @@ public class FileUtils {
         return fileName;
     }
 
-    public static String getBaseName(final File file) {
+    public static String getBaseName(File file) {
         return getBaseName(file.getName());
     }
 
-    public static void extractFile(final File target, final String name, boolean overwrite) throws IOException {
+    public static void extractFile(File target, String name, boolean overwrite) throws IOException {
         if (target.exists() && !overwrite) {
             return;
         }
 
-        final InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(name);
+        InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(name);
         Files.copy(is, target.getAbsoluteFile().toPath());
         is.close();
     }
 
-    public static void extractFile(final File target, final String name) throws IOException {
+    public static void extractFile(File target, String name) throws IOException {
         extractFile(target, name, false);
     }
 
-    public static String readFile(final File file) {
-        final StringBuilder contentBuilder = new StringBuilder();
+    public static String readFile(File file) {
+        StringBuilder contentBuilder = new StringBuilder();
         try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
         } catch (IOException e) {

@@ -12,7 +12,7 @@ public class EntityShootBowListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onEntityShootBow(final EntityShootBowEvent e) {
+    public void onEntityShootBow(EntityShootBowEvent e) {
         if (e.getEntity() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntity(), "deny-interact")) {
                 e.setCancelled(true);

@@ -8,12 +8,12 @@ import dev._2lstudios.advancedauth.security.ciphers.SHA512Cipher;
 import dev._2lstudios.advancedauth.errors.NoSuchCipherException;
 
 public interface Cipher {
-    public String hash(final String raw);
+    public String hash(String raw);
 
-    public boolean compare(final String hash, final String raw);
+    public boolean compare(String hash, String raw);
 
-    public static Cipher getCipher(final String input) throws NoSuchCipherException {
-        final String name = input.replace(" ", "").replace("-", "").toLowerCase();
+    public static Cipher getCipher(String input) throws NoSuchCipherException {
+        String name = input.replace(" ", "").replace("-", "").toLowerCase();
 
         switch (name) {
         case "bcrypt":

@@ -11,8 +11,8 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 )
 public class AutoLoginCommand extends CommandListener {
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = ctx.getPlayer();
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = ctx.getPlayer();
     
         boolean result =  !player.getData().enabledSession;
         player.getData().enabledSession = result;

@@ -12,7 +12,7 @@ public class VehicleExitListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onVehicleExit(final VehicleExitEvent e) {
+    public void onVehicleExit(VehicleExitEvent e) {
         if (e.getExited() instanceof Player) {
             if (!this.isAllowed((Player) e.getExited(), "deny-vehicles")) {
                 e.setCancelled(true);

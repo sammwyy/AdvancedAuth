@@ -5,10 +5,10 @@ import redis.clients.jedis.Jedis;
 
 public class RedisEngine implements CacheEngine {
 
-    private final Jedis client;
-    private final int expiration;
+    private Jedis client;
+    private int expiration;
 
-    public RedisEngine(final String host, final int port, final String password, final int expiration) {
+    public RedisEngine(String host, int port, String password, int expiration) {
         this.client = new Jedis(host, port);
         this.expiration = expiration;
 
@@ -20,13 +20,13 @@ public class RedisEngine implements CacheEngine {
     }
 
     @Override
-    public void delete(final String key) {
+    public void delete(String key) {
         this.client.del(key);
     }
 
     @Override
-    public String get(final String key) {
-        final String value = this.client.get(key);
+    public String get(String key) {
+        String value = this.client.get(key);
         if (value != null) {
             this.client.expire(key, this.expiration);
         }
@@ -34,7 +34,7 @@ public class RedisEngine implements CacheEngine {
     }
 
     @Override
-    public void set(final String key, final String value) {
+    public void set(String key, String value) {
         this.client.setex(key, this.expiration, value);
     }
 

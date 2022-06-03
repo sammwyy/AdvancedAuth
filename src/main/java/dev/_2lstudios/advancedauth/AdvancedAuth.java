@@ -148,7 +148,7 @@ public class AdvancedAuth extends JavaPlugin {
 
         try {
             this.cache = CacheEngine.getEngine(driver, expiration, host, port, password);
-        } catch (final NoSuchCacheEngineException e) {
+        } catch (NoSuchCacheEngineException e) {
             e.printStackTrace();
             this.shutdownServer();
             return;
@@ -157,7 +157,7 @@ public class AdvancedAuth extends JavaPlugin {
         // Setup cipher.
         try {
             this.cipher = Cipher.getCipher(this.getConfig().getString("security.cipher", "bcrypt"));
-        } catch (final NoSuchCipherException e) {
+        } catch (NoSuchCipherException e) {
             e.printStackTrace();
             this.shutdownServer();
             return;
@@ -175,7 +175,7 @@ public class AdvancedAuth extends JavaPlugin {
         this.faillock = new Faillock(this);
 
         // Register tasks
-        final long interval = this.getConfig().getInt("authentication.message-interval", 2) * 20L;
+        long interval = this.getConfig().getInt("authentication.message-interval", 2) * 20L;
 
         this.getServer().getScheduler().runTaskTimer(this, new PlayerAuthNotifyTask(this), interval, interval);
         this.getServer().getScheduler().runTaskTimerAsynchronously(this, new PlayerDataFetchTask(this), 20L, 20L);
@@ -202,10 +202,10 @@ public class AdvancedAuth extends JavaPlugin {
         this.addCommand(new AdvancedAuthCommand(this));
 
         // Print welcome message if plugin starts correctly
-        final String cipherAlgorithm = this.getConfig().getString("security.cipher");
-        final String cacheDriver = this.getConfig().getString("storage.cache.driver");
-        final String storageDriver =  this.getConfig().getString("storage.database.uri").split("://")[0];
-        final String pluginVersion = this.getDescription().getVersion();
+        String cipherAlgorithm = this.getConfig().getString("security.cipher");
+        String cacheDriver = this.getConfig().getString("storage.cache.driver");
+        String storageDriver =  this.getConfig().getString("storage.database.uri").split("://")[0];
+        String pluginVersion = this.getDescription().getVersion();
 
         this.getServer().getConsoleSender().sendMessage("§8============================================");
         this.getServer().getConsoleSender().sendMessage("              §6§lAdvanced§e§lAuth§r");

@@ -5,15 +5,15 @@ import dev._2lstudios.advancedauth.cache.engines.RedisEngine;
 import dev._2lstudios.advancedauth.errors.NoSuchCacheEngineException;
 
 public interface CacheEngine {
-    public void delete(final String key);
+    public void delete(String key);
 
-    public String get(final String key);
+    public String get(String key);
 
-    public void set(final String key, final String value);
+    public void set(String key, String value);
 
-    public static CacheEngine getEngine(final String driver, final int expiration, final String host, final int port,
-            final String password) throws NoSuchCacheEngineException {
-        final String name = driver.replace(" ", "").replace("-", "").toLowerCase();
+    public static CacheEngine getEngine(String driver, int expiration, String host, int port,
+            String password) throws NoSuchCacheEngineException {
+        String name = driver.replace(" ", "").replace("-", "").toLowerCase();
 
         switch (name) {
         case "redis":

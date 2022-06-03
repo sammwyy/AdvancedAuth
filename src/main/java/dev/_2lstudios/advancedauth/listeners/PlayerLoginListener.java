@@ -7,14 +7,14 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class PlayerLoginListener implements Listener {
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
     
-    public PlayerLoginListener(final AdvancedAuth plugin) {
+    public PlayerLoginListener(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerLogin (final PlayerLoginEvent e) {
+    public void onPlayerLogin (PlayerLoginEvent e) {
         // Country blocker.
         if (!this.plugin.getCountryCheck().canJoinAddress(e.getAddress().toString())) {
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Your country has been blocked");

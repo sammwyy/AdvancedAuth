@@ -11,7 +11,7 @@ public class PlayerMoveListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onPlayerMove(final PlayerMoveEvent e) {
+    public void onPlayerMove(PlayerMoveEvent e) {
         if (!this.isAllowed(e.getPlayer(), "deny-move")) {
             if (e.getFrom().distance(e.getTo()) > 0) {
                 e.setTo(e.getFrom());

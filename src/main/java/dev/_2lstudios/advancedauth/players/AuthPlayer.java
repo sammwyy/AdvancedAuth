@@ -82,7 +82,7 @@ public class AuthPlayer extends CommandExecutor {
         this.timer++;
     }
 
-    public boolean comparePassword(final String candidate) {
+    public boolean comparePassword(String candidate) {
         if (!this.isRegistered()) {
             return false;
         }
@@ -101,7 +101,7 @@ public class AuthPlayer extends CommandExecutor {
             return false;
         }
 
-        final String sessionAddr = this.getPlugin().getCache().get("auth_session_" + this.data.getID());
+        String sessionAddr = this.getPlugin().getCache().get("auth_session_" + this.data.getID());
         if (sessionAddr == null) {
             return false;
         } else {
@@ -116,7 +116,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public void fetchUserData() {
-        final Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
+        Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
 
         // Find user data
         FindFilter filter = new FindFilter("username", this.getLowerName()).or().isEquals("uuid",  this.getUUIDAsStr());
@@ -166,7 +166,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public List<AuthPlayerData> getAlts() {
-        final Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
+        Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
         return repo.findMany(new FindFilter("lastLoginIP", this.getAddress()));
     }
 
@@ -190,7 +190,7 @@ public class AuthPlayer extends CommandExecutor {
         return this.state == AuthState.GUEST;
     }
 
-    public void login(final LoginReason reason) {
+    public void login(LoginReason reason) {
         if (this.isRegistered()) {
             this.state = AuthState.LOGGED;
             this.data.displayName = this.getName();
@@ -279,7 +279,7 @@ public class AuthPlayer extends CommandExecutor {
         }
     }
 
-    public boolean register(final String password) {
+    public boolean register(String password) {
         if (this.isRegistered()) {
             return false;
         }
@@ -303,7 +303,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     @Override
-    public void sendMessage(final String message) {
+    public void sendMessage(String message) {
         String prefix = this.getPlugin().getConfig().getString("settings.prefix");
         super.sendMessage(PlaceholderUtils.format(prefix + message, this));
     }
@@ -318,12 +318,12 @@ public class AuthPlayer extends CommandExecutor {
         out.close();
     }
 
-    public void setEmail(final String email) {
+    public void setEmail(String email) {
         this.data.email = email;
         this.data.save();
     }
 
-    public void setPassword(final String password) {
+    public void setPassword(String password) {
         this.data.password = this.getPlugin().getCipher().hash(password);
         this.data.save();
     }
@@ -344,7 +344,7 @@ public class AuthPlayer extends CommandExecutor {
             this.showOther(op);
         }
     }
-    public void showOther(final Player player) {
+    public void showOther(Player player) {
         player.showPlayer(this.getPlugin(), this.getBukkitPlayer());
     }
 
@@ -356,7 +356,7 @@ public class AuthPlayer extends CommandExecutor {
         }
     }
 
-    public void hideOther(final Player player) {
+    public void hideOther(Player player) {
         player.hidePlayer(this.getPlugin(), this.getBukkitPlayer());
     }
 

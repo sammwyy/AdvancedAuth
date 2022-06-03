@@ -29,7 +29,7 @@ public class Configuration extends YamlConfiguration {
         this.failover = failover;
     }
 
-    public Configuration(final File file) {
+    public Configuration(File file) {
         this.file = file;
     }
 
@@ -150,7 +150,7 @@ public class Configuration extends YamlConfiguration {
         return BukkitUtils.getMaterial(name);
     }
 
-    public Sound getSound(final String key) {
+    public Sound getSound(String key) {
         this.setIfNotExist(key);
 
         String name = this.getString(key);
@@ -163,7 +163,7 @@ public class Configuration extends YamlConfiguration {
     }
 
     /* Custom object set */
-    public void setLocation(String key, final Location location, final boolean includeWorld) {
+    public void setLocation(String key, Location location, boolean includeWorld) {
         if (!key.isEmpty()) {
             key += ".";
         }
@@ -183,7 +183,7 @@ public class Configuration extends YamlConfiguration {
         this.setLocation(key, location, true);
     }
 
-    public void setLocation(final Location location) {
+    public void setLocation(Location location) {
         this.setLocation("", location, true);
     }
 

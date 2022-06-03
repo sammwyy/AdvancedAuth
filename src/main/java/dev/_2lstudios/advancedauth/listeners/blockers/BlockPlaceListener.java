@@ -11,7 +11,7 @@ public class BlockPlaceListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onBlockPlace(final BlockPlaceEvent e) {
+    public void onBlockPlace(BlockPlaceEvent e) {
         if (!this.isAllowed(e.getPlayer(), "deny-block-break-place")) {
             e.setCancelled(true);
         }

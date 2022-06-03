@@ -9,11 +9,11 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 public class BlockerListener implements Listener {
     private AdvancedAuth plugin;
 
-    public BlockerListener(final AdvancedAuth plugin) {
+    public BlockerListener(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
-    public boolean isAllowed(final AuthPlayer player, final String action) {
+    public boolean isAllowed(AuthPlayer player, String action) {
         if (!player.getBukkitPlayer().isOnline()) {
             return true;
         }
@@ -35,8 +35,8 @@ public class BlockerListener implements Listener {
         }
     }
 
-    public boolean isAllowed(final Player player, final String action) {
-        final AuthPlayer authPlayer = this.plugin.getPlayerManager().getPlayer(player);
+    public boolean isAllowed(Player player, String action) {
+        AuthPlayer authPlayer = this.plugin.getPlayerManager().getPlayer(player);
 
         if (authPlayer == null && player.isOnline()) {
             return false;

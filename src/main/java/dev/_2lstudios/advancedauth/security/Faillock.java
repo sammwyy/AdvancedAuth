@@ -3,13 +3,13 @@ package dev._2lstudios.advancedauth.security;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class Faillock {
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
     
-    public Faillock(final AdvancedAuth plugin) {
+    public Faillock(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
-    public int getTries(final String address) {
+    public int getTries(String address) {
         if (!this.plugin.getConfig().getBoolean("security.fail-lock.enabled")) {
             return 0;
         }
@@ -24,7 +24,7 @@ public class Faillock {
         return tries;
     }
 
-    public void handleFail(final String address) {
+    public void handleFail(String address) {
         if (!this.plugin.getConfig().getBoolean("security.fail-lock.enabled")) {
             return;
         }
@@ -34,7 +34,7 @@ public class Faillock {
         this.plugin.getCache().set("faillock_try_" + address, "" + tries);
     }
 
-    public boolean isAddressLocked(final String address) {
+    public boolean isAddressLocked(String address) {
         if (!this.plugin.getConfig().getBoolean("security.fail-lock.enabled")) {
             return false;
         }

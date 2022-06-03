@@ -17,16 +17,16 @@ import dev._2lstudios.advancedauth.players.LoginReason;
     silent = true
 )
 public class LoginCommand extends CommandListener {
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
 
-    public LoginCommand(final AdvancedAuth plugin) {
+    public LoginCommand(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = ctx.getPlayer();
-        final String password = ctx.getArguments().getString(0);
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = ctx.getPlayer();
+        String password = ctx.getArguments().getString(0);
         
         if (!player.isRegistered()) {
             player.sendI18nMessage("register.not-registered");

@@ -14,7 +14,7 @@ public class MigrateSubCommand extends CommandListener {
 
     private MigrationManager migrationManager;
 
-    public MigrateSubCommand (final AdvancedAuth plugin) {
+    public MigrateSubCommand (AdvancedAuth plugin) {
         this.migrationManager = plugin.getMigrationManager();    
     }
 
@@ -24,7 +24,7 @@ public class MigrateSubCommand extends CommandListener {
             ctx.getExecutor().sendMessage("&eStarting migration...");
             int users = migrationManager.startMigration();
             ctx.getExecutor().sendMessage("&aMigration completed (&b" + users + " &ausers migrated)");
-        } catch (final Exception e) {
+        } catch (Exception e) {
             ctx.getExecutor().sendMessage("&cError migrating: " + e.getMessage());
         }
     }

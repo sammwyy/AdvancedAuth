@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 public class CommonCipher implements Cipher {
     private MessageDigest messageDigest;
 
-    public CommonCipher(final String algorithm) {
+    public CommonCipher(String algorithm) {
         try {
             this.messageDigest = MessageDigest.getInstance(algorithm);
         } catch (NoSuchAlgorithmException e) {
@@ -16,9 +16,9 @@ public class CommonCipher implements Cipher {
     }
 
     @Override
-    public String hash(final String raw) {
-        final byte[] digest = this.messageDigest.digest(raw.getBytes());
-        final BigInteger no = new BigInteger(1, digest);
+    public String hash(String raw) {
+        byte[] digest = this.messageDigest.digest(raw.getBytes());
+        BigInteger no = new BigInteger(1, digest);
 
         String hash = no.toString(16);
         while (hash.length() < 32) {
@@ -28,7 +28,7 @@ public class CommonCipher implements Cipher {
     }
 
     @Override
-    public boolean compare(final String hash, final String raw) {
+    public boolean compare(String hash, String raw) {
         return hash.equals(this.hash(raw));
     }
 }

@@ -13,15 +13,15 @@ public class GeoIPService {
 
     static LookupService service;
 
-    public static void downloadFile(final File file) throws Exception {
+    public static void downloadFile(File file) throws Exception {
         URL url = new URL(FILE_URL);
         try (InputStream in = url.openStream()) {
             Files.copy(in, file.toPath());
         }
     }
     
-    public static void start(final File workingDirectory) throws Exception {
-        final File dbFile = new File(workingDirectory, FILE_NAME);
+    public static void start(File workingDirectory) throws Exception {
+        File dbFile = new File(workingDirectory, FILE_NAME);
 
         if (!dbFile.exists()) {
             downloadFile(dbFile);
@@ -30,7 +30,7 @@ public class GeoIPService {
         GeoIPService.service = new LookupService(dbFile.getAbsolutePath(), LookupService.GEOIP_MEMORY_CACHE | LookupService.GEOIP_CHECK_CACHE); 
     }
 
-    public static String getCountryCode(final String ip) {
+    public static String getCountryCode(String ip) {
         String code = GeoIPService.service.getCountry(ip).getCode();
         if (code == null) {
             code = "unknown";
@@ -40,7 +40,7 @@ public class GeoIPService {
         return code;
     }
 
-    public static String getCountry(final String ip) {
+    public static String getCountry(String ip) {
         String name = GeoIPService.service.getCountry(ip).getName();
         if (name == null) {
             name = "unknown";

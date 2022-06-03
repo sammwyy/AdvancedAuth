@@ -12,7 +12,7 @@ public class FoodLevelChangeListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onFoodLevelChange(final FoodLevelChangeEvent e) {
+    public void onFoodLevelChange(FoodLevelChangeEvent e) {
         if (e.getEntity() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntity(), "deny-food-level-change")) {
                 e.setCancelled(true);

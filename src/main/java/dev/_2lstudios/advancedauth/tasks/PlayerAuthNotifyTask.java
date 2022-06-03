@@ -7,16 +7,16 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 
 public class PlayerAuthNotifyTask implements Runnable {
 
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
 
-    public PlayerAuthNotifyTask(final AdvancedAuth plugin) {
+    public PlayerAuthNotifyTask(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public void run() {
-        for (final Player player : this.plugin.getServer().getOnlinePlayers()) {
-            final AuthPlayer authPlayer = this.plugin.getPlayerManager().getPlayer(player);
+        for (Player player : this.plugin.getServer().getOnlinePlayers()) {
+            AuthPlayer authPlayer = this.plugin.getPlayerManager().getPlayer(player);
 
             if (authPlayer != null && authPlayer.isFetched()) {
                 if (authPlayer.isGuest()) {

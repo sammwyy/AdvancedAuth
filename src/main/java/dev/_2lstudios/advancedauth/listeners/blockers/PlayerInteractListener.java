@@ -11,7 +11,7 @@ public class PlayerInteractListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onPlayerInteract(final PlayerInteractEvent e) {
+    public void onPlayerInteract(PlayerInteractEvent e) {
         if (!this.isAllowed(e.getPlayer(), "deny-interact")) {
             e.setCancelled(true);
         }

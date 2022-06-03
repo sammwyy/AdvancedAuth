@@ -5,8 +5,8 @@ import org.bukkit.plugin.PluginManager;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class BlockerListenerHandler {
-    public static void register(final AdvancedAuth plugin) {
-        final PluginManager pm = plugin.getServer().getPluginManager();
+    public static void register(AdvancedAuth plugin) {
+        PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new AsyncPlayerChatListener(plugin), plugin);
         pm.registerEvents(new BlockBreakListener(plugin), plugin);
         pm.registerEvents(new BlockPlaceListener(plugin), plugin);

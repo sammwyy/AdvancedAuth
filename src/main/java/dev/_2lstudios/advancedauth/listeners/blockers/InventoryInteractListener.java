@@ -12,7 +12,7 @@ public class InventoryInteractListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onInventoryInteract(final InventoryInteractEvent e) {
+    public void onInventoryInteract(InventoryInteractEvent e) {
         if (e.getWhoClicked() instanceof Player) {
             if (!this.isAllowed((Player) e.getWhoClicked(), "deny-inventory")) {
                 e.setCancelled(true);

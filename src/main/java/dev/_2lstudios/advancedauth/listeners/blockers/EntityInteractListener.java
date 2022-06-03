@@ -12,7 +12,7 @@ public class EntityInteractListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onEntityInteract(final EntityInteractEvent e) {
+    public void onEntityInteract(EntityInteractEvent e) {
         if (e.getEntity() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntity(), "deny-interact")) {
                 e.setCancelled(true);

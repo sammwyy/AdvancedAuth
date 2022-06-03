@@ -12,7 +12,7 @@ public class CountryCheck {
     private String mode;
     private List<String> list;
 
-    public CountryCheck (final AdvancedAuth plugin) {
+    public CountryCheck (AdvancedAuth plugin) {
         Configuration config = plugin.getConfig();
 
         this.enabled = config.getBoolean("security.country-check.enabled", false);
@@ -20,13 +20,13 @@ public class CountryCheck {
         this.list = config.getStringList("security.country-check.list");
     }
 
-    public boolean canJoinAddress (final String address) {
+    public boolean canJoinAddress (String address) {
         if (!this.enabled) {
             return true;
         }
 
-        final String country = GeoIPService.getCountryCode(address);
-        final boolean isInList = this.list.contains(country);
+        String country = GeoIPService.getCountryCode(address);
+        boolean isInList = this.list.contains(country);
 
         if (this.mode.equalsIgnoreCase("blacklist") && isInList) {
             return false;
@@ -37,7 +37,7 @@ public class CountryCheck {
         }
     }
 
-    public boolean canJoinAddress(final InetSocketAddress address) {
+    public boolean canJoinAddress(InetSocketAddress address) {
         return this.canJoinAddress(address.toString());
     }
 }

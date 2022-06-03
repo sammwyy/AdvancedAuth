@@ -12,7 +12,7 @@ public class ArrayUtils {
     return newArr;
   }
 
-  public static String randomItem(final List<String> list) {
+  public static String randomItem(List<String> list) {
     Random rand = new Random();
     return list.get(rand.nextInt(list.size()));
   }

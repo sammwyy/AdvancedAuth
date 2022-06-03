@@ -12,7 +12,7 @@ public class InventoryCreativeListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onInventoryCreative(final InventoryCreativeEvent e) {
+    public void onInventoryCreative(InventoryCreativeEvent e) {
         if (e.getWhoClicked() instanceof Player) {
             if (!this.isAllowed((Player) e.getWhoClicked(), "deny-inventory")) {
                 e.setCancelled(true);

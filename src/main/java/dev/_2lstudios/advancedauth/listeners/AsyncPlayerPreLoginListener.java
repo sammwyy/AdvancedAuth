@@ -8,14 +8,14 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import dev._2lstudios.advancedauth.AdvancedAuth;
 
 public class AsyncPlayerPreLoginListener implements Listener {
-    private final AdvancedAuth plugin;
+    private AdvancedAuth plugin;
     
-    public AsyncPlayerPreLoginListener(final AdvancedAuth plugin) {
+    public AsyncPlayerPreLoginListener(AdvancedAuth plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onAsyncPlayerPreLogin (final AsyncPlayerPreLoginEvent e) {
+    public void onAsyncPlayerPreLogin (AsyncPlayerPreLoginEvent e) {
         if (this.plugin.getConfig().getBoolean("settings.prevent-logged-from-another-location")) {
             for (Player player : this.plugin.getServer().getOnlinePlayers()) {
                 if (player.getName().equalsIgnoreCase(e.getName())) {

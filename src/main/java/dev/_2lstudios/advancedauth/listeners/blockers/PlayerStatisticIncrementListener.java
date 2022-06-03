@@ -12,7 +12,7 @@ public class PlayerStatisticIncrementListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onPlayerStatisticIncrement(final PlayerStatisticIncrementEvent e) {
+    public void onPlayerStatisticIncrement(PlayerStatisticIncrementEvent e) {
         if (!this.isAllowed((Player) e.getPlayer(), "deny-statistic-increment")) {
             e.setCancelled(true);
         }

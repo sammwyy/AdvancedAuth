@@ -17,11 +17,11 @@ public class PlayerCommandPreprocessListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onPlayerCommandPreprocess(final PlayerCommandPreprocessEvent e) {
-        final AuthPlayer player = plugin.getPlayerManager().getPlayer(e.getPlayer());
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
+        AuthPlayer player = plugin.getPlayerManager().getPlayer(e.getPlayer());
 
-        final String command = e.getMessage().split(" ")[0];
-        final List<String> allowedCommands = this.plugin.getConfig().getStringList("security.allowed-commands");
+        String command = e.getMessage().split(" ")[0];
+        List<String> allowedCommands = this.plugin.getConfig().getStringList("security.allowed-commands");
 
         if (!allowedCommands.contains(command) && !isAllowed(player, "deny-commands")) {
             player.sendI18nMessage("login.not-logged");

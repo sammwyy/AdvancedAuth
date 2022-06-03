@@ -17,9 +17,9 @@ import dev._2lstudios.advancedauth.security.EmailValidation;
 )
 public class AddEmailCommand extends CommandListener {
     @Override
-    public void onExecuteByPlayer(final CommandContext ctx) {
-        final AuthPlayer player = (AuthPlayer) ctx.getPlayer();
-        final String email = ctx.getArguments().getString(0);
+    public void onExecuteByPlayer(CommandContext ctx) {
+        AuthPlayer player = (AuthPlayer) ctx.getPlayer();
+        String email = ctx.getArguments().getString(0);
 
         if (!EmailValidation.isValidEmailFormat(email)) {
             player.sendI18nMessage("addemail.bad-format");

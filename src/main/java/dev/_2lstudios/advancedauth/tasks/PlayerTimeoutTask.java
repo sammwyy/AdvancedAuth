@@ -5,10 +5,10 @@ import dev._2lstudios.advancedauth.players.AuthPlayer;
 
 public class PlayerTimeoutTask implements Runnable {
 
-    private final AdvancedAuth plugin;
-    private final long timeout;
+    private AdvancedAuth plugin;
+    private long timeout;
 
-    public PlayerTimeoutTask(final AdvancedAuth plugin) {
+    public PlayerTimeoutTask(AdvancedAuth plugin) {
         this.plugin = plugin;
         this.timeout = this.plugin.getConfig().getInt("authentication.timeout", 30);
     }

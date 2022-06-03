@@ -12,7 +12,7 @@ public class EntityDamageByEntityListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(final EntityDamageByEntityEvent e) {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
         if ((e.getDamager() instanceof Player)) {
             if (!this.isAllowed((Player) e.getDamager(), "deny-damage")) {
                 e.setDamage(0);

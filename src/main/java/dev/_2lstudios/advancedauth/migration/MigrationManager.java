@@ -20,21 +20,21 @@ public class MigrationManager {
     private Map<String, IMigration> migrations;
     private AdvancedAuth plugin;
 
-    public MigrationManager(final AdvancedAuth plugin) {
+    public MigrationManager(AdvancedAuth plugin) {
         this.migrations = new HashMap<>();
         this.plugin = plugin;
 
         this.addMigrator(new AuthMeMigration());
     }
 
-    public void addMigrator(final IMigration migration) {
+    public void addMigrator(IMigration migration) {
         this.migrations.put(migration.getPlugin().toLowerCase(), migration);
     }
 
     public int startMigration() throws Exception {
         // Prepare stuff.
-        final Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
-        final Configuration config = this.plugin.getMigrationConfig();
+        Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
+        Configuration config = this.plugin.getMigrationConfig();
 
         // Connect to backend.
         Connection connection = null;
@@ -60,8 +60,8 @@ public class MigrationManager {
         }
 
         // Get migration for specified plugin.
-        final String pluginName = config.getString("plugin");
-        final IMigration migration = this.migrations.get(pluginName);
+        String pluginName = config.getString("plugin");
+        IMigration migration = this.migrations.get(pluginName);
         if (migration == null) {
             throw new Exception("Unknown plugin " + pluginName);
         }

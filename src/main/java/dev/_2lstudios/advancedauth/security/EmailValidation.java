@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class EmailValidation {
     private static Pattern emailPattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
 
-    public static boolean isValidEmailFormat(final String email) {
-        final Matcher mat = emailPattern.matcher(email);
+    public static boolean isValidEmailFormat(String email) {
+        Matcher mat = emailPattern.matcher(email);
         return mat.matches();
     }
 }

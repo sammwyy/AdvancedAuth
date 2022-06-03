@@ -8,11 +8,11 @@ import dev._2lstudios.advancedauth.config.Configuration;
 import dev._2lstudios.advancedauth.players.AuthPlayer;
 
 public class PlaceholderUtils {
-    private final static Pattern pattern = Pattern.compile("\\{([^}]+)\\}");
+    private static Pattern pattern = Pattern.compile("\\{([^}]+)\\}");
 
-    public static String getPlaceholderValue(final String placeholder, final AuthPlayer player) {
-        final AdvancedAuth plugin = player.getPlugin();
-        final Configuration config = plugin.getConfig();
+    public static String getPlaceholderValue(String placeholder, AuthPlayer player) {
+        AdvancedAuth plugin = player.getPlugin();
+        Configuration config = plugin.getConfig();
 
         switch (placeholder) {
         case "player_name":
@@ -34,14 +34,14 @@ public class PlaceholderUtils {
         }
     }
 
-    public static String format(String message, final AuthPlayer player) {
-        final Matcher matcher = pattern.matcher(message);
+    public static String format(String message, AuthPlayer player) {
+        Matcher matcher = pattern.matcher(message);
         String result = message;
 
         while (matcher.find()) {
-            final String placeholder = matcher.group();
-            final String placeholderKey = matcher.group(1);
-            final String placeholderValue = getPlaceholderValue(placeholderKey, player);
+            String placeholder = matcher.group();
+            String placeholderKey = matcher.group(1);
+            String placeholderValue = getPlaceholderValue(placeholderKey, player);
 
             result = result.replaceFirst(Pattern.quote(placeholder), placeholderValue);
         }

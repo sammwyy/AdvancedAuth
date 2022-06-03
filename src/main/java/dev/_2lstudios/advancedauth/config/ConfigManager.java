@@ -13,15 +13,15 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigManager {
-    private final Map<String, Configuration> configs;
-    private final Plugin plugin;
+    private Map<String, Configuration> configs;
+    private Plugin plugin;
 
-    public ConfigManager(final Plugin plugin) {
+    public ConfigManager(Plugin plugin) {
         this.configs = new HashMap<>();
         this.plugin = plugin;
     }
 
-    public Configuration loadFailover(final String name) {
+    public Configuration loadFailover(String name) {
         try {
             InputStream failoverStream = this.plugin.getResource(name);
 
@@ -51,7 +51,7 @@ public class ConfigManager {
         return null;
     }
 
-    public Configuration getConfig(final String name) {
+    public Configuration getConfig(String name) {
         if (this.configs.containsKey(name)) {
             return configs.get(name);
         }

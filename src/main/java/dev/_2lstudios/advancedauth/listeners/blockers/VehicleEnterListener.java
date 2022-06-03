@@ -12,7 +12,7 @@ public class VehicleEnterListener extends BlockerListener {
     }
 
     @EventHandler
-    public void onVehicleEnter(final VehicleEnterEvent e) {
+    public void onVehicleEnter(VehicleEnterEvent e) {
         if (e.getEntered() instanceof Player) {
             if (!this.isAllowed((Player) e.getEntered(), "deny-vehicles")) {
                 e.setCancelled(true);

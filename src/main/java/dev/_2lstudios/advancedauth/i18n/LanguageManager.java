@@ -15,10 +15,10 @@ import dev._2lstudios.advancedauth.utils.FileUtils;
 
 public class LanguageManager {
     private Map<String, Configuration> languages;
-    private final String defaultLanguage;
-    private final File directory;
+    private String defaultLanguage;
+    private File directory;
 
-    public LanguageManager(final String defaultLanguage, final File directory) {
+    public LanguageManager(String defaultLanguage, File directory) {
         this.languages = new HashMap<>();
         this.defaultLanguage = defaultLanguage;
         this.directory = directory;
@@ -26,18 +26,18 @@ public class LanguageManager {
         LanguageExtractor.extractAll(directory);
     }
 
-    public LanguageManager(final AdvancedAuth plugin) {
+    public LanguageManager(AdvancedAuth plugin) {
         this(
             plugin.getConfig().getString("settings.default-lang"), 
             new File(plugin.getDataFolder(), "lang")
         );
     }
 
-    public void loadLanguage(final File file) throws IOException, InvalidConfigurationException {
-        final Configuration lang = new Configuration(file);
+    public void loadLanguage(File file) throws IOException, InvalidConfigurationException {
+        Configuration lang = new Configuration(file);
         lang.load();
 
-        final String name = FileUtils.getBaseName(file).toLowerCase();
+        String name = FileUtils.getBaseName(file).toLowerCase();
         this.languages.put(name, lang);
     }
 
@@ -60,7 +60,7 @@ public class LanguageManager {
             directory.mkdirs();
         }
 
-        for (final File file : directory.listFiles()) {
+        for (File file : directory.listFiles()) {
             if (file.getName().endsWith(".yml")) {
                 try {
                     this.loadLanguage(file);
