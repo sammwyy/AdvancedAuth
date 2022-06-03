@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.dotphin.milkshake.Milkshake;
 import com.dotphin.milkshake.Repository;
 import com.dotphin.milkshake.find.FindFilter;
 
@@ -47,7 +46,7 @@ public class AuthPlayer extends CommandExecutor {
             lang = PlayerUtils.getPlayerLocaleInLegacyWay(this.bukkitPlayer);
         }
 
-        return lang == null ? super.getLang() : lang;
+        return lang;
     }
 
     public String getName() {
@@ -116,7 +115,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public void fetchUserData() {
-        Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
+        Repository<AuthPlayerData> repo = this.getPlugin().getPlayerDataRepository();
 
         // Find user data
         FindFilter filter = new FindFilter("username", this.getLowerName()).or().isEquals("uuid",  this.getUUIDAsStr());
@@ -154,9 +153,7 @@ public class AuthPlayer extends CommandExecutor {
         }
 
         // Check for session
-        boolean resumeSession = this.getPlugin().getConfig().getBoolean("authentication.resume-session");
-
-        if (resumeSession && this.hasActiveSession()) {
+        if (this.hasActiveSession()) {
             this.login(LoginReason.SESSION_RESUME);
         }
     }
@@ -166,7 +163,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public List<AuthPlayerData> getAlts() {
-        return this.getPlugin().getAuthService().getAltsForAddress(this.data.lastLoginIP);
+        return this.getPlugin().getAuthService().getAltsForAddress(this.getAddress());
     }
 
     public boolean isLogged() {
@@ -262,8 +259,10 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public void updateEffects() {
-        this.updateHideOrShowPlayer();
-        this.updateAllowOrDenyMovement();
+        this.getPlugin().getServer().getScheduler().runTask(this.getPlugin(), () -> {
+            this.updateHideOrShowPlayer();
+            this.updateAllowOrDenyMovement();
+        });
     }
 
     public void logout() {
@@ -292,7 +291,7 @@ public class AuthPlayer extends CommandExecutor {
         this.data.lastLoginDate = System.currentTimeMillis();
         this.data.registrationIP = this.getAddress();
         this.data.registrationDate = System.currentTimeMillis();
-        this.data.enabledSession = this.getPlugin().getConfig().getBoolean("authentication.resume-session-by-default", false);
+        this.data.enabledSession = this.getPlugin().getConfig().getBoolean("authentication.resume-session-by-default");
 
         this.data.save();
         this.timer = 0;
@@ -343,8 +342,10 @@ public class AuthPlayer extends CommandExecutor {
             this.showOther(op);
         }
     }
+
+    @SuppressWarnings("deprecation")
     public void showOther(Player player) {
-        player.showPlayer(this.getPlugin(), this.getBukkitPlayer());
+        player.showPlayer(this.getBukkitPlayer());
     }
 
     public void hide() {
@@ -355,8 +356,9 @@ public class AuthPlayer extends CommandExecutor {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void hideOther(Player player) {
-        player.hidePlayer(this.getPlugin(), this.getBukkitPlayer());
+        player.hidePlayer(this.getBukkitPlayer());
     }
 
     public void kick(String message) {

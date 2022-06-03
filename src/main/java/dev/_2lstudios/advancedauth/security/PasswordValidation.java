@@ -6,8 +6,8 @@ import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.config.Configuration;
 
 public class PasswordValidation {
-    public static String validatePassword(String password) {
-        Configuration config = AdvancedAuth.getInstance().getConfig();
+    public static String validatePassword(AdvancedAuth plugin, String password) {
+        Configuration config = plugin.getConfig();
 
         int minLength = config.getInt("security.password-min-length", 4);
         int maxLength = config.getInt("security.password-max-length", 32);

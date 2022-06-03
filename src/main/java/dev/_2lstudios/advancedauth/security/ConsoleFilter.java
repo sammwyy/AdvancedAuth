@@ -7,12 +7,20 @@ import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
 import org.apache.logging.log4j.message.Message;
 
+import dev._2lstudios.advancedauth.AdvancedAuth;
+
 /**
  * Implements a filter for Log4j to skip sensitive commands.
  *
  * @author Xephi59
  */
 public class ConsoleFilter extends AbstractFilter {
+    private ConsoleFilterHelper helper;
+
+    public ConsoleFilter(AdvancedAuth plugin) {
+        this.helper = new ConsoleFilterHelper(plugin);
+    }
+
     /**
      * Validates a Message instance and returns the {@link Result} value
      * depending on whether the message contains sensitive data.
@@ -21,7 +29,7 @@ public class ConsoleFilter extends AbstractFilter {
      *
      * @return The Result value
      */
-    private static Result validateMessage(Message message) {
+    private Result validateMessage(Message message) {
         if (message == null) {
             return Result.NEUTRAL;
         }
@@ -36,8 +44,8 @@ public class ConsoleFilter extends AbstractFilter {
      *
      * @return The Result value
      */
-    private static Result validateMessage(String message) {
-        return ConsoleFilterHelper.hasSilentCommand(message)
+    private Result validateMessage(String message) {
+        return this.helper.hasSilentCommand(message)
             ? Result.DENY
             : Result.NEUTRAL;
     }

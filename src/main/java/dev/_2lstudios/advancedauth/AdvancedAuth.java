@@ -66,6 +66,7 @@ public class AdvancedAuth extends JavaPlugin {
     private Faillock faillock;
 
     private List<String> silentCommands;
+    private boolean shutdown = false;
 
     private void addCommand(CommandListener command) {
         command.register(this, false);
@@ -94,8 +95,11 @@ public class AdvancedAuth extends JavaPlugin {
     }
 
     public void shutdownServer() {
-        this.getLogger().severe("Stopping server to avoid security breaches");
-        this.getServer().shutdown();
+        if (!this.shutdown) {
+            this.shutdown = true;
+            this.getLogger().severe("Stopping server to avoid security breaches");
+            this.getServer().shutdown();
+        }
     }
     
     @Override
@@ -129,7 +133,7 @@ public class AdvancedAuth extends JavaPlugin {
 
         // Setup Console filter
         Logger logger = (Logger) LogManager.getRootLogger();
-        logger.addFilter(new ConsoleFilter());
+        logger.addFilter(new ConsoleFilter(this));
 
         // Setup database.
         String databaseUri = this.getConfig().getString("storage.database.uri");
@@ -227,6 +231,11 @@ public class AdvancedAuth extends JavaPlugin {
         this.getServer().getConsoleSender().sendMessage("§8============================================");
     }
 
+    @Override
+    public void onDisable() {
+        this.shutdownServer();
+    }
+
     // Configuration getters
     public Configuration getConfig() {
         return this.configManager.getConfig("config.yml");
@@ -284,12 +293,5 @@ public class AdvancedAuth extends JavaPlugin {
     public boolean hasPlugin(String pluginName) {
         Plugin plugin = this.getServer().getPluginManager().getPlugin(pluginName);
         return plugin != null && plugin.isEnabled();
-    }
-
-    /* Static instance */
-    private static AdvancedAuth instance;
-
-    public static AdvancedAuth getInstance() {
-        return instance;
     }
 }

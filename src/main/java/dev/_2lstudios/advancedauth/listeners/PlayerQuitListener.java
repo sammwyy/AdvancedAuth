@@ -16,6 +16,8 @@ public class PlayerQuitListener implements Listener {
     
     @EventHandler
     public void onPlayerQuit (PlayerQuitEvent e) {
+        this.plugin.getPlayerManager().removePlayer(e.getPlayer());
+        
         // Disable join message
         if (this.plugin.getConfig().getBoolean("settings.disable-join-quit-message")) {
             e.setQuitMessage(null);

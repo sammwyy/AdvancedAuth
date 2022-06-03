@@ -18,7 +18,7 @@ public class PlayerJoinListener implements Listener {
     
     @EventHandler
     public void onPlayerJoin (PlayerJoinEvent e) {
-        AuthPlayer player = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
+        AuthPlayer player = this.plugin.getPlayerManager().addPlayer(e.getPlayer());
 
         // Prevent movement
         player.updateEffects();

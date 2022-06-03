@@ -13,7 +13,7 @@ public class PlayerDataFetchTask implements Runnable {
     @Override
     public void run() {
         for (AuthPlayer player : this.plugin.getPlayerManager().getPlayers()) {
-            if (player.isFetched()) {
+            if (!player.isFetched()) {
                 if (player.getLang() != null) {
                     player.fetchUserData();
                 }

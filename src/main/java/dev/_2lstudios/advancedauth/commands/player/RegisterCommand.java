@@ -37,7 +37,7 @@ public class RegisterCommand extends CommandListener {
             return;
         }
 
-        String passwordValidation = PasswordValidation.validatePassword(password);
+        String passwordValidation = PasswordValidation.validatePassword(ctx.getPlugin(), password);
         if (passwordValidation == null) {
             player.register(password);
             player.sendI18nMessage("register.successfully");

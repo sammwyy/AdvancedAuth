@@ -12,6 +12,21 @@ commands:
   advancedauth:
     aliases: ["aa"]
     description: "Main plugin command"
+  addemail:
+    description: "Register an email to your account"
   autologin:
     aliases: ["session", "auto-login"]
     description: "Manage your auto-login session"
+  changepassword:
+    aliases: ["cpw"]
+    description: "Change the password of your account"
+  login:
+    aliases: ["l"]
+    description: "Login your self"
+  logout:
+    description: "Destroy your current session"
+  register:
+    aliases: ["reg"]
+    description: "Register your self"
+  unregister:
+    description: "Delete your current account"

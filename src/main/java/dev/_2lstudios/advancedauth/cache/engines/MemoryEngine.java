@@ -14,12 +14,14 @@ public class MemoryEngine implements CacheEngine {
     private LoadingCache<String, String> cache;
 
     public MemoryEngine(int expiration) {
-        this.cache = CacheBuilder.newBuilder().expireAfterWrite(expiration, TimeUnit.SECONDS)
-                .expireAfterAccess(expiration, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
-                    public String load(String key) throws Exception {
-                        return "";
-                    }
-                });
+        this.cache = CacheBuilder.newBuilder()
+            .expireAfterWrite(expiration, TimeUnit.SECONDS)
+            .expireAfterAccess(expiration, TimeUnit.SECONDS)
+            .build(new CacheLoader<String, String>() {
+                public String load(String key) throws Exception {
+                    return "";
+                }
+            });
     }
 
     @Override

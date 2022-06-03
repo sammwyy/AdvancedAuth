@@ -28,7 +28,7 @@ public class ChangePasswordCommand extends CommandListener {
             return;
         }
 
-        String passwordValidation = PasswordValidation.validatePassword(newPassword);
+        String passwordValidation = PasswordValidation.validatePassword(ctx.getPlugin(), newPassword);
         if (passwordValidation == null) {
             player.setPassword(newPassword);
             player.sendI18nMessage("changepassword.successfully");

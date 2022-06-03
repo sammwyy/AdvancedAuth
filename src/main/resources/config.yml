@@ -51,11 +51,15 @@ storage:
     #     driver://username:password@address/database
     #
     # Available drivers: MongoDB
+    # In order to use mongodb you need "milkshake-bukkit" plugin installed on your server.
+    # Download from here: https://ci.2lstudios.dev/job/milkshake-bukkit/
     uri: "mongodb://localhost/minecraft"
     collection: "Users"
   # The cache buffer will be used for fast access data, such as sessions and synchronization.
   cache:
     # Available drivers: memory, redis.
+    # In order to use redis you need "jedis-wrapper" plugin installed on your server.
+    # Download from here: https://ci.2lstudios.dev/job/Jedis-Wrapper/
     driver: "memory"
     expiration: 1440 # In minutes (1440 = 1 day)
     # The following values are only valid if no memory cache is used (memory selected)
