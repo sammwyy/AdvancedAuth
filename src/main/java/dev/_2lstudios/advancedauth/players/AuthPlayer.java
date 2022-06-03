@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 
 import com.dotphin.milkshake.Repository;
 import com.dotphin.milkshake.find.FindFilter;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.commands.CommandExecutor;
@@ -234,6 +236,12 @@ public class AuthPlayer extends CommandExecutor {
 
             this.sendI18nTitle("logged.title", "logged.subtitle");
             this.updateEffects();
+
+            if (this.getPlugin().getConfig().getBoolean("settings.bungee-hook")) {
+                ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                out.writeUTF("AdvancedAuth");
+                bukkitPlayer.sendPluginMessage(this.getPlugin(), "BungeeCord", out.toByteArray());
+            }
 
             if (this.getPlugin().getConfig().getBoolean("authentication.send-server-on-login.enabled")) {
                 List<String> servers = this.getPlugin().getConfig().getStringList("authentication.send-server-on-login.servers");

@@ -123,7 +123,10 @@ public class AdvancedAuth extends JavaPlugin {
         // Register channels.
         Messenger messenger = this.getServer().getMessenger();
 
-        if (this.getConfig().getBoolean("authentication.send-server-on-login.enabled")) {
+        boolean sendBungeeServer = this.getConfig().getBoolean("authentication.send-server-on-login.enabled"); 
+        boolean bungeeHook = this.getConfig().getBoolean("settings.bungee-hook");
+
+        if (sendBungeeServer || bungeeHook) {
             messenger.registerOutgoingPluginChannel(this, "BungeeCord");
         }
 
@@ -224,6 +227,7 @@ public class AdvancedAuth extends JavaPlugin {
 
         this.getServer().getConsoleSender().sendMessage("§8============================================");
         this.getServer().getConsoleSender().sendMessage("              §6§lAdvanced§e§lAuth§r");
+        this.getServer().getConsoleSender().sendMessage("§7- §eBungee Hook: " + (bungeeHook ? "§aYes" : "§cNo"));
         this.getServer().getConsoleSender().sendMessage("§7- §eCache Engine: §7" + cacheDriver);
         this.getServer().getConsoleSender().sendMessage("§7- §eCipher: §7" + cipherAlgorithm);
         this.getServer().getConsoleSender().sendMessage("§7- §eStorage: §7" + storageDriver);

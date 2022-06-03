@@ -4,6 +4,9 @@ settings:
   prefix: "&8[&6&lA&e&lA&8] &r"
   # Enable user action log messages.
   logging: true
+  # Prevent player from being moved from server if not logged in.
+  # Requires bungeecord mode true and plugin installed on proxy.
+  bungee-hook: false
   # Prevent malicious users from kicking other connected players.
   prevent-logged-from-another-location: true
   # Default language in case of not finding translation (it will also work for the console)
