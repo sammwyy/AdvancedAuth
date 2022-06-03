@@ -232,6 +232,9 @@ public class AuthPlayer extends CommandExecutor {
                 break;
             }
 
+            this.sendI18nTitle("logged.title", "logged.subtitle");
+            this.updateEffects();
+
             if (this.getPlugin().getConfig().getBoolean("authentication.send-server-on-login.enabled")) {
                 List<String> servers = this.getPlugin().getConfig().getStringList("authentication.send-server-on-login.servers");
                 String server =  ArrayUtils.randomItem(servers);
@@ -242,8 +245,6 @@ public class AuthPlayer extends CommandExecutor {
                     this.sendMessage(this.getI18nMessage("common.error-sending-server").replace("{server}", server));
                 }
             }
-
-            this.updateEffects();
         }
     }
 
@@ -321,9 +322,14 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     @Override
+    public String formatMessage(String message) {
+        return super.formatMessage(PlaceholderUtils.format(message, this));
+    }
+
+    @Override
     public void sendMessage(String message) {
         String prefix = this.getPlugin().getConfig().getString("settings.prefix");
-        super.sendMessage(PlaceholderUtils.format(prefix + message, this));
+        super.sendMessage(prefix + message);
     }
 
     public void sendToServer(String server) throws IOException {

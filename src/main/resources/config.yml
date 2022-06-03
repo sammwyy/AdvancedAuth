@@ -9,7 +9,7 @@ settings:
   # Default language in case of not finding translation (it will also work for the console)
   default-lang: "en"
   # Disable the message to join and leave the server.
-  disable-join-quit-message: false
+  disable-join-quit-message: true
   # Blocked or allowed actions for authenticated and unauthenticated users.
   actions:
     # default = Block action only for unauthenticated.

@@ -21,6 +21,11 @@ register-request:
   title: "&6Register"
   subtitle: "&7Use &e/register <password>"
 
+logged:
+  # Title and subtitle to be sent to the user when logged successfully (leave empty to disable)
+  title: "&aWelcome!"
+  subtitle: "&7Enjoy our server, &b{player_name}"
+
 # Misc messages
 timeout: "&cYou took too long to enter your password!"
 
