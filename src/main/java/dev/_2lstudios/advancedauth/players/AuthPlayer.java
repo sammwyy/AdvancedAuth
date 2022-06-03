@@ -36,8 +36,7 @@ public class AuthPlayer extends CommandExecutor {
         return this.bukkitPlayer;
     }
 
-    @Override
-    public String getLang() {
+    public String getLang(boolean returnDefault) {
         String lang = null;
 
         if (ServerUtils.hasPlayerGetLocaleAPI()) {
@@ -46,7 +45,20 @@ public class AuthPlayer extends CommandExecutor {
             lang = PlayerUtils.getPlayerLocaleInLegacyWay(this.bukkitPlayer);
         }
 
+        if (returnDefault && lang == null) {
+            if (this.data.lang != null) {
+                lang = this.data.lang;
+            } else {
+                lang = this.getPlugin().getLanguageManager().getDefaultLocale();
+            }
+        }
+
         return lang;
+    }
+
+    @Override
+    public String getLang() {
+        return this.getLang(true);
     }
 
     public String getName() {
@@ -198,6 +210,7 @@ public class AuthPlayer extends CommandExecutor {
                 this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
                 this.data.lastLoginIP = this.getAddress();
                 this.data.lastLoginDate = System.currentTimeMillis();
+                this.data.lang = this.getLang();
                 this.data.save();
             }
 
@@ -300,6 +313,7 @@ public class AuthPlayer extends CommandExecutor {
         this.data.registrationIP = this.getAddress();
         this.data.registrationDate = System.currentTimeMillis();
         this.data.enabledSession = this.getPlugin().getConfig().getBoolean("authentication.resume-session-by-default");
+        this.data.lang = this.getLang();
 
         this.data.save();
         this.login(LoginReason.REGISTERED);
@@ -383,5 +397,15 @@ public class AuthPlayer extends CommandExecutor {
                 this.bukkitPlayer.setLevel((int) timeLeft);
                 break;
         }
+    }
+
+    @SuppressWarnings("deprecation")
+    public void sendTitle(String title, String subtitle) {
+        this.bukkitPlayer.resetTitle();
+        this.bukkitPlayer.sendTitle(this.formatMessage(title), this.formatMessage(subtitle));
+    }
+
+    public void sendI18nTitle(String title, String subtitle) {
+        this.sendTitle(this.getI18nMessage(title), this.getI18nMessage(subtitle));
     }
 }

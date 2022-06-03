@@ -14,8 +14,22 @@ public class PlayerDataFetchTask implements Runnable {
     public void run() {
         for (AuthPlayer player : this.plugin.getPlayerManager().getPlayers()) {
             if (!player.isFetched()) {
-                if (player.getLang() != null) {
+                if (player.getLang(false) != null) {
                     player.fetchUserData();
+
+                    if (player.isGuest()) {
+                        return;
+                    }
+                    
+                    // Isn't registered
+                    if (!player.isRegistered()) {
+                        player.sendI18nTitle("register-request.title", "register-request.subtitle");
+                    }
+    
+                    // Is registered but isn't logged
+                    else if (!player.isLogged()) {
+                        player.sendI18nTitle("login-request.title", "login-request.subtitle");
+                    }
                 }
             }
         }

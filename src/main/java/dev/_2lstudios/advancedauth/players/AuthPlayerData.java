@@ -9,6 +9,8 @@ public class AuthPlayerData extends Entity {
     public String email;
     @Prop
     public String displayName;
+    @Prop
+    public String lang;
 
     // Authentication.
     @Prop

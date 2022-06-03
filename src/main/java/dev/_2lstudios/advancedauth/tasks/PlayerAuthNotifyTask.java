@@ -22,16 +22,15 @@ public class PlayerAuthNotifyTask implements Runnable {
                 if (authPlayer.isGuest()) {
                     return;
                 }
-
+                
                 // Isn't registered
                 if (!authPlayer.isRegistered()) {
-                    authPlayer.sendI18nMessage("register.message");
-                    return;
+                    authPlayer.sendI18nMessage("register-request.message");
                 }
 
                 // Is registered but isn't logged
-                if (!authPlayer.isLogged()) {
-                    authPlayer.sendI18nMessage("login.message");
+                else if (!authPlayer.isLogged()) {
+                    authPlayer.sendI18nMessage("login-request.message");
                 }
             }
         }

@@ -1,3 +1,4 @@
+# Common messages
 common:
   error-sending-server: "&cCan't connect to server {server}"
   still-downloading: "&cYour data is still loading, try again later."
@@ -5,6 +6,25 @@ common:
   player-offline: "&cThe user is not online."
   username-case-mismatch: "&cYou are registered as {registered_name} but joined as {current_name}.\nPlease match the caps and try again."
 
+# Task & request messages
+login-request:
+  # Message to be sent to the user every X seconds to ask him to log in. (leave empty to disable)
+  message: "&7Login using &b/login <password>"
+  # Title and subtitle to be sent to the user to ask him to log in. (leave empty to disable)
+  title: "&6Login"
+  subtitle: "&7Use &e/login <password>"
+
+register-request:
+  # Message to be sent to the user every X seconds to ask him to register. (leave empty to disable)
+  message: "&7Register using &b/register <password>"
+  # Title and subtitle to be sent to the user to ask him to regiter (leave empty to disable)
+  title: "&6Register"
+  subtitle: "&7Use &e/register <password>"
+
+# Misc messages
+timeout: "&cYou took too long to enter your password!"
+
+# Command messages
 admin:
   help: |-
     &r
@@ -48,7 +68,6 @@ changepassword:
   successfully: "&aPassword was changed."
 
 login:
-  message: "&7Login using &b/login <password>"
   usage: "&cUsage: /login <password>"
   successfully: "&aYou are now logged in."
   session-resumed: "&aYour session was resumed."
@@ -59,7 +78,6 @@ login:
   wrong-password: "&cInvalid password ({tries}/{max-tries} try)"
 
 register:
-  message: "&7Register using &b/register <password>"
   usage: "&cUsage: /register <password>"
   successfully: "&aYour account has been registered."
   already-registered: "&cThis account is already registered."
@@ -72,5 +90,3 @@ register:
 unregister:
   usage: "&cUsage: /unregister <password>"
   successfully: "&aYour account was deleted."
-
-timeout: "&cYou took too long to enter your password!"
