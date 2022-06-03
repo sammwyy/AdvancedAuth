@@ -13,6 +13,7 @@ import org.bukkit.plugin.messaging.Messenger;
 
 import com.dotphin.milkshake.Milkshake;
 import com.dotphin.milkshake.Provider;
+import com.dotphin.milkshake.Repository;
 
 import dev._2lstudios.advancedauth.api.AuthAPI;
 import dev._2lstudios.advancedauth.api.events.AuthEvent;
@@ -43,6 +44,7 @@ import dev._2lstudios.advancedauth.security.Cipher;
 import dev._2lstudios.advancedauth.security.ConsoleFilter;
 import dev._2lstudios.advancedauth.security.CountryCheck;
 import dev._2lstudios.advancedauth.security.Faillock;
+import dev._2lstudios.advancedauth.services.AuthService;
 import dev._2lstudios.advancedauth.services.GeoIPService;
 import dev._2lstudios.advancedauth.tasks.PlayerAuthNotifyTask;
 import dev._2lstudios.advancedauth.tasks.PlayerDataFetchTask;
@@ -55,6 +57,9 @@ public class AdvancedAuth extends JavaPlugin {
     private AuthPlayerManager playerManager;
 
     private CacheEngine cache;
+    private Repository<AuthPlayerData> playerDataRepository;
+
+    private AuthService authService;
     
     private Cipher cipher;
     private CountryCheck countryCheck;
@@ -137,7 +142,11 @@ public class AdvancedAuth extends JavaPlugin {
         }
 
         Provider provider = Milkshake.connect(databaseUri);
-        Milkshake.addRepository(AuthPlayerData.class, provider, databaseCollection);
+        this.playerDataRepository = Milkshake.addRepository(
+            AuthPlayerData.class, 
+            provider, 
+            databaseCollection
+        );
 
         // Setup cache engine.
         String driver = this.getConfig().getString("storage.cache.driver");
@@ -164,6 +173,8 @@ public class AdvancedAuth extends JavaPlugin {
         }
 
         // Initialize Services
+        this.authService = new AuthService(this);
+
         try {
             GeoIPService.start(this.getDataFolder());
         } catch (Exception e) {
@@ -194,12 +205,12 @@ public class AdvancedAuth extends JavaPlugin {
         this.addCommand(new AddEmailCommand());
         this.addCommand(new AutoLoginCommand());
         this.addCommand(new ChangePasswordCommand());
-        this.addCommand(new LoginCommand(this));
+        this.addCommand(new LoginCommand());
         this.addCommand(new LogoutCommand());
-        this.addCommand(new RegisterCommand(this));
+        this.addCommand(new RegisterCommand());
         this.addCommand(new UnregisterCommand());
 
-        this.addCommand(new AdvancedAuthCommand(this));
+        this.addCommand(new AdvancedAuthCommand());
 
         // Print welcome message if plugin starts correctly
         String cipherAlgorithm = this.getConfig().getString("security.cipher");
@@ -238,6 +249,11 @@ public class AdvancedAuth extends JavaPlugin {
         return this.playerManager;
     }
 
+    // Service getters
+    public AuthService getAuthService() {
+        return this.authService;
+    }
+
     // Security modules
     public CountryCheck getCountryCheck() {
         return this.countryCheck;
@@ -250,6 +266,10 @@ public class AdvancedAuth extends JavaPlugin {
     // Providers getters
     public CacheEngine getCache() {
         return this.cache;
+    }
+    
+    public Repository<AuthPlayerData> getPlayerDataRepository() {
+        return this.playerDataRepository;
     }
 
     public Cipher getCipher() {

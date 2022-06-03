@@ -1,9 +1,5 @@
 package dev._2lstudios.advancedauth.commands.admin;
 
-import com.dotphin.milkshake.Milkshake;
-import com.dotphin.milkshake.Repository;
-import com.dotphin.milkshake.find.FindFilter;
-
 import dev._2lstudios.advancedauth.commands.Argument;
 import dev._2lstudios.advancedauth.commands.Command;
 import dev._2lstudios.advancedauth.commands.CommandContext;
@@ -17,17 +13,10 @@ import dev._2lstudios.advancedauth.services.GeoIPService;
     arguments = { Argument.STRING }
 )
 public class IPSubCommand extends CommandListener {
-
-    private Repository<AuthPlayerData> playerRepository;
-
-    public IPSubCommand () {
-        this.playerRepository = Milkshake.getRepository(AuthPlayerData.class);
-    }
-
     @Override
     public void onExecute(CommandContext ctx) {
         String username = ctx.getArguments().getString(0);
-        AuthPlayerData player = this.playerRepository.findOne(new FindFilter("username", username.toLowerCase()));
+        AuthPlayerData player = ctx.getPlugin().getAuthService().getByUsername(username);
 
         if (player == null) {
             ctx.getExecutor().sendI18nMessage("common.player-not-registered");

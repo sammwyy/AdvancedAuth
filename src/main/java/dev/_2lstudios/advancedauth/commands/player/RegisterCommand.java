@@ -1,6 +1,5 @@
 package dev._2lstudios.advancedauth.commands.player;
 
-import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.commands.Argument;
 import dev._2lstudios.advancedauth.commands.Command;
@@ -17,13 +16,6 @@ import dev._2lstudios.advancedauth.security.PasswordValidation;
     requireAuth = false
 )
 public class RegisterCommand extends CommandListener {
-
-    private AdvancedAuth plugin;
-
-    public RegisterCommand(AdvancedAuth plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public void onExecuteByPlayer(CommandContext ctx) {
         AuthPlayer player = ctx.getPlayer();

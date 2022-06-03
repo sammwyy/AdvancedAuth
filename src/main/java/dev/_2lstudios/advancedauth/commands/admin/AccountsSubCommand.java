@@ -2,15 +2,12 @@ package dev._2lstudios.advancedauth.commands.admin;
 
 import java.util.List;
 
-import com.dotphin.milkshake.Milkshake;
-import com.dotphin.milkshake.Repository;
-import com.dotphin.milkshake.find.FindFilter;
-
 import dev._2lstudios.advancedauth.commands.Argument;
 import dev._2lstudios.advancedauth.commands.Command;
 import dev._2lstudios.advancedauth.commands.CommandContext;
 import dev._2lstudios.advancedauth.commands.CommandListener;
 import dev._2lstudios.advancedauth.players.AuthPlayerData;
+import dev._2lstudios.advancedauth.services.AuthService;
 
 @Command(
     name = "accounts", 
@@ -19,24 +16,17 @@ import dev._2lstudios.advancedauth.players.AuthPlayerData;
     arguments = { Argument.STRING }
 )
 public class AccountsSubCommand extends CommandListener {
-
-    private Repository<AuthPlayerData> playerRepository;
-
-    public AccountsSubCommand () {
-        this.playerRepository = Milkshake.getRepository(AuthPlayerData.class);
-    }
-
     @Override
     public void onExecute(CommandContext ctx) {
-        String username = ctx.getArguments().getString(0);
-        AuthPlayerData player = this.playerRepository.findOne(new FindFilter("username", username.toLowerCase()));
+        String field = ctx.getArguments().getString(0);
+        boolean isAddress = field.contains(".");
 
-        if (player == null) {
+        AuthService authService = ctx.getPlugin().getAuthService();
+        List<AuthPlayerData> alts = isAddress ? authService.getAltsForAddress(field) : authService.getAltsForPlayer(field);
+
+        if (alts == null) {
             ctx.getExecutor().sendI18nMessage("common.player-not-registered");
         } else {
-            String lastIP = player.lastLoginIP;
-            List<AuthPlayerData> alts = this.playerRepository.findMany(new FindFilter("lastLoginIP", lastIP));
-
             String altsText = "";
             int position = 0;
 
@@ -53,7 +43,7 @@ public class AccountsSubCommand extends CommandListener {
             ctx.getExecutor().sendMessage(
                 ctx.getExecutor().getI18nMessage("admin.accounts")
                     .replace("{alts}", altsText)
-                    .replace("{player}", player.username)
+                    .replace("{player}", field)
             );
         }
     }

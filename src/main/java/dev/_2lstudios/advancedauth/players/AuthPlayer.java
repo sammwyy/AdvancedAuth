@@ -166,8 +166,7 @@ public class AuthPlayer extends CommandExecutor {
     }
 
     public List<AuthPlayerData> getAlts() {
-        Repository<AuthPlayerData> repo = Milkshake.getRepository(AuthPlayerData.class);
-        return repo.findMany(new FindFilter("lastLoginIP", this.getAddress()));
+        return this.getPlugin().getAuthService().getAltsForAddress(this.data.lastLoginIP);
     }
 
     public boolean isLogged() {

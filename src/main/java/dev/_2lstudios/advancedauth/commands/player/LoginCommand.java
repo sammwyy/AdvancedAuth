@@ -1,6 +1,5 @@
 package dev._2lstudios.advancedauth.commands.player;
 
-import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.Logging;
 import dev._2lstudios.advancedauth.commands.Argument;
 import dev._2lstudios.advancedauth.commands.Command;
@@ -17,12 +16,6 @@ import dev._2lstudios.advancedauth.players.LoginReason;
     silent = true
 )
 public class LoginCommand extends CommandListener {
-    private AdvancedAuth plugin;
-
-    public LoginCommand(AdvancedAuth plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public void onExecuteByPlayer(CommandContext ctx) {
         AuthPlayer player = ctx.getPlayer();
