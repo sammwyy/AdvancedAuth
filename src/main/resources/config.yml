@@ -68,6 +68,11 @@ storage:
     password: ""
 # Authentication settings.
 authentication:
+  # Show how much time is available for the user to log in.
+  # Available indicators:
+  # - NONE: Does not show the visual indicator
+  # - LEVEL: Shows the remaining time in the player's levels.
+  visual-time-indicator: LEVEL
   # If the registration is optional, the user will be able to play the server without registering,
   # however, if he does so, then he must enter the password to be able to enter.
   is-register-optional: false

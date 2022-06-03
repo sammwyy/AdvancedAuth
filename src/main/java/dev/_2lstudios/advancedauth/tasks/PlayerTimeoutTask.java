@@ -19,8 +19,12 @@ public class PlayerTimeoutTask implements Runnable {
             if (!player.isLogged()) {
                 player.addTimer();
 
-                if (player.getTimer() >= timeout) {
+                long timeLeft = timeout - player.getTimer();
+
+                if (timeLeft < 0) {
                     player.kickI18n("timeout");
+                } else {
+                    player.updateVisualTime(timeLeft);
                 }
             }
         }

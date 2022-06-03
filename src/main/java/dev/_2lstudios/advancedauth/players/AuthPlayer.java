@@ -188,13 +188,18 @@ public class AuthPlayer extends CommandExecutor {
 
     public void login(LoginReason reason) {
         if (this.isRegistered()) {
+            this.timer = 0;
             this.state = AuthState.LOGGED;
-            this.data.displayName = this.getName();
-            this.data.username = this.getName().toLowerCase();
-            this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
-            this.data.lastLoginIP = this.getAddress();
-            this.data.lastLoginDate = System.currentTimeMillis();
-            this.data.save();
+            this.updateVisualTime(0);
+
+            if (reason != LoginReason.REGISTERED) {
+                this.data.displayName = this.getName();
+                this.data.username = this.getName().toLowerCase();
+                this.data.uuid = this.getBukkitPlayer().getUniqueId().toString();
+                this.data.lastLoginIP = this.getAddress();
+                this.data.lastLoginDate = System.currentTimeMillis();
+                this.data.save();
+            }
 
             if (reason == LoginReason.PASSWORD && this.data.enabledSession) {
                 this.createSession();
@@ -209,6 +214,9 @@ public class AuthPlayer extends CommandExecutor {
                 break;
             case FORCED:
                 this.sendI18nMessage("login.forced");
+                break;
+            case REGISTERED:
+                break;
             }
 
             if (this.getPlugin().getConfig().getBoolean("authentication.send-server-on-login.enabled")) {
@@ -294,9 +302,7 @@ public class AuthPlayer extends CommandExecutor {
         this.data.enabledSession = this.getPlugin().getConfig().getBoolean("authentication.resume-session-by-default");
 
         this.data.save();
-        this.timer = 0;
-        this.state = AuthState.LOGGED;
-        this.updateEffects();
+        this.login(LoginReason.REGISTERED);
         return true;
     }
 
@@ -369,5 +375,13 @@ public class AuthPlayer extends CommandExecutor {
 
     public void kickI18n(String key) {
         this.kick(this.getI18nMessage(key));
+    }
+
+    public void updateVisualTime(long timeLeft) {
+        switch (this.getPlugin().getConfig().getString("authentication.visual-time-indicator")) {
+            case "LEVEL":
+                this.bukkitPlayer.setLevel((int) timeLeft);
+                break;
+        }
     }
 }
