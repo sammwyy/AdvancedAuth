@@ -45,12 +45,12 @@ settings:
       yaw: 0
       pitch: 0
 # Plugin data storage.
-storage: 
+storage:
   # The storage container will be used to store the names and passwords of the registered accounts.
   database:
-    # URI format: 
+    # URI format:
     #     driver://address/database
-    # with authentication: 
+    # with authentication:
     #     driver://username:password@address/database
     #
     # Available drivers: MongoDB
@@ -95,7 +95,7 @@ authentication:
   send-server-on-login:
     enabled: false
     # Available proxies:
-    # - bungeecord
+    # - bungeecord (also works for velocity)
     proxy: bungeecord
     # List of destination servers (choose one at random)
     servers:
