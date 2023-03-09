@@ -156,9 +156,9 @@ public class AdvancedAuth extends JavaPlugin {
 
         // Setup cache engine.
         String driver = this.getConfig().getString("storage.cache.driver");
-        String host = this.getConfig().getString("storage.cache.driver");
-        int port = this.getConfig().getInt("storage.cache.driver");
-        String password = this.getConfig().getString("storage.cache.driver");
+        String host = this.getConfig().getString("storage.cache.host");
+        int port = this.getConfig().getInt("storage.cache.port");
+        String password = this.getConfig().getString("storage.cache.password");
         int expiration = this.getConfig().getInt("storage.cache.expiration");
 
         try {
