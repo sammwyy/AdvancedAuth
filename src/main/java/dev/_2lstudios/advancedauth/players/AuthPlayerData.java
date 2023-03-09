@@ -1,7 +1,7 @@
 package dev._2lstudios.advancedauth.players;
 
-import com.dotphin.classserializer.annotations.Prop;
-import com.dotphin.milkshake.Entity;
+import com.sammwy.classserializer.annotations.Prop;
+import com.sammwy.milkshake.Entity;
 
 public class AuthPlayerData extends Entity {
     // Information.

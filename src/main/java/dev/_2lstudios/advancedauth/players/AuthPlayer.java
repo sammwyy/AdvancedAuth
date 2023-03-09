@@ -9,8 +9,8 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.dotphin.milkshake.Repository;
-import com.dotphin.milkshake.find.FindFilter;
+import com.sammwy.milkshake.Repository;
+import com.sammwy.milkshake.find.FindFilter;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
@@ -67,7 +67,6 @@ public class AuthPlayer extends CommandExecutor {
         return this.getBukkitPlayer().getName();
     }
 
-
     public String getLowerName() {
         return this.getName().toLowerCase();
     }
@@ -91,6 +90,7 @@ public class AuthPlayer extends CommandExecutor {
     public AuthPlayerData getData() {
         return this.data;
     }
+
     public void addTimer() {
         this.timer++;
     }
@@ -132,7 +132,7 @@ public class AuthPlayer extends CommandExecutor {
         Repository<AuthPlayerData> repo = this.getPlugin().getPlayerDataRepository();
 
         // Find user data
-        FindFilter filter = new FindFilter("username", this.getLowerName()).or().isEquals("uuid",  this.getUUIDAsStr());
+        FindFilter filter = new FindFilter("username", this.getLowerName()).or().isEquals("uuid", this.getUUIDAsStr());
         this.data = repo.findOne(filter);
 
         // Check for guest playing.
@@ -154,11 +154,10 @@ public class AuthPlayer extends CommandExecutor {
                     // And kick if isn't the same as previous saved.
                     this.getPlugin().getServer().getScheduler().runTask(this.getPlugin(), () -> {
                         this.getBukkitPlayer().kickPlayer(
-                            ChatColor.translateAlternateColorCodes('&', 
-                            this.getI18nMessage("common.username-case-mismatch")
-                                .replace("{current_name}", this.getBukkitPlayer().getName())
-                                .replace("{registered_name}", this.data.displayName))
-                        );
+                                ChatColor.translateAlternateColorCodes('&',
+                                        this.getI18nMessage("common.username-case-mismatch")
+                                                .replace("{current_name}", this.getBukkitPlayer().getName())
+                                                .replace("{registered_name}", this.data.displayName)));
                     });
 
                     return;
@@ -221,17 +220,17 @@ public class AuthPlayer extends CommandExecutor {
             }
 
             switch (reason) {
-            case PASSWORD:
-                this.sendI18nMessage("login.successfully");
-                break;
-            case SESSION_RESUME:
-                this.sendI18nMessage("login.session-resumed");
-                break;
-            case FORCED:
-                this.sendI18nMessage("login.forced");
-                break;
-            case REGISTERED:
-                break;
+                case PASSWORD:
+                    this.sendI18nMessage("login.successfully");
+                    break;
+                case SESSION_RESUME:
+                    this.sendI18nMessage("login.session-resumed");
+                    break;
+                case FORCED:
+                    this.sendI18nMessage("login.forced");
+                    break;
+                case REGISTERED:
+                    break;
             }
 
             this.sendI18nTitle("logged.title", "logged.subtitle");
@@ -244,9 +243,10 @@ public class AuthPlayer extends CommandExecutor {
             }
 
             if (this.getPlugin().getConfig().getBoolean("authentication.send-server-on-login.enabled")) {
-                List<String> servers = this.getPlugin().getConfig().getStringList("authentication.send-server-on-login.servers");
-                String server =  ArrayUtils.randomItem(servers);
-                
+                List<String> servers = this.getPlugin().getConfig()
+                        .getStringList("authentication.send-server-on-login.servers");
+                String server = ArrayUtils.randomItem(servers);
+
                 try {
                     this.sendToServer(server);
                 } catch (Exception e) {
@@ -272,9 +272,9 @@ public class AuthPlayer extends CommandExecutor {
         }
     }
 
-    public void updateAllowOrDenyMovement () {
+    public void updateAllowOrDenyMovement() {
         String blockMode = this.getPlugin().getConfig().getString("settings.actions.deny-move", "default");
-        
+
         if (blockMode.equalsIgnoreCase("always")) {
             this.getBukkitPlayer().setWalkSpeed(0.0f);
         } else if (blockMode.equalsIgnoreCase("never")) {
@@ -372,7 +372,7 @@ public class AuthPlayer extends CommandExecutor {
 
     public void show() {
         this.hidden = false;
-        for (Player op : this.getPlugin().getServer().getOnlinePlayers()){
+        for (Player op : this.getPlugin().getServer().getOnlinePlayers()) {
             this.showOther(op);
         }
     }
@@ -385,7 +385,7 @@ public class AuthPlayer extends CommandExecutor {
     public void hide() {
         this.hidden = true;
 
-        for (Player op : this.getPlugin().getServer().getOnlinePlayers()){
+        for (Player op : this.getPlugin().getServer().getOnlinePlayers()) {
             this.hideOther(op);
         }
     }

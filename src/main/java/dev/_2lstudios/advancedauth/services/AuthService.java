@@ -2,8 +2,8 @@ package dev._2lstudios.advancedauth.services;
 
 import java.util.List;
 
-import com.dotphin.milkshake.Repository;
-import com.dotphin.milkshake.find.FindFilter;
+import com.sammwy.milkshake.Repository;
+import com.sammwy.milkshake.find.FindFilter;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.players.AuthPlayerData;
@@ -11,7 +11,7 @@ import dev._2lstudios.advancedauth.players.AuthPlayerData;
 public class AuthService {
     private AdvancedAuth plugin;
     private Repository<AuthPlayerData> repository;
-    
+
     public AuthService(AdvancedAuth plugin) {
         this.plugin = plugin;
         this.repository = plugin.getPlayerDataRepository();

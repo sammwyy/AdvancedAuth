@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.dotphin.milkshake.Milkshake;
-import com.dotphin.milkshake.Repository;
-import com.dotphin.milkshake.find.FindFilter;
+import com.sammwy.milkshake.Milkshake;
+import com.sammwy.milkshake.Repository;
+import com.sammwy.milkshake.find.FindFilter;
 
 import dev._2lstudios.advancedauth.AdvancedAuth;
 import dev._2lstudios.advancedauth.config.Configuration;
@@ -49,11 +49,10 @@ public class MigrationManager {
             String password = config.getString("mysql.password");
             String database = config.getString("mysql.database");
             table = config.getString("mysql.table");
-            
+
             url += "mysql://" + host + ":" + port + "/" + database;
             connection = DriverManager.getConnection(url, username, password);
-        } 
-        else if (backend.trim().equals("")) {
+        } else if (backend.trim().equals("")) {
             throw new Exception("Please check your migration.yml file.");
         } else {
             throw new Exception("Unknown backend type " + backend);
@@ -86,7 +85,7 @@ public class MigrationManager {
 
         int users = 0;
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             String displayName = resultSet.getString(keyDisplayName);
             String username = resultSet.getString(keyUsername).toLowerCase();
             String password = resultSet.getString(keyPassword);

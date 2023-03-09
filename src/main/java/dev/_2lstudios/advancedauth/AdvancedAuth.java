@@ -11,9 +11,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 
-import com.dotphin.milkshake.Milkshake;
-import com.dotphin.milkshake.Provider;
-import com.dotphin.milkshake.Repository;
+import com.sammwy.milkshake.Milkshake;
+import com.sammwy.milkshake.Provider;
+import com.sammwy.milkshake.Repository;
 
 import dev._2lstudios.advancedauth.api.AuthAPI;
 import dev._2lstudios.advancedauth.api.events.AuthEvent;
@@ -60,7 +60,7 @@ public class AdvancedAuth extends JavaPlugin {
     private Repository<AuthPlayerData> playerDataRepository;
 
     private AuthService authService;
-    
+
     private Cipher cipher;
     private CountryCheck countryCheck;
     private Faillock faillock;
@@ -88,7 +88,7 @@ public class AdvancedAuth extends JavaPlugin {
     private void addListener(Listener listener) {
         this.getServer().getPluginManager().registerEvents(listener, this);
     }
-    
+
     public boolean callEvent(AuthEvent event) {
         this.getServer().getPluginManager().callEvent(event);
         return !event.isCancelled();
@@ -101,9 +101,9 @@ public class AdvancedAuth extends JavaPlugin {
             this.getServer().shutdown();
         }
     }
-    
+
     @Override
-    public void onEnable () {
+    public void onEnable() {
         // Initialize API.
         new AuthAPI(this);
 
@@ -123,7 +123,7 @@ public class AdvancedAuth extends JavaPlugin {
         // Register channels.
         Messenger messenger = this.getServer().getMessenger();
 
-        boolean sendBungeeServer = this.getConfig().getBoolean("authentication.send-server-on-login.enabled"); 
+        boolean sendBungeeServer = this.getConfig().getBoolean("authentication.send-server-on-login.enabled");
         boolean bungeeHook = this.getConfig().getBoolean("settings.bungee-hook");
 
         if (sendBungeeServer || bungeeHook) {
@@ -150,10 +150,9 @@ public class AdvancedAuth extends JavaPlugin {
 
         Provider provider = Milkshake.connect(databaseUri);
         this.playerDataRepository = Milkshake.addRepository(
-            AuthPlayerData.class, 
-            provider, 
-            databaseCollection
-        );
+                AuthPlayerData.class,
+                provider,
+                databaseCollection);
 
         // Setup cache engine.
         String driver = this.getConfig().getString("storage.cache.driver");
@@ -222,7 +221,7 @@ public class AdvancedAuth extends JavaPlugin {
         // Print welcome message if plugin starts correctly
         String cipherAlgorithm = this.getConfig().getString("security.cipher");
         String cacheDriver = this.getConfig().getString("storage.cache.driver");
-        String storageDriver =  this.getConfig().getString("storage.database.uri").split("://")[0];
+        String storageDriver = this.getConfig().getString("storage.database.uri").split("://")[0];
         String pluginVersion = this.getDescription().getVersion();
 
         this.getServer().getConsoleSender().sendMessage("§8============================================");
@@ -280,7 +279,7 @@ public class AdvancedAuth extends JavaPlugin {
     public CacheEngine getCache() {
         return this.cache;
     }
-    
+
     public Repository<AuthPlayerData> getPlayerDataRepository() {
         return this.playerDataRepository;
     }
