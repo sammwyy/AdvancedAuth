@@ -1,21 +1,35 @@
-# Bukkit Boilerplate
+# AdvancedAuth
 
-Boilerplate/Template for a Bukkit Plugin
+## Plugin Base ✔️
 
-### Section 1 ✔️
+- [x] Login and Register.
+- [x] MongoDB Support.
+- [x] Command and event blocker.
+- [x] Encryption.
+- [x] Bungee integration.
+- [x] Bungee addon.
+- [x] Cache with Redis.
+- [x] Sessions.
+- [x] Migration from AuthMe.
+- [x] GeoIP.
+- [x] Secure passwords. 
+- [x] Visual time indicator.
+- [x] Multiple lobby servers.
+- [x] Username checker.
+- [x] Anti UUIDSpoof and Caps Check.
+- [x] Faillock (Ban IP on multiple fails)
+- [x] Max accounts per IP. 
 
-- [x] First task
-- [x] Second task  
-- [x] Third task  
+## Full plugin
 
-### Section 2
+- [ ] 2FA.
+- [ ] Premium mode.
+- [ ] Multiple auth server.
 
-- [x] Fourth task
-- [ ] Fifth task  
-- [ ] Sixth task  
+## Extras
 
-### Section 3
-
-- [ ] Seventh task
-- [ ] Eighth task  
-- [ ] Nineth task  
+- [ ] Port to BungeeCord.
+- [ ] Port to Velocity.
+- [ ] Port to Sponge.
+- [ ] Port to Fabric.
+- [ ] Port to Forge.
