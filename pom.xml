@@ -60,18 +60,16 @@
             <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Soft-dependencies -->
+        <!-- Built-in libraries -->
         <dependency>
             <groupId>com.sammwy</groupId>
             <artifactId>milkshake</artifactId>
             <version>1.2</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>dev._2lstudios</groupId>
-            <artifactId>Jedis-Wrapper</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
             <version>4.1.1</version>
-            <scope>provided</scope>
         </dependency>
         <!-- Ciphers -->
         <dependency>
@@ -154,6 +152,30 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Shade dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>shade</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <e>redis.clients.jedis</e>
+                            <shadedPattern>dev._2lstudios.advancedauth.libs.jedis</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
             </plugin>
         </plugins>
     </build>
